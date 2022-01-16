@@ -57,9 +57,9 @@ void SwerveDrive::Drive(double forward, double strafe, double rotate, units::deg
 
     //Set all swerve modules
     m_swerveModules["TopRight"]->setModule(angles["TopRight"], outputs["TopRight"], velocityMode);
-    m_swerveModules["TopLeft"]->setModule(angles["TopLeft"], -outputs["TopLeft"], velocityMode);
+    m_swerveModules["TopLeft"]->setModule(angles["TopLeft"], outputs["TopLeft"], velocityMode);
     m_swerveModules["BottomRight"]->setModule(angles["BottomRight"], outputs["BottomRight"], velocityMode);
-    m_swerveModules["BottomLeft"]->setModule(angles["BottomLeft"], -outputs["BottomLeft"], velocityMode);
+    m_swerveModules["BottomLeft"]->setModule(angles["BottomLeft"], outputs["BottomLeft"], velocityMode);
 
     // m_topRightModule->setDriveOutput(outputs["TopRight"]);
     // m_topLeftModule->setDriveOutput(outputs["TopLeft"]);

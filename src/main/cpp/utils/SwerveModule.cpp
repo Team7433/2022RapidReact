@@ -9,7 +9,7 @@ SwerveModule::SwerveModule(WPI_TalonFX* outputMotor, WPI_TalonFX* angleMotor, do
     m_angleMotor->ConfigFactoryDefault();
 
     //init encoder on angle motor
-    m_angleMotor->ConfigSelectedFeedbackSensor(ctre::phoenix::motorcontrol::FeedbackDevice::QuadEncoder, kslotIndex, kTimeoutMs);
+    // m_angleMotor->ConfigSelectedFeedbackSensor(ctre::phoenix::motorcontrol::FeedbackDevice::QuadEncoder, kslotIndex, kTimeoutMs);
 
     //config PID for angle motor
     m_angleMotor->Config_kP(kslotIndex, m_PID_A["P"], kTimeoutMs);
