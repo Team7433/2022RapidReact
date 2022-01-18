@@ -17,7 +17,9 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   );
 
   frc2::JoystickButton(&m_controller, 1).WhenReleased(frc2::InstantCommand([this] {m_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 0);}));
-
+  frc2::JoystickButton(&m_controller, 2).WhenPressed(
+    frc2::InstantCommand([this] {m_swerveDriveTrain.ResetOdometry();})
+  );
 }
 
 void RobotContainer::ConfigureButtonBindings() {

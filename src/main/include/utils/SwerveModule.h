@@ -17,7 +17,7 @@ namespace Iona {
     class SwerveModule {
         public:
         // SwerveModule(WPI_TalonFX* outputMotor, WPI_TalonSRX* angleMotor, double encoderCountsPD, std::string swerveModuleName) : m_outputMotor{outputMotor}, m_angleMotor{angleMotor}, encoderPerDegree{encoderCountsPD}, m_moduleName{swerveModuleName} {}
-        SwerveModule(WPI_TalonFX* outputMotor, WPI_TalonFX* angleMotor, double encoderCountsPD, std::string swerveModuleName);
+        SwerveModule(WPI_TalonFX* outputMotor, WPI_TalonFX* angleMotor, WPI_CANCoder* angleEncoder, double encoderOffset, double encoderCountsPD,std::string swerveModuleName);
         //Set drive output and angle
         void setHeadingAngle(units::degree_t headingAngle);
         void setDriveOutput(double output) {m_outputMotor->Set(ControlMode::PercentOutput, output*m_outputInversion); }
@@ -36,18 +36,24 @@ namespace Iona {
             //Motors
             WPI_TalonFX* m_outputMotor;
             WPI_TalonFX* m_angleMotor;
-            
+
+            //Encoder
+            WPI_CANCoder* m_angleEncoder;
+            const double m_encoderOffset{};
+
+
             //Encoder counts per degree for angle motor
             const double encoderPerDegree{}; 
 
             //Member Variables
+ 
             const std::string m_moduleName{};
 
 
             //PID values
             std::map<std::string, double> m_PID_A{{"P", 0.2}, {"I", 0.0}, {"D", 0.1}};
             //calculating kf = (percent output * 1023) / max velocity
-            std::map<std::string, double> m_PID_D{{"P", 0.3}, {"I", 0.0}, {"D", 0.0}, {"F", ((0.5*1023.0)/10053.0)}};
+            std::map<std::string, double> m_PID_D{{"P", 0.28}, {"I", 0.002}, {"D", 0.1}, {"F", (1023.0)/21797}};
             const double kTimeoutMs{10.0};
             const int kslotIndex{0};
             const bool kInvertSensors{true};
@@ -56,7 +62,7 @@ namespace Iona {
             double m_outputInversion{1};
 
             const double kSetAngleDeadzone{0.05};
-            const double kwheelCircumferenceM{0.319185813605};
+            const double kwheelCircumferenceM{0.31918581360576};
             
             //12 tooth driven by falcon
             //40 tooth driven by 12 tooth

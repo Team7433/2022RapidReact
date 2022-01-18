@@ -36,6 +36,7 @@ class SwerveDriveTrain : public frc2::SubsystemBase {
   void Periodic() override;
   void Drive(double forward, double strafe, double rotate, bool squared=false, bool velocityMode=false);
   void ResetGyro() {m_odometry.ResetPosition(m_odometry.GetPose(), -m_gyro->GetYaw()); m_gyro->Reset();}
+  void ResetOdometry() {m_odometry.ResetPosition(frc::Pose2d{0_m, 0_m, -m_gyro->GetYaw()}, -m_gyro->GetYaw());}
   coordinate getCoordinate();
  private:
   // Components (e.g. motor controllers and sensors) should generally be
@@ -53,21 +54,33 @@ class SwerveDriveTrain : public frc2::SubsystemBase {
   static units::millimeter_t constexpr halveTrackWidth= units::millimeter_t(trackWidth/2); 
 
   Gyro* m_gyro;
-
+  //Init all angle motors
   WPI_TalonFX* m_motorFLA = new WPI_TalonFX{12};
   WPI_TalonFX* m_motorFRA = new WPI_TalonFX{22};
   WPI_TalonFX* m_motorBLA = new WPI_TalonFX{32};
   WPI_TalonFX* m_motorBRA = new WPI_TalonFX{42};
-
+  //Init all drive motors
   WPI_TalonFX* m_motorFLD = new WPI_TalonFX{11};
   WPI_TalonFX* m_motorFRD = new WPI_TalonFX{21};
   WPI_TalonFX* m_motorBLD = new WPI_TalonFX{31};
   WPI_TalonFX* m_motorBRD = new WPI_TalonFX{41};
 
-  Iona::SwerveModule* m_TopRightModule = new Iona::SwerveModule{m_motorFRD, m_motorFRA, encoderCountPerDegreeOne, "TopRight"};
-  Iona::SwerveModule* m_TopLeftModule = new Iona::SwerveModule{m_motorFLD, m_motorFLA, encoderCountPerDegreeOne, "TopLeft"};
-  Iona::SwerveModule* m_BackRightModule = new Iona::SwerveModule{m_motorBRD, m_motorBRA, encoderCountPerDegreeOne, "BottomRight"};
-  Iona::SwerveModule* m_BackLeftModule = new Iona::SwerveModule{m_motorBLD, m_motorBLA, encoderCountPerDegreeOne, "BottomLeft"};
+  //Init all can encoders
+  WPI_CANCoder* m_encoderFL = new WPI_CANCoder{13};
+  WPI_CANCoder* m_encoderFR = new WPI_CANCoder{23};
+  WPI_CANCoder* m_encoderBL = new WPI_CANCoder{33};
+  WPI_CANCoder* m_encoderBR = new WPI_CANCoder{43};
+
+  //Encoder Offset Init
+  const double m_offsetFL{351.562};
+  const double m_offsetFR{248.203};
+  const double m_offsetBL{52.119};
+  const double m_offsetBR{273.691};
+
+  Iona::SwerveModule* m_TopRightModule = new Iona::SwerveModule{m_motorFRD, m_motorFRA, m_encoderFR, m_offsetFR, encoderCountPerDegreeOne, "TopRight"};
+  Iona::SwerveModule* m_TopLeftModule = new Iona::SwerveModule{m_motorFLD, m_motorFLA, m_encoderFL, m_offsetFL, encoderCountPerDegreeOne, "TopLeft"};
+  Iona::SwerveModule* m_BackRightModule = new Iona::SwerveModule{m_motorBRD, m_motorBRA, m_encoderBR, m_offsetBR, encoderCountPerDegreeOne, "BottomRight"};
+  Iona::SwerveModule* m_BackLeftModule = new Iona::SwerveModule{m_motorBLD, m_motorBLA, m_encoderBL, m_offsetBL, encoderCountPerDegreeOne, "BottomLeft"};
 
   Iona::SwerveDrive* m_swerveDrive = new Iona::SwerveDrive{m_TopRightModule, m_TopLeftModule, m_BackLeftModule, m_BackRightModule, wheelBase, trackWidth};
   

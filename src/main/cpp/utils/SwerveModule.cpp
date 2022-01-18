@@ -2,11 +2,13 @@
 
 using namespace Iona;
 
-SwerveModule::SwerveModule(WPI_TalonFX* outputMotor, WPI_TalonFX* angleMotor, double encoderCountsPD, std::string swerveModuleName) : m_outputMotor{outputMotor}, m_angleMotor{angleMotor}, encoderPerDegree{encoderCountsPD}, m_moduleName{swerveModuleName} {
+SwerveModule::SwerveModule(WPI_TalonFX* outputMotor, WPI_TalonFX* angleMotor, WPI_CANCoder* angleEncoder, double encoderOffset, double encoderCountsPD, std::string swerveModuleName) : m_outputMotor{outputMotor}, m_angleMotor{angleMotor}, m_angleEncoder{angleEncoder}, m_encoderOffset{encoderOffset}, encoderPerDegree{encoderCountsPD}, m_moduleName{swerveModuleName} {
 
     //Config Factory Defaults
     m_outputMotor->ConfigFactoryDefault();
     m_angleMotor->ConfigFactoryDefault();
+
+    m_outputMotor->SetNeutralMode(motorcontrol::Brake);
 
     //init encoder on angle motor
     // m_angleMotor->ConfigSelectedFeedbackSensor(ctre::phoenix::motorcontrol::FeedbackDevice::QuadEncoder, kslotIndex, kTimeoutMs);
@@ -24,6 +26,9 @@ SwerveModule::SwerveModule(WPI_TalonFX* outputMotor, WPI_TalonFX* angleMotor, do
     m_outputMotor->Config_kI(kslotIndex, m_PID_D["I"], kTimeoutMs);
     m_outputMotor->Config_kD(kslotIndex, m_PID_D["D"], kTimeoutMs);
     m_outputMotor->Config_kF(kslotIndex, m_PID_D["F"], kTimeoutMs);
+
+
+    m_angleMotor->SetSelectedSensorPosition((m_angleEncoder->GetAbsolutePosition() - m_encoderOffset)*encoderPerDegree, kslotIndex, kTimeoutMs);
 
 }
 

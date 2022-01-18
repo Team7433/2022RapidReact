@@ -39,7 +39,7 @@ void DriveWithJoystick::Execute() {
     strafe = 0;
   }
 
-  m_swerveDriveTrain->Drive(forward*0.5, strafe*0.5, rotate*0.5, true, false);
+  m_swerveDriveTrain->Drive(forward*2, strafe*2, rotate*2, true, true);
 
 }
 
