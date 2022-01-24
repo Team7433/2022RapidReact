@@ -17,6 +17,7 @@ class Shooter : public frc2::SubsystemBase {
    */
   void Periodic() override;
   void setPercentOutput(double output) {m_motor->Set(ControlMode::PercentOutput, output);}
+  void ConfigPID(double P, double I, double D);
   double getPercentOutput() {return m_motor->GetMotorOutputPercent();}
 
  private:
