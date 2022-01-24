@@ -53,7 +53,7 @@ namespace Iona {
             //PID values
             std::map<std::string, double> m_PID_A{{"P", 0.2}, {"I", 0.0}, {"D", 0.1}};
             //calculating kf = (percent output * 1023) / max velocity
-            std::map<std::string, double> m_PID_D{{"P", 0.28}, {"I", 0.002}, {"D", 0.1}, {"F", (1023.0)/21797}};
+            std::map<std::string, double> m_PID_D{{"P", 0.135}, {"I", 0.0007}, {"D", 0.19}, {"F", (1023.0)/21797}};
             const double kTimeoutMs{10.0};
             const int kslotIndex{0};
             const bool kInvertSensors{true};
@@ -62,7 +62,7 @@ namespace Iona {
             double m_outputInversion{1};
 
             const double kSetAngleDeadzone{0.05};
-            const double kwheelCircumferenceM{0.31918581360576};
+            const double kwheelCircumferenceM{0.2892};
             
             //12 tooth driven by falcon
             //40 tooth driven by 12 tooth
@@ -70,6 +70,6 @@ namespace Iona {
             //40 tooth is driven by 20 tooth
             //wheel is driven by 40 tooth
 
-            const double kencoderPerM{(2048.0*(6.67))/kwheelCircumferenceM};
+            const double kencoderPerM{(2048.0*(6.75))/kwheelCircumferenceM};
     }; //Swerve Module
 } // namespace 

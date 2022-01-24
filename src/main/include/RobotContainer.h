@@ -14,10 +14,12 @@
 
 #include "subsystems/SwerveDriveTrain.h"
 #include "subsystems/Gyro.h"
+#include "subsystems/Shooter.h"
 // #include "subsystems/FloorIntake.h"
 
 #include "commands/DriveWithJoystick.h"
-// #include "commands/MotionProfile.h"
+#include "commands/MoveTo.h"
+#include "commands/MotionProfile.h"
 
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>
@@ -42,6 +44,7 @@ class RobotContainer {
   SwerveDriveTrain m_swerveDriveTrain;
 
   Gyro m_gyro;
+  Shooter m_shooter;
 
   void ConfigureButtonBindings();
 

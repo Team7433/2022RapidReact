@@ -82,6 +82,6 @@ void SwerveModule::displayData() {
 frc::SwerveModuleState SwerveModule::getModuleState() {
     frc::SwerveModuleState state{};
     state.angle = getHeadingAngle();
-    state.speed = units::meters_per_second_t((m_outputMotor->GetSelectedSensorVelocity()*10)/kencoderPerM);
+    state.speed = units::meters_per_second_t((((m_outputMotor->GetSelectedSensorVelocity()-((m_angleMotor->GetSelectedSensorVelocity()/12.8)*(50/14))))*10)/kencoderPerM);
     return state;
 }

@@ -11,6 +11,7 @@
 #include <frc/DriverStation.h>
 
 #include <AHRS.h>
+#include <ctre/Phoenix.h>
 
 #include <units/angle.h>
 
@@ -28,11 +29,12 @@ class Gyro : public frc2::SubsystemBase {
   units::degree_t GetPitch();
   units::degree_t GetRoll();
   units::degree_t GetClosestError(units::degree_t target);
-  AHRS* ReturnGyro() {return m_gyro;}
+  ctre::phoenix::sensors::PigeonIMU* ReturnGyro() {return m_gyro;}
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
   
-  AHRS* m_gyro;
+  // AHRS* m_gyro;
+  ctre::phoenix::sensors::PigeonIMU* m_gyro = new ctre::phoenix::sensors::PigeonIMU{50};
 };

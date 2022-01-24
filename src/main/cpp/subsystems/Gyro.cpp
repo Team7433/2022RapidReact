@@ -9,18 +9,18 @@
 #include <iostream>
 
 Gyro::Gyro() {
-    try {
-       /* Communicate w/navX-MXP via the MXP SPI Bus.                                       */
-       /* Alternatively:  I2C::Port::kMXP, SerialPort::Port::kMXP or SerialPort::Port::kUSB */
-       /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details.   */
-        m_gyro = new AHRS(frc::SPI::Port::kMXP);
+    // try {
+    //    /* Communicate w/navX-MXP via the MXP SPI Bus.                                       */
+    //    /* Alternatively:  I2C::Port::kMXP, SerialPort::Port::kMXP or SerialPort::Port::kUSB */
+    //    /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details.   */
+    //     m_gyro = new AHRS(frc::SPI::Port::kMXP);
 
-    } catch (std::exception ex ) {
+    // } catch (std::exception ex ) {
 
-        std::string err_string = "Error Instantiating navX-MXP: ";
-        err_string += ex.what();
-        std::cout << err_string.c_str() << std::endl;
-    }
+    //     std::string err_string = "Error Instantiating navX-MXP: ";
+    //     err_string += ex.what();
+    //     std::cout << err_string.c_str() << std::endl;
+    // }
 
 
 
@@ -40,7 +40,7 @@ units::degree_t Gyro::GetYaw() {
 }
 
 void Gyro::Reset() {
-    return m_gyro->Reset();
+    m_gyro->SetYaw(0.0);
 }
 
 units::degree_t Gyro::GetPitch() {

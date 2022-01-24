@@ -58,7 +58,7 @@ namespace Iona{
             units::degree_t currentRobotAngle{0.0};
 
             //velocity control
-            double maxVel{3.0};
+            double maxVel{1.0};
 
 
 

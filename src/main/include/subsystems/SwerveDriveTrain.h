@@ -74,8 +74,8 @@ class SwerveDriveTrain : public frc2::SubsystemBase {
   //Encoder Offset Init
   const double m_offsetFL{351.562};
   const double m_offsetFR{248.203};
-  const double m_offsetBL{52.119};
-  const double m_offsetBR{273.691};
+  const double m_offsetBL{4.482};
+  const double m_offsetBR{323.438};
 
   Iona::SwerveModule* m_TopRightModule = new Iona::SwerveModule{m_motorFRD, m_motorFRA, m_encoderFR, m_offsetFR, encoderCountPerDegreeOne, "TopRight"};
   Iona::SwerveModule* m_TopLeftModule = new Iona::SwerveModule{m_motorFLD, m_motorFLA, m_encoderFL, m_offsetFL, encoderCountPerDegreeOne, "TopLeft"};

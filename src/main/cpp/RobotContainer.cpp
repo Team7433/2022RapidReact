@@ -20,8 +20,21 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   frc2::JoystickButton(&m_controller, 2).WhenPressed(
     frc2::InstantCommand([this] {m_swerveDriveTrain.ResetOdometry();})
   );
-}
 
+  frc2::JoystickButton(&m_controller, 3).WhenPressed(MotionProfile(&m_swerveDriveTrain, &m_gyro, coordinate{0.0_m, 0.0_m, 0.0_deg}));
+  frc2::JoystickButton(&m_controller, 4).WhenPressed (frc2::InstantCommand([this] {
+    std::cout << "buttonPressed" << std::endl;
+    if(m_shooter.getPercentOutput() == 0.0) {
+      std::cout << "Shooting" << std::endl;
+      m_shooter.setPercentOutput(1);
+    } else {
+      std::cout << "Unshooting" << std::endl;
+      m_shooter.setPercentOutput(0.0);
+    }
+
+  }));
+  // frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::InstantCommand([this] {m_shooter.setPercentOutput(0.5);}));
+}
 void RobotContainer::ConfigureButtonBindings() {
   // Configure your button bindings here
 }
