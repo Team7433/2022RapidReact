@@ -7,6 +7,7 @@
 #include <frc2/command/Command.h>
 
 #include <frc2/command/button/JoystickButton.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/ParallelCommandGroup.h>
@@ -20,6 +21,7 @@
 #include "commands/DriveWithJoystick.h"
 #include "commands/MoveTo.h"
 #include "commands/MotionProfile.h"
+#include "commands/RunShooter.h"
 
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>

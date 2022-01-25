@@ -15,6 +15,6 @@
  */
 
 namespace ShooterConstants {
-    constexpr double kTimeOutMS;
+    constexpr double kTimeOutMS = 10;
 
 }
