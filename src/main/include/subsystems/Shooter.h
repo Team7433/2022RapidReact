@@ -23,6 +23,7 @@ class Shooter : public frc2::SubsystemBase {
   double getPercentOutput() {return m_motor->GetMotorOutputPercent();}
   double getVelocity() {return m_motor->GetSelectedSensorVelocity();}
   double getTargetVelocity() {return m_motor->GetClosedLoopTarget();}
+  ControlMode getControlMode() {return m_motor->GetControlMode();}
   
 
  private:

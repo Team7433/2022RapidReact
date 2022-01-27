@@ -43,10 +43,9 @@ void RunShooter::Execute() {
   }
 
   
-
-
-
   m_shooter->setVelocity(futureVel);
+
+  
 
   frc::SmartDashboard::PutNumber("shooter/target vel", m_targetVel);
   frc::SmartDashboard::PutNumber("shooter/future vel", futureVel);
