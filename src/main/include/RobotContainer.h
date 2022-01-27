@@ -16,6 +16,7 @@
 #include "subsystems/SwerveDriveTrain.h"
 #include "subsystems/Gyro.h"
 #include "subsystems/Shooter.h"
+#include "subsystems/Vision.h"
 // #include "subsystems/FloorIntake.h"
 
 #include "commands/DriveWithJoystick.h"
