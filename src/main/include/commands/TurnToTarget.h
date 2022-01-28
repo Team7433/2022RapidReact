@@ -7,6 +7,7 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 #include "subsystems/Vision.h"
+#include "subsystems/SwerveDriveTrain.h"
 
 
 /**
@@ -19,7 +20,7 @@
 class TurnToTarget
     : public frc2::CommandHelper<frc2::CommandBase, TurnToTarget> {
  public:
-  TurnToTarget(Vision * vision);
+  TurnToTarget(Vision * vision, SwerveDriveTrain * swerve);
 
   void Initialize() override;
 
@@ -31,5 +32,7 @@ class TurnToTarget
 
  private:
   Vision * m_vision;
+  SwerveDriveTrain * m_swerve;
+
   
 };

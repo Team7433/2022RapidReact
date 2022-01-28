@@ -4,10 +4,11 @@
 
 #include "commands/TurnToTarget.h"
 
-TurnToTarget::TurnToTarget(Vision * vision) {
+TurnToTarget::TurnToTarget(Vision * vision, SwerveDriveTrain * swerve) {
   // Use addRequirements() here to declare subsystem dependencies.
-  AddRequirements(vision);
+  AddRequirements({vision, swerve});
   m_vision = vision;
+  m_swerve = swerve;
   
 }
 
@@ -15,7 +16,32 @@ TurnToTarget::TurnToTarget(Vision * vision) {
 void TurnToTarget::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void TurnToTarget::Execute() {}
+void TurnToTarget::Execute() {
+  double P = 0.1; // sort of a PID loop, proportional control constant to map the error to an adjustment in the steering control
+  double minimum_command = 0.05; // the minimum amount to actually rotate the bot, so it doesnt freak out at very small offsets
+  
+  if (m_vision->getTargetSkew() == true){
+    double x_error = m_vision->getTargetOffsetX();
+    double rotate;
+
+    if (x_error > 1.0) {
+      rotate = x_error*P - minimum_command;
+    }
+    
+    else {
+      rotate = x_error*P + minimum_command;
+    }
+
+
+    m_swerve->Drive(0, 0, rotate);
+
+  }
+  
+
+  
+
+
+}
 
 // Called once the command ends or is interrupted.
 void TurnToTarget::End(bool interrupted) {}
