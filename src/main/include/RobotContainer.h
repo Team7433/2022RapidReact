@@ -17,7 +17,8 @@
 #include "subsystems/Gyro.h"
 #include "subsystems/Shooter.h"
 #include "subsystems/Vision.h"
-// #include "subsystems/FloorIntake.h"
+#include "subsystems/Magazine.h"
+#include "subsystems/Intake.h"
 
 #include "commands/DriveWithJoystick.h"
 #include "commands/MoveTo.h"
@@ -48,6 +49,8 @@ class RobotContainer {
 
   Gyro m_gyro;
   Shooter m_shooter;
+  Magazine m_magazine;
+  Intake m_intake;
 
   void ConfigureButtonBindings();
 

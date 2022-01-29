@@ -28,9 +28,20 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   frc2::JoystickButton(&m_controller, 4).WhenPressed(RunShooter(&m_shooter, 5000.0, 100));
 
   frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this] { m_shooter.setPercentOutput(0.0); }, {&m_shooter}));
-    
+  
+  frc2::JoystickButton(&m_controller, 8).WhenPressed(frc2::InstantCommand([this]{
 
-}
+    if (m_magazine.getPercentageOutput() == 0) {
+      m_magazine.setPercentageOutput(0.5);
+      m_intake.setPercentOutput(0.5);
+    } else {
+      m_magazine.setPercentageOutput(0.0);
+      m_intake.setPercentOutput(0.0);
+    }
+
+  }));
+
+};
     
 void RobotContainer::ConfigureButtonBindings() {
   // Configure your button bindings here
