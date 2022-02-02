@@ -13,9 +13,13 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   // Configure the button bindings
   ConfigureButtonBindings();
   
-  frc2::JoystickButton(&m_controller, 1).WhileHeld(
-    frc2::InstantCommand([this] {m_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 1); m_swerveDriveTrain.ResetGyro();})
+  // frc2::JoystickButton(&m_controller, 1).WhileHeld(
+  //   frc2::InstantCommand([this] {m_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 1); m_swerveDriveTrain.ResetGyro();})
+  // );
+  frc2::JoystickButton(&m_controller, 1).WhenPressed(
+    frc2::InstantCommand([this] {m_swerveDriveTrain.ResetGyro();})
   );
+
 
   frc2::JoystickButton(&m_controller, 1).WhenReleased(frc2::InstantCommand([this] {m_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 0);}));
   frc2::JoystickButton(&m_controller, 2).WhenPressed(
@@ -30,7 +34,7 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::InstantCommand([this] {
 
     if (m_shooter.getPercentOutput() == 0.0){
-    m_shooter.setPercentOutput(1.0); // run the shooter
+    m_shooter.setPercentOutput(-1.0); // run the shooter
     }
     else {
       m_shooter.setPercentOutput(0.0);
@@ -42,7 +46,7 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
       m_intake.setPercentOutput(-0.5);
     }
     else {                                    // run the intake
-      m_intake.setPercentOutput(0);
+      m_intake.setPercentOutput(0.0);
     }
   }));
 
@@ -51,7 +55,7 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   frc2::JoystickButton(&m_controller, 6).WhenPressed(frc2::InstantCommand([this]{
 
     if (m_magazine.getPercentageOutput() == 0) {
-      m_magazine.setPercentageOutput(-0.3);
+      m_magazine.setPercentageOutput(0.3);
     } 
     else {
       m_magazine.setPercentageOutput(0.0);

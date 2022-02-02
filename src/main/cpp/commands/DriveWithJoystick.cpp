@@ -28,13 +28,13 @@ void DriveWithJoystick::Execute() {
   }
   // double forward = -m_controller->GetY(frc::GenericHID::JoystickHand::kLeftHand);
   // double forward = -m_controller->GetLeftY();
-  double forward = m_joystick->GetRawAxis(1);
+  double forward = m_joystick->GetRawAxis(2);
   if (fabs(forward) < 0.05) {
     forward = 0;
   }
   // double strafe = m_controller->GetX(frc::GenericHID::JoystickHand::kLeftHand);
   // double strafe = m_controller->GetLeftX();
-  double strafe = m_joystick->GetRawAxis(0);
+  double strafe = m_joystick->GetRawAxis(1);
   if (fabs(strafe) < 0.05) {
     strafe = 0;
   }
