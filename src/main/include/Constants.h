@@ -16,5 +16,8 @@
 
 namespace ShooterConstants {
     constexpr double kTimeOutMS = 10;
+    constexpr double maxVelocity = 23000; // max velocity of the motor (velocity at 100% output)
+    constexpr double kFCalc = 1023 / maxVelocity; //kF calculations for the shooter motor
+    
 
 }

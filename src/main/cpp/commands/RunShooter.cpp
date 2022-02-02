@@ -4,6 +4,8 @@
 
 #include "commands/RunShooter.h"
 
+
+using namespace ShooterConstants;
 RunShooter::RunShooter(Shooter* shooter, double targetVelocity, double velocityRamp) {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements(shooter);
@@ -42,11 +44,11 @@ void RunShooter::Execute() {
      frc::SmartDashboard::PutNumber("shooter/else ", 1);
   }
 
+  futureVel = futureVel + kFCalc * futureVel;
   
   m_shooter->setVelocity(futureVel);
 
   
-
   frc::SmartDashboard::PutNumber("shooter/target vel", m_targetVel);
   frc::SmartDashboard::PutNumber("shooter/future vel", futureVel);
   frc::SmartDashboard::PutNumber("shooter/vel error", velError);
