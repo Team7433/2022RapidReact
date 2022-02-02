@@ -20,21 +20,21 @@ void DriveWithJoystick::Initialize() {}
 void DriveWithJoystick::Execute() {
 
   // double rotate = m_controller->GetX(frc::GenericHID::JoystickHand::kRightHand);
-  double rotate = m_controller->GetRightX();
-  // double rotate = m_joystick->GetRawAxis(3);
+  // double rotate = m_controller->GetRightX();
+  double rotate = m_joystick->GetRawAxis(3);
 
   if (fabs(rotate) < 0.05) {
     rotate = 0;
   }
   // double forward = -m_controller->GetY(frc::GenericHID::JoystickHand::kLeftHand);
-  double forward = -m_controller->GetLeftY();
-  // double forward = m_joystick->GetRawAxis(1);
+  // double forward = -m_controller->GetLeftY();
+  double forward = m_joystick->GetRawAxis(1);
   if (fabs(forward) < 0.05) {
     forward = 0;
   }
   // double strafe = m_controller->GetX(frc::GenericHID::JoystickHand::kLeftHand);
-  double strafe = m_controller->GetLeftX();
-  // double strafe = m_joystick->GetRawAxis(0);
+  // double strafe = m_controller->GetLeftX();
+  double strafe = m_joystick->GetRawAxis(0);
   if (fabs(strafe) < 0.05) {
     strafe = 0;
   }
