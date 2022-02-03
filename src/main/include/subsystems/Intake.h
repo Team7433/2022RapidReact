@@ -16,7 +16,7 @@ class Intake : public frc2::SubsystemBase {
    */
   void Periodic() override;
   void setPercentOutput(double percentoutput) {m_motor->Set(ControlMode::PercentOutput, percentoutput);}
-  double getPercentOutput() {m_motor->GetMotorOutputPercent();}
+  double getPercentOutput() {return m_motor->GetMotorOutputPercent();}
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be

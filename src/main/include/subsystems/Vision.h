@@ -21,11 +21,11 @@ class Vision : public frc2::SubsystemBase {
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
-  double getTargetOffsetX(){table->GetNumber("tx", 0.0);}
-  double getTargetOffsetY() {table->GetNumber("ty",0.0);}
-  double getTargetArea() {table->GetNumber("ta",0.0);}
-  double getTargetSkew() {table->GetNumber("ts", 0.0);}
-  double getTargetVisible() {table->GetNumber("tv", 0.0);}
+  double getTargetOffsetX(){return table->GetNumber("tx", 0.0);}
+  double getTargetOffsetY() {return table->GetNumber("ty",0.0);}
+  double getTargetArea() {return table->GetNumber("ta",0.0);}
+  double getTargetSkew() {return table->GetNumber("ts", 0.0);}
+  double getTargetVisible() {return table->GetNumber("tv", 0.0);}
 
 
  private:

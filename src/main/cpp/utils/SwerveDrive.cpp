@@ -1,5 +1,5 @@
 #include <utils/SwerveDrive.h>
-
+#include <iostream>
 using namespace Iona;
 
 
@@ -17,6 +17,7 @@ void SwerveDrive::Drive(double forward, double strafe, double rotate, units::deg
 
     //getting chasis angle from the gyro
     currentRobotAngle = gyroAngle;
+    std::cout << gyroAngle.to<double>() << std::endl;
 
     //converting joystick field centric inputs to field centric values for the bot depending on the chasis angle
     FWD = forward*units::math::cos(currentRobotAngle) + (strafe*units::math::sin(currentRobotAngle));

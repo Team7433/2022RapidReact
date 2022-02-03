@@ -23,6 +23,7 @@ class Shooter : public frc2::SubsystemBase {
   double getPercentOutput() {return m_motor->GetMotorOutputPercent();}
   double getVelocity() {return m_motor->GetSelectedSensorVelocity();}
   double getTargetVelocity() {return m_motor->GetClosedLoopTarget();}
+  void setPosition(double position) {m_hoodmotor->Set(ControlMode::Position, position);}
   ControlMode getControlMode() {return m_motor->GetControlMode();}
   
 
@@ -31,5 +32,6 @@ class Shooter : public frc2::SubsystemBase {
   // declared private and exposed only through public methods.
   WPI_TalonFX* m_motor = new WPI_TalonFX{6};
   WPI_TalonFX* m_motorS = new WPI_TalonFX{5};
+  WPI_TalonSRX* m_hoodmotor = new WPI_TalonSRX{7};
 
 };

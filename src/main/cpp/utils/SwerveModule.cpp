@@ -65,6 +65,7 @@ void SwerveModule::setHeadingAngle(units::degree_t headingAngle) {
 
 void SwerveModule::displayData() {
     //display output and angle on the network table
+    
     frc::SmartDashboard::PutNumber("SwerveDrive/CurrentAngle/" + m_moduleName, getHeadingAngle().to<double>());
     frc::SmartDashboard::PutNumber("SwerveDrive/Output/" + m_moduleName, getDriveOutput());
     frc::SmartDashboard::PutNumber("SwerveDrive/Speed/" + m_moduleName, getModuleState().speed.to<double>());
