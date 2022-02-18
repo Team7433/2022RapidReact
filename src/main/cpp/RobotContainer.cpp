@@ -29,13 +29,13 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   frc2::JoystickButton(&m_controller, 3).WhenPressed(MotionProfile(&m_swerveDriveTrain, &m_gyro, coordinate{0.0_m, 0.0_m, 0.0_deg}));
 
 
-  frc2::JoystickButton(&m_controller, 4).WhenPressed(RunShooter(&m_shooter, -15000.0, 100));
+  frc2::JoystickButton(&m_controller, 4).WhenPressed(RunShooter(&m_shooter, -15000.0, 10));
 
   
 
   frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand( [this] {
     if (m_intake.getPercentOutput() == 0.0){
-      m_intake.setPercentOutput(-0.4);
+      m_intake.setPercentOutput(0.5);
     }
     else {                                    // run the intake
       m_intake.setPercentOutput(0.0);
@@ -47,7 +47,7 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   frc2::JoystickButton(&m_controller, 6).WhenPressed(frc2::InstantCommand([this]{
 
     if (m_magazine.getPercentageOutput() == 0) {
-      m_magazine.setPercentageOutput(0.3);
+      m_magazine.setPercentageOutput(0.4);
     } 
     else {
       m_magazine.setPercentageOutput(0.0);
