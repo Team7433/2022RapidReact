@@ -6,7 +6,7 @@
 
 RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   // Initialize all of your commands and subsystems here
-  m_swerveDriveTrain.SetDefaultCommand(DriveWithJoystick(&m_swerveDriveTrain, &m_gyro, &m_controller, &m_joystick));
+  // m_swerveDriveTrain.SetDefaultCommand(DriveWithJoystick(&m_swerveDriveTrain, &m_gyro, &m_controller, &m_joystick));
   // m_shooter.SetDefaultCommand(RunShooter(&m_shooter, 10))
 
 
@@ -31,8 +31,8 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
 
   // frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::InstantCommand([this] {m_shooter.setVelocity(1000);} ));
 
-  frc2::JoystickButton(&m_controller, 3).WhenPressed(RunShooter(&m_shooter, 0, 100));
-  frc2::JoystickButton(&m_controller, 4).WhenPressed(RunShooter(&m_shooter, 15000, 50));
+  // frc2::JoystickButton(&m_controller, 3).WhenPressed(RunShooter(&m_shooter, 0, 100));
+  // frc2::JoystickButton(&m_controller, 4).WhenPressed(RunShooter(&m_shooter, 15000, 50));
 
   
 
@@ -58,21 +58,21 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
 
   }));
 
-  //   frc2::JoystickButton(&m_controller, 3).WhenPressed(frc2::InstantCommand([this]{
-  //   m_intake.setPercentOutput(0.65);
-  // }));
+    frc2::JoystickButton(&m_controller, 3).WhenPressed(frc2::InstantCommand([this]{
+    m_intake.setPercentOutput(0.65);
+  }));
 
-  // frc2::JoystickButton(&m_controller, 3).WhenReleased(frc2::InstantCommand([this]{
-  //   m_intake.setPercentOutput(0.0);
-  // }));
+  frc2::JoystickButton(&m_controller, 3).WhenReleased(frc2::InstantCommand([this]{
+    m_intake.setPercentOutput(0.0);
+  }));
 
-  // frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::InstantCommand([this]{
-  //   m_intake.setPercentOutput(-0.65);
-  // }));
+  frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::InstantCommand([this]{
+    m_intake.setPercentOutput(-0.65);
+  }));
 
-  // frc2::JoystickButton(&m_controller, 4).WhenReleased(frc2::InstantCommand([this]{
-  //   m_intake.setPercentOutput(0.0);
-  // }));
+  frc2::JoystickButton(&m_controller, 4).WhenReleased(frc2::InstantCommand([this]{
+    m_intake.setPercentOutput(0.0);
+  }));
 
 }
     

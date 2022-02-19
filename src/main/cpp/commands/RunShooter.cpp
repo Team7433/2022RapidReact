@@ -18,21 +18,22 @@ RunShooter::RunShooter(Shooter* shooter, double targetVelocity, double velocityR
 // Called when the command is initially scheduled.
 void RunShooter::Initialize() {
   m_direction = -(m_shooter->getTargetVelocity()-m_targetVel)/fabs(m_shooter->getTargetVelocity()-m_targetVel);
+  // m_direction = 
 }
 
 // Called repeatedly when this Command is scheduled to run
 void RunShooter::Execute() {
   
-  // currentVel = m_shooter->getTargetVelocity();
-  // futureVel = currentVel;
-  // velError = m_targetVel - currentVel;
+  // currentVel = m_shooter->getTargetVelocity(); // 2000
+  // futureVel = currentVel; // 2000
+  // velError = m_targetVel - currentVel; // -2000
   
 
-  // if (sqrt(pow(velError, 2)) <= m_velocityRamp){
+  // if (sqrt(pow(velError, 2)) <= m_velocityRamp){ 2000 <= 10
   //   futureVel = m_targetVel;
   // }
   // else {
-  //   futureVel = futureVel - m_velocityRamp;
+  //   futureVel = futureVel - m_velocityRamp; 2000 = 2000-10
   // }
   
   // m_shooter->setVelocity(futureVel);
