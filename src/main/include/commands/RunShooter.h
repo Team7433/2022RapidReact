@@ -37,8 +37,9 @@ private:
   double currentVel;
 
   double velError;
-
   double futureVel;
+  bool m_done{false};
+  double m_direction;
 
 
 };

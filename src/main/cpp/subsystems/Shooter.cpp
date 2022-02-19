@@ -13,7 +13,10 @@ Shooter::Shooter() {
     m_motorS->SetInverted(true);
     m_motorS->Follow(*m_motor, ctre::phoenix::motorcontrol::FollowerType::FollowerType_PercentOutput);
 
-    ConfigPID(0.3, 0, 0.0);
+    ConfigPID(0.18, 00000000000001, 0.0);
+    m_motor->Config_kF(0, kFCalc, kTimeOutMS);
+    m_motor->ConfigMaxIntegralAccumulator(0, 1.5, kTimeOutMS);
+    m_motor->Config_IntegralZone(0, 300, kTimeOutMS);
 }
 
 // This method will be called once per scheduler run
@@ -21,6 +24,7 @@ void Shooter::Periodic() {
     if (m_motor->GetControlMode() == ControlMode::Velocity) {
         frc::SmartDashboard::PutString("shooter/controlmode", "velocity");
         frc::SmartDashboard::PutNumber("shooter/vel", getVelocity());
+        frc::SmartDashboard::PutNumber("shooter/targetVel", getTargetVelocity());
         
     } else {
         frc::SmartDashboard::PutString("shooter/controlmode", "not vel");
