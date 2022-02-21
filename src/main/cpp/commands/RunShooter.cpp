@@ -24,29 +24,26 @@ void RunShooter::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void RunShooter::Execute() {
   
-  // currentVel = m_shooter->getTargetVelocity(); // 2000
-  // futureVel = currentVel; // 2000
-  // velError = m_targetVel - currentVel; // -2000
-  
+  currentVel = m_shooter->getTargetVelocity(); // 2000
+  velError = m_targetVel - currentVel;
 
-  // if (sqrt(pow(velError, 2)) <= m_velocityRamp){ 2000 <= 10
-  //   futureVel = m_targetVel;
-  // }
-  // else {
-  //   futureVel = futureVel - m_velocityRamp; 2000 = 2000-10
-  // }
-  
-  // m_shooter->setVelocity(futureVel);
-  
-
-  currentVel = m_shooter->getTargetVelocity();
-
-  if (currentVel*m_direction > m_targetVel) {
+  if (sqrt(pow(velError, 2)) < velError) {
     m_shooter->setVelocity(m_targetVel);
     m_done = true;
-  } else {
-    m_shooter->setVelocity((currentVel+(m_velocityRamp*m_direction)));
   }
+  else {
+    m_shooter->setVelocity(currentVel+m_velocityRamp*m_direction);
+  }
+  
+
+  // currentVel = m_shooter->getTargetVelocity();
+
+  // if (currentVel*m_direction > m_targetVel) {
+  //   m_shooter->setVelocity(m_targetVel);
+  //   m_done = true;
+  // } else {
+  //   m_shooter->setVelocity((currentVel+(m_velocityRamp*m_direction)));
+  // }
 
 
 
