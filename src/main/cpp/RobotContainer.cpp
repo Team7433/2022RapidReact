@@ -6,7 +6,7 @@
 
 RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   // Initialize all of your commands and subsystems here
-  // m_swerveDriveTrain.SetDefaultCommand(DriveWithJoystick(&m_swerveDriveTrain, &m_gyro, &m_controller, &m_joystick));
+  m_swerveDriveTrain.SetDefaultCommand(DriveWithJoystick(&m_swerveDriveTrain, &m_gyro, &m_controller, &m_joystick));
   // m_shooter.SetDefaultCommand(RunShooter(&m_shooter, 10))
 
 
