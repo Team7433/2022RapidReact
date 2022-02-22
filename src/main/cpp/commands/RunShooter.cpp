@@ -17,33 +17,38 @@ RunShooter::RunShooter(Shooter* shooter, double targetVelocity, double velocityR
 
 // Called when the command is initially scheduled.
 void RunShooter::Initialize() {
-  m_direction = -(m_shooter->getTargetVelocity()-m_targetVel)/fabs(m_shooter->getTargetVelocity()-m_targetVel);
+  if (m_shooter->getTargetVelocity() == m_targetVel) {
+    m_done = true;
+  } else {
+    m_direction = -(m_shooter->getTargetVelocity()-m_targetVel)/fabs(m_shooter->getTargetVelocity()-m_targetVel);
+  }
+  
   // m_direction = 
 }
 
 // Called repeatedly when this Command is scheduled to run
 void RunShooter::Execute() {
   
-  currentVel = m_shooter->getTargetVelocity(); // 2000
-  velError = m_targetVel - currentVel;
+  // currentVel = m_shooter->getTargetVelocity(); // 2000
+  // velError = m_targetVel - currentVel;
 
-  if (sqrt(pow(velError, 2)) < velError) {
-    m_shooter->setVelocity(m_targetVel);
-    m_done = true;
-  }
-  else {
-    m_shooter->setVelocity(currentVel+m_velocityRamp*m_direction);
-  }
-  
-
-  // currentVel = m_shooter->getTargetVelocity();
-
-  // if (currentVel*m_direction > m_targetVel) {
+  // if (sqrt(pow(velError, 2)) < velError) {
   //   m_shooter->setVelocity(m_targetVel);
   //   m_done = true;
-  // } else {
-  //   m_shooter->setVelocity((currentVel+(m_velocityRamp*m_direction)));
   // }
+  // else {
+  //   m_shooter->setVelocity(currentVel+m_velocityRamp*m_direction);
+  // }
+  
+
+  currentVel = m_shooter->getTargetVelocity();
+
+  if (currentVel*m_direction > m_targetVel) {
+    m_shooter->setVelocity(m_targetVel);
+    m_done = true;
+  } else {
+    m_shooter->setVelocity((currentVel+(m_velocityRamp*m_direction)));
+  }
 
 
 

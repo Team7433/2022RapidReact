@@ -21,5 +21,5 @@ class HoodedShooter : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  WPI_TalonSRX * m_motor = new WPI_TalonSRX{999};
+  WPI_TalonSRX * m_motor = new WPI_TalonSRX{54};
 };
