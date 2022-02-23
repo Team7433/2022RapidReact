@@ -20,7 +20,7 @@ void TurnToTarget::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void TurnToTarget::Execute() {
   double P = 0.05; // sort of a PID loop, proportional control constant to map the error to an adjustment in the steering control
-  minimum_command = 0.05; // the minimum amount to actually rotate the bot, so it doesnt freak out at very small offsets
+  minimum_command = 0.2\; // the minimum amount to actually rotate the bot, so it doesnt freak out at very small offsets
   
   if (m_vision->getTargetOffsetX() != 0.0){
     x_error = m_vision->getTargetOffsetX();
