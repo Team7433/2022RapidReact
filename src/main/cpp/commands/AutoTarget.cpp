@@ -94,9 +94,10 @@ units::degree_t AutoTarget::getCLosestError(units::degree_t targetGyroAngle) {
 units::degree_t AutoTarget::getRemappedGyroAngle(units::degree_t targetGyroAngle) {
 
   if (targetGyroAngle <= -180_deg) {
-    targetGyroAngle = 180_deg-(remainderf(-(targetGyroAngle.to<double>()), 180));
+    targetGyroAngle = 180_deg-units::degree_t(remainderf(-(targetGyroAngle.to<double>()), 180));
   } else if (targetGyroAngle >= 180_deg) {
-    targetGyroAngle = 180_deg-(remainderf((targetGyroAngle.to<double>()), 180));
+    targetGyroAngle = 180_deg-units::degree_t(remainderf((targetGyroAngle.to<double>()), 180));
   }
+  return targetGyroAngle;
 
 }
