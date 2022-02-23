@@ -23,10 +23,12 @@
 #include "subsystems/HoodedShooter.h"
 #include "subsystems/Intake.h"
 
+
 #include "commands/DriveWithJoystick.h"
 #include "commands/MoveTo.h"
 #include "commands/MotionProfile.h"
 #include "commands/RunShooter.h"
+#include "commands/TurnToTarget.h"
 
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>
@@ -55,6 +57,7 @@ class RobotContainer {
   Magazine m_magazine;
   Intake m_intake;
   HoodedShooter m_hood;
+  Vision m_vision;
 
   void ConfigureButtonBindings();
 

@@ -91,6 +91,8 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
 
   }));
 
+  frc2::JoystickButton(&m_joystick, 1).WhenPressed(TurnToTarget(&m_vision, &m_swerveDriveTrain));
+
   
 
 }
