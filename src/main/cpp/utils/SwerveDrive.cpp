@@ -3,7 +3,7 @@
 using namespace Iona;
 
 
-void SwerveDrive::Drive(double forward, double strafe, double rotate, units::degree_t gyroAngle, bool invertHeading, bool invertRotation, bool squaredInputs, bool velocityMode) {
+void SwerveDrive::Drive(double forward, double strafe, double rotate, units::degree_t gyroAngle, bool invertHeading, bool invertRotation, bool squaredInputs, bool velocityMode, bool squareRotation) {
     //invert heading and rotation logic
     // forward = invertHeading ? -forward : forward;
     // strafe = invertHeading ? -strafe : strafe;
@@ -13,6 +13,9 @@ void SwerveDrive::Drive(double forward, double strafe, double rotate, units::deg
     if (squaredInputs) {
         forward = std::copysign(pow(forward, 2.0), forward);
         strafe = std::copysign(pow(strafe, 2.0), strafe);
+    }
+    if (squareRotation) {
+        rotate = std::copysign(pow(rotate, 2.0), rotate);
     }
 
     //getting chasis angle from the gyro

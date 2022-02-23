@@ -18,9 +18,9 @@ void SwerveDriveTrain::Periodic() {
 
 }
 
-void SwerveDriveTrain::Drive(double forward, double strafe, double rotate, bool squaredInputs, bool velocityMode) {
+void SwerveDriveTrain::Drive(double forward, double strafe, double rotate, bool squaredInputs, bool velocityMode, bool squareRotation) {
 
-    m_swerveDrive->Drive(forward, strafe, rotate, m_gyro->GetYaw(), true, false, squaredInputs, velocityMode);
+    m_swerveDrive->Drive(forward, strafe, rotate, m_gyro->GetYaw(), true, false, squaredInputs, velocityMode, squareRotation);
 
 }
  

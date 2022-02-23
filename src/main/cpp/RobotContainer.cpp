@@ -12,7 +12,11 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
 
   // Configure the button bindings
   ConfigureButtonBindings();
-  
+}
+    
+void RobotContainer::ConfigureButtonBindings() {
+  // Configure your button bindings here
+    
   // frc2::JoystickButton(&m_controller, 1).WhileHeld(
   //   frc2::InstantCommand([this] {m_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 1); m_swerveDriveTrain.ResetGyro();})
   // );
@@ -91,14 +95,9 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
 
   }));
 
-  frc2::JoystickButton(&m_joystick, 1).WhenPressed(TurnToTarget(&m_vision, &m_swerveDriveTrain));
+  frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick));
 
   
-
-}
-    
-void RobotContainer::ConfigureButtonBindings() {
-  // Configure your button bindings here
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

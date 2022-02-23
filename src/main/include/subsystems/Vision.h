@@ -12,6 +12,7 @@
 #include "networktables/NetworkTableValue.h"
 #include "wpi/span.h"
 
+#include "units/angle.h"
 
 class Vision : public frc2::SubsystemBase {
  public:
@@ -21,17 +22,20 @@ class Vision : public frc2::SubsystemBase {
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
-  double getTargetOffsetX(){return table->GetNumber("tx", 0.0);}
-  double getTargetOffsetY() {return table->GetNumber("ty",0.0);}
-  double getTargetArea() {return table->GetNumber("ta",0.0);}
-  double getTargetSkew() {return table->GetNumber("ts", 0.0);}
-  double getTargetVisible() {return table->GetNumber("tv", 0.0);}
+  units::degree_t getTargetOffsetX(){ return units::degree_t(m_currentTx);}
+  units::degree_t getTargetOffsetY() {return units::degree_t(table->GetNumber("ty",0.0));}
+  units::degree_t getTargetArea() {return units::degree_t(table->GetNumber("ta",0.0));}
+  units::degree_t getTargetSkew() {return units::degree_t(table->GetNumber("ts", 0.0));}
+  bool getTargetVisible() {return table->GetNumber("tv", 0.0);}
+  bool getTXUpToDate() {return m_txUpToDate;}
 
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
   std::shared_ptr<nt::NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
-
+  double m_oldTx{0.0};
+  double m_currentTx{0.0};
+  bool m_txUpToDate{true};
   
 };

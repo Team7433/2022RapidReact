@@ -15,9 +15,23 @@
  */
 
 namespace ShooterConstants {
-    constexpr double kTimeOutMS = 10;
-    constexpr double maxVelocity = 23000; // max velocity of the motor (velocity at 100% output)
-    constexpr double kFCalc = 1023 / maxVelocity; //kF calculations for the shooter motor
+    static constexpr double kTimeOutMS = 10;
+    static constexpr double maxVelocity = 23000; // max velocity of the motor (velocity at 100% output)
+    static constexpr double kFCalc = 1023 / maxVelocity; //kF calculations for the shooter motor
     
+
+}
+
+
+namespace SwerveDriveConstants {
+
+    static constexpr double kJoystickRotateDeadZone{0.35};
+    static constexpr double kJoystickStrafeDeadZone{0.15};
+    static constexpr double kJoystickForwardDeadZone{0.15};
+
+    static constexpr double kStrafeMultiplier{1.25};
+    static constexpr double kForwardMultiplier{1.25};
+    static constexpr double kRotateMultiplier{1.25};
+
 
 }

@@ -28,7 +28,7 @@
 #include "commands/MoveTo.h"
 #include "commands/MotionProfile.h"
 #include "commands/RunShooter.h"
-#include "commands/TurnToTarget.h"
+#include "commands/AutoTarget.h"
 
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>

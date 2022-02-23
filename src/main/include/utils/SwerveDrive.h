@@ -19,7 +19,7 @@ namespace Iona{
         public:
             // SwerveDrive(Iona::SwerveModule* topRightModule, Iona::SwerveModule* topLeftModule, Iona::SwerveModule* bottomLeftModule, Iona::SwerveModule* bottomRightModule, double wheelBase, double trackWidth) : m_topRightModule{topRightModule}, m_topLeftModule{topLeftModule}, m_bottomLeftModule{bottomLeftModule}, m_bottomRightModule{bottomRightModule}, kwheelBase{wheelBase}, ktrackWidth{trackWidth} {}
             SwerveDrive(Iona::SwerveModule* topRightModule, Iona::SwerveModule* topLeftModule, Iona::SwerveModule* bottomLeftModule, Iona::SwerveModule* bottomRightModule, double wheelBase, double trackWidth) : m_swerveModules{{"TopRight", topRightModule}, {"TopLeft", topLeftModule}, {"BottomLeft", bottomLeftModule}, {"BottomRight", bottomRightModule}}, kwheelBase{wheelBase}, ktrackWidth{trackWidth} {}
-            void Drive(double forward, double strafe, double rotate, units::degree_t gyroAngle, bool invertHeading= false, bool invertRotation=false , bool squaredInputs=false, bool velocityMode=false);
+            void Drive(double forward, double strafe, double rotate, units::degree_t gyroAngle, bool invertHeading= false, bool invertRotation=false , bool squaredInputs=false, bool velocityMode=false, bool squareRotation=false);
             void DisplayData();
 
         private:
