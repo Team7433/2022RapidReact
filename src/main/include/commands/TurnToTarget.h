@@ -9,6 +9,8 @@
 #include "subsystems/Vision.h"
 #include "subsystems/SwerveDriveTrain.h"
 
+#include <math.h>
+
 
 /**
  * An example command.
@@ -33,6 +35,9 @@ class TurnToTarget
  private:
   Vision * m_vision;
   SwerveDriveTrain * m_swerve;
+  double m_done;
+  double x_error;
+  double minimum_command;
 
   
 };

@@ -12,18 +12,23 @@
 #include <frc2/command/InstantCommand.h>
 #include <frc2/command/ParallelCommandGroup.h>
 #include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/ConditionalCommand.h>
+#include <frc2/command/ScheduleCommand.h>
 
 #include "subsystems/SwerveDriveTrain.h"
 #include "subsystems/Gyro.h"
 #include "subsystems/Shooter.h"
 #include "subsystems/Vision.h"
 #include "subsystems/Magazine.h"
+#include "subsystems/HoodedShooter.h"
 #include "subsystems/Intake.h"
+
 
 #include "commands/DriveWithJoystick.h"
 #include "commands/MoveTo.h"
 #include "commands/MotionProfile.h"
 #include "commands/RunShooter.h"
+#include "commands/TurnToTarget.h"
 
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>
@@ -51,6 +56,8 @@ class RobotContainer {
   Shooter m_shooter;
   Magazine m_magazine;
   Intake m_intake;
+  HoodedShooter m_hood;
+  Vision m_vision;
 
   void ConfigureButtonBindings();
 

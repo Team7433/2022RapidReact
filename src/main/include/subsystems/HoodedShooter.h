@@ -6,24 +6,20 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <ctre/Phoenix.h>
-#include <frc/DigitalInput.h>
 
-class Magazine : public frc2::SubsystemBase {
+class HoodedShooter : public frc2::SubsystemBase {
  public:
-  Magazine();
+  HoodedShooter();
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
-  void setPercentageOutput(double output){m_motor->Set(ControlMode::PercentOutput, output);}
-  double getPercentageOutput() {return m_motor->GetMotorOutputPercent();}
-  bool isBall() {return m_ballsensor.Get();}
+  void setPercentOutput(double percentoutput) {m_motor->Set(ControlMode::PercentOutput, percentoutput);}
+  double getPercentOutput() {return m_motor->GetMotorOutputPercent();}
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  WPI_TalonFX* m_motor = new WPI_TalonFX{52};
-  frc::DigitalInput m_ballsensor{0};
-
+  WPI_TalonSRX * m_motor = new WPI_TalonSRX{54};
 };

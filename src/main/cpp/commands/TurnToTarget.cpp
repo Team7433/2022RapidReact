@@ -3,6 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "commands/TurnToTarget.h"
+#include <iostream>
+
 
 TurnToTarget::TurnToTarget(Vision * vision, SwerveDriveTrain * swerve) {
   // Use addRequirements() here to declare subsystem dependencies.
@@ -17,26 +19,20 @@ void TurnToTarget::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void TurnToTarget::Execute() {
-  double P = 0.1; // sort of a PID loop, proportional control constant to map the error to an adjustment in the steering control
-  double minimum_command = 0.05; // the minimum amount to actually rotate the bot, so it doesnt freak out at very small offsets
+  double P = 0.05; // sort of a PID loop, proportional control constant to map the error to an adjustment in the steering control
+  minimum_command = 0.2\; // the minimum amount to actually rotate the bot, so it doesnt freak out at very small offsets
   
-  if (m_vision->getTargetSkew() == true){
-    double x_error = m_vision->getTargetOffsetX();
+  if (m_vision->getTargetOffsetX() != 0.0){
+    x_error = m_vision->getTargetOffsetX();
     double rotate;
 
-    if (x_error > 1.0) {
-      rotate = x_error*P - minimum_command;
-    }
     
-    else {
-      rotate = x_error*P + minimum_command;
-    }
-
+    rotate = x_error*P;
+     std::cout<< "RUNNING " << rotate << std::endl; 
 
     m_swerve->Drive(0, 0, rotate);
 
   }
-  
 
   
 
@@ -48,5 +44,5 @@ void TurnToTarget::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool TurnToTarget::IsFinished() {
-  return false;
+ return fabs(x_error) < minimum_command;
 }

@@ -6,9 +6,8 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-
-#include "Constants.h"
-#include "subsystems/Shooter.h"
+#include <subsystems/Magazine.h>
+#include <subsystems/Intake.h>
 
 /**
  * An example command.
@@ -17,10 +16,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class RunShooter
-    : public frc2::CommandHelper<frc2::CommandBase, RunShooter> {
+class BallAutoIntake
+    : public frc2::CommandHelper<frc2::CommandBase, BallAutoIntake> {
  public:
-  RunShooter(Shooter* shooter, double targetVelocity, double velocityRamp);
+  BallAutoIntake();
 
   void Initialize() override;
 
@@ -30,16 +29,8 @@ class RunShooter
 
   bool IsFinished() override;
 
-private:
-  Shooter* m_shooter;
-  double m_targetVel;
-  double m_velocityRamp;
-  double currentVel;
-
-  double velError;
-  double futureVel;
-  bool m_done{false};
-  double m_direction;
-
+ private:
+  Magazine * m_magazine;
+  Intake * m_intake;
 
 };

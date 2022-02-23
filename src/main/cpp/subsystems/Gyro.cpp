@@ -36,11 +36,12 @@ void Gyro::Periodic() {
 }
 
 units::degree_t Gyro::GetYaw() {
-    return units::degree_t( -m_gyro->GetYaw() );
+    return units::degree_t( m_gyro->GetYaw() );
 }
 
 void Gyro::Reset() {
     // m_gyro->SetYaw(0.0);
+    std::cout << "gyro has been reset!!! \n";
     m_gyro->Reset();
 }
 

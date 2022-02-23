@@ -12,43 +12,46 @@ RunShooter::RunShooter(Shooter* shooter, double targetVelocity, double velocityR
   m_shooter = shooter;
   m_targetVel = targetVelocity;
   m_velocityRamp = velocityRamp;
+  
 }
 
 // Called when the command is initially scheduled.
 void RunShooter::Initialize() {
+  if (m_shooter->getTargetVelocity() == m_targetVel) {
+    m_done = true;
+  } else {
+    m_direction = -(m_shooter->getTargetVelocity()-m_targetVel)/fabs(m_shooter->getTargetVelocity()-m_targetVel);
+  }
   
+  // m_direction = 
 }
 
 // Called repeatedly when this Command is scheduled to run
 void RunShooter::Execute() {
-  // double currentVel = m_shooter->getVelocity();
-  // double currentVelError = m_targetVel - currentVel;
+  
+  // currentVel = m_shooter->getTargetVelocity(); // 2000
+  // velError = m_targetVel - currentVel;
 
-  // double temp = currentVelError / m_velocityRamp;
-
-  // double futureVel = currentVel + temp;
-
+  // if (sqrt(pow(velError, 2)) < velError) {
+  //   m_shooter->setVelocity(m_targetVel);
+  //   m_done = true;
+  // }
+  // else {
+  //   m_shooter->setVelocity(currentVel+m_velocityRamp*m_direction);
+  // }
   
 
   currentVel = m_shooter->getTargetVelocity();
 
-  velError = m_targetVel - currentVel;
-
-  if (velError <= m_velocityRamp) {
-    futureVel = m_targetVel;
-    frc::SmartDashboard::PutNumber("shooter/if ", 1);
-
-  }
-  else {
-     futureVel = currentVel + m_velocityRamp;
-     frc::SmartDashboard::PutNumber("shooter/else ", 1);
+  if (currentVel*m_direction > m_targetVel) {
+    m_shooter->setVelocity(m_targetVel);
+    m_done = true;
+  } else {
+    m_shooter->setVelocity((currentVel+(m_velocityRamp*m_direction)));
   }
 
-  futureVel = futureVel + kFCalc * futureVel;
-  
-  m_shooter->setVelocity(futureVel);
 
-  
+
   frc::SmartDashboard::PutNumber("shooter/target vel", m_targetVel);
   frc::SmartDashboard::PutNumber("shooter/future vel", futureVel);
   frc::SmartDashboard::PutNumber("shooter/vel error", velError);
@@ -56,9 +59,11 @@ void RunShooter::Execute() {
 }
 
 // Called once the command ends or is interrupted.
-void RunShooter::End(bool interrupted) {}
+void RunShooter::End(bool interrupted) {
+  m_done=false;
+}
 
 // Returns true when the command should end.
 bool RunShooter::IsFinished() {
-  return false;
+  return m_done;
 }

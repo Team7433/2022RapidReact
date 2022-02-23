@@ -23,7 +23,7 @@ void DriveWithJoystick::Execute() {
   // double rotate = m_controller->GetRightX();
   double rotate = m_joystick->GetRawAxis(2);
 
-  if (fabs(rotate) < 0.15) {
+  if (fabs(rotate) < 0.35) {
     rotate = 0;
   }
   // double forward = -m_controller->GetY(frc::GenericHID::JoystickHand::kLeftHand);
@@ -34,12 +34,12 @@ void DriveWithJoystick::Execute() {
   }
   // double strafe = m_controller->GetX(frc::GenericHID::JoystickHand::kLeftHand);
   // double strafe = m_controller->GetLeftX();
-  double strafe = m_joystick->GetRawAxis(0);
+  double strafe = -m_joystick->GetRawAxis(0);
   if (fabs(strafe) < 0.15) {
     strafe = 0;
   }
 
-  m_swerveDriveTrain->Drive(forward*0.8, strafe*0.8, rotate*0.8, true, true);
+  m_swerveDriveTrain->Drive(forward*1.25, strafe*1.25, rotate*1.25, true, true);
 
 }
 
