@@ -60,13 +60,14 @@ void AutoTarget::Execute() {
   if (fabs(strafe) < kJoystickStrafeDeadZone) {
     strafe = 0;
   }
+  std::cout << "error: " << m_error.to<double>() << " output: " << rotate << std::endl;
   //telling swerveDrive Controller to drive with the above outputs
-  m_swerveDrive->Drive(forward, strafe, rotate, true, true, false);
+  m_swerveDrive->Drive(forward*kForwardMultiplier, strafe*kStrafeMultiplier, rotate, true, true, false);
 }
 
 // Called once the command ends or is interrupted.
 void AutoTarget::End(bool interrupted) {
-  m_done=true;
+  m_done=false;
 }
 
 // Returns true when the command should end.

@@ -7,4 +7,6 @@
 Magazine::Magazine() = default;
 
 // This method will be called once per scheduler run
-void Magazine::Periodic() {}
+void Magazine::Periodic() {
+    std::cout << isBall() << std::endl;
+}
