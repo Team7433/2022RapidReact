@@ -4,8 +4,12 @@
 
 #include "commands/BallAutoIntake.h"
 
-BallAutoIntake::BallAutoIntake() {
+BallAutoIntake::BallAutoIntake(Magazine * magazine, Intake * intake) {
   // Use addRequirements() here to declare subsystem dependencies.
+  AddRequirements({magazine, intake});
+
+  m_intake = intake;
+  m_magazine = magazine;
 }
 
 // Called when the command is initially scheduled.

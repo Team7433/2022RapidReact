@@ -67,21 +67,23 @@ void RobotContainer::ConfigureButtonBindings() {
 
   // frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{m_shooter.setPercentOutput(0.0);})); // stop the shooter
 
-    frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
-    m_hood.setPercentOutput(0.65);
-  }));
+  //   frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
+  //   m_hood.setPercentOutput(0.65);
+  // }));
 
-  frc2::JoystickButton(&m_controller, 7).WhenReleased(frc2::InstantCommand([this]{
-    m_hood.setPercentOutput(0.0);
-  }));
+  // frc2::JoystickButton(&m_controller, 7).WhenReleased(frc2::InstantCommand([this]{
+  //   m_hood.setPercentOutput(0.0);
+  // }));
 
-  frc2::JoystickButton(&m_controller, 8).WhenPressed(frc2::InstantCommand([this]{
-    m_hood.setPercentOutput(-0.65); 
-  }));
+  // frc2::JoystickButton(&m_controller, 8).WhenPressed(frc2::InstantCommand([this]{
+  //   m_hood.setPercentOutput(-0.65); 
+  // }));
 
-  frc2::JoystickButton(&m_controller, 8).WhenReleased(frc2::InstantCommand([this]{
-    m_hood.setPercentOutput(0.0);
-  }));
+  // frc2::JoystickButton(&m_controller, 8).WhenReleased(frc2::InstantCommand([this]{
+  //   m_hood.setPercentOutput(0.0);
+  // }));
+
+  frc2::JoystickButton(&m_controller, 8).WhenPressed(BallAutoIntake(&m_magazine, &m_intake));
   
 
   frc2::JoystickButton(&m_controller, 6).WhenPressed(frc2::InstantCommand([this]{

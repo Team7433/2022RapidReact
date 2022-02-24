@@ -29,6 +29,7 @@
 #include "commands/MotionProfile.h"
 #include "commands/RunShooter.h"
 #include "commands/AutoTarget.h"
+#include "commands/BallAutoIntake.h"
 
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>
