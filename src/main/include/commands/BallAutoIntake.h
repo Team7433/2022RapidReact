@@ -19,7 +19,7 @@
 class BallAutoIntake
     : public frc2::CommandHelper<frc2::CommandBase, BallAutoIntake> {
  public:
-  BallAutoIntake();
+  BallAutoIntake(Magazine *, Intake*);
 
   void Initialize() override;
 

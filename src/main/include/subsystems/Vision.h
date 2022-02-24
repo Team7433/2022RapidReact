@@ -26,7 +26,7 @@ class Vision : public frc2::SubsystemBase {
   units::degree_t getTargetOffsetY() {return units::degree_t(table->GetNumber("ty",0.0));}
   units::degree_t getTargetArea() {return units::degree_t(table->GetNumber("ta",0.0));}
   units::degree_t getTargetSkew() {return units::degree_t(table->GetNumber("ts", 0.0));}
-  units::meter_t getTargetDistance() {return units::meter_t((6.0 - 3.0)/tan((25.0 + getTargetOffsetY()) * (3.1415926535897932383 * 180)));} // 1 goal off ground dist, 2 limelight off ground dist, 3 limelight angle from vertical
+  units::meter_t getTargetDistance() {return units::meter_t((6.0 - 3.0)/tan((25.0 + getTargetOffsetY()) * (3.1415926535897932383 * 180)));} // 1 goal off ground dist, 2 limelight off ground dist, 3 limelight angle from verticale
   bool getTargetVisible() {return table->GetNumber("tv", 0.0);}
   bool getTXUpToDate() {return m_txUpToDate;}
 
