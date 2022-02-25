@@ -65,4 +65,6 @@ class RobotContainer {
   frc::XboxController m_controller{0};
   frc::Joystick m_joystick{1};
 
+  int m_counter = 0;
+
 };

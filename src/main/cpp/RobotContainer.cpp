@@ -84,6 +84,14 @@ void RobotContainer::ConfigureButtonBindings() {
   // }));
 
   frc2::JoystickButton(&m_controller, 8).WhenPressed(BallAutoIntake(&m_magazine, &m_intake));
+  frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
+    if (!(m_intake.getPercentOutput() == 0.0)){
+      m_intake.setPercentOutput(0.0);
+    }
+    else {
+    m_intake.setPercentOutput(0.5);
+    }
+  }));
   
 
   frc2::JoystickButton(&m_controller, 6).WhenPressed(frc2::InstantCommand([this]{
@@ -96,6 +104,27 @@ void RobotContainer::ConfigureButtonBindings() {
     }
 
   }));
+
+  frc2::JoystickButton(&m_controller, 9).WhenPressed(frc2::InstantCommand([this] {
+    m_counter = m_counter + 200;
+    RunShooter(&m_shooter, m_counter, 200);
+  }));
+
+  frc2::JoystickButton(&m_controller, 10).WhenPressed(frc2::InstantCommand([this] {
+    m_counter = m_counter - 200;
+    if (m_counter < 200) {
+      m_counter = 0;
+    }
+    RunShooter(&m_shooter, m_counter, 200);
+  }));
+
+  frc2::JoystickButton(&m_controller, 11).WhenPressed(frc2::InstantCommand([this]{
+    m_intake.setPercentOutput(-0.5);
+  }));
+  frc2::JoystickButton(&m_controller, 11).WhenReleased(frc2::InstantCommand([this]{
+    m_intake.setPercentOutput(0.0);
+  }));
+
 
   frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick));
 

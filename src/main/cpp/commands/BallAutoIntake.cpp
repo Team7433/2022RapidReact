@@ -18,7 +18,6 @@ void BallAutoIntake::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void BallAutoIntake::Execute() {
   if (m_magazine->isBall() == true) {
-    m_intake->setPercentOutput(0.0);
     m_magazine->setPercentageOutput(0.0);
 
   }
