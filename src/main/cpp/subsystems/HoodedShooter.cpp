@@ -4,7 +4,14 @@
 
 #include "subsystems/HoodedShooter.h"
 
-HoodedShooter::HoodedShooter() = default;
+
+using namespace HoodedShooterConstants;
+
+HoodedShooter::HoodedShooter(){
+    m_motor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, kTimeOutMS);
+}
 
 // This method will be called once per scheduler run
-void HoodedShooter::Periodic() {}
+void HoodedShooter::Periodic() {
+    
+}

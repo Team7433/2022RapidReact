@@ -35,3 +35,7 @@ namespace SwerveDriveConstants {
 
 
 }
+
+namespace HoodedShooterConstants {
+    static constexpr double kTimeOutMS = 10;
+}

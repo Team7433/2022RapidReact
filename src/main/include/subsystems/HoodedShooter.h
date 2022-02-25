@@ -6,6 +6,7 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <ctre/Phoenix.h>
+#include "Constants.h"
 
 class HoodedShooter : public frc2::SubsystemBase {
  public:
