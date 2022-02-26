@@ -93,19 +93,20 @@ void RobotContainer::ConfigureButtonBindings() {
     m_intake.setPercentOutput(0.0);
   }));
 
-  frc2::TriggerButton(&m_controller, frc::XboxTriggers::up).WhenPressed(frc2::InstantCommand([this]{
+
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::L_trig).WhenPressed(frc2::InstantCommand([this]{
     m_hood.setPercentOutput(-0.5);
   }));
 
-  frc2::TriggerButton(&m_controller, frc::XboxTriggers::up).WhenReleased(frc2::InstantCommand([this]{
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::L_trig).WhenReleased(frc2::InstantCommand([this]{
     m_hood.setPercentOutput(0.0);
   }));
 
-  frc2::TriggerButton(&m_controller, frc::XboxTriggers::down).WhenPressed(frc2::InstantCommand([this]{
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::R_trig).WhenPressed(frc2::InstantCommand([this]{
     m_hood.setPercentOutput(0.5);
   }));
 
-  frc2::TriggerButton(&m_controller, frc::XboxTriggers::down).WhenReleased(frc2::InstantCommand([this]{
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::R_trig).WhenReleased(frc2::InstantCommand([this]{
     m_hood.setPercentOutput(0.5);
   }));
 

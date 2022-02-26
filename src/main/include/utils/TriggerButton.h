@@ -1,4 +1,5 @@
 #pragma once
+
 #include <frc/GenericHID.h>
 #include <frc/XboxController.h>
 
@@ -7,8 +8,8 @@
 namespace frc {
     namespace XboxTriggers {
         enum trigger {
-        up = 0,
-        down = 90
+        L_trig = 2,
+        R_trig = 3
         };
     }
 }
@@ -28,9 +29,9 @@ class TriggerButton : public Button {
    * @param joystick The joystick on which the button is located.
    * @param trigger The left or right trigger.
    */
-  TriggerButton(frc::GenericHID* controller, frc::XboxTriggers::trigger trigger)
-      : Button([controller, trigger] {
-        return controller->GetPOV(trigger);
+  TriggerButton(frc::GenericHID* joystick, frc::XboxTriggers::trigger trigger)
+      : Button([joystick, trigger] {
+        return joystick->GetRawAxis(trigger) > 0.5;
 
         }) {}
 };
