@@ -36,9 +36,9 @@ class EjectOneBall
 
   private:
   frc::Timer m_timer;
-  Shooter m_shooter;
-  Magazine m_magazine;
-
+  Shooter* m_shooter;
+  Magazine* m_magazine;
+  bool m_done{false};
 
 
 };
