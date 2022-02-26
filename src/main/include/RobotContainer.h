@@ -62,7 +62,7 @@ class RobotContainer {
   Magazine m_magazine;
   Intake m_intake;
   Vision m_vision;
-
+  
   void ConfigureButtonBindings();
 
   frc::XboxController m_controller{0};
