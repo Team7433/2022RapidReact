@@ -60,7 +60,7 @@ void AutoTarget::Execute() {
   if (fabs(strafe) < kJoystickStrafeDeadZone) {
     strafe = 0;
   }
-  std::cout << "error: " << m_error.to<double>() << " output: " << rotate << std::endl;
+  // std::cout << "error: " << m_error.to<double>() << " output: " << rotate << std::endl;
   //telling swerveDrive Controller to drive with the above outputs
   m_swerveDrive->Drive(forward*kForwardMultiplier, strafe*kStrafeMultiplier, rotate, true, true, false);
 }

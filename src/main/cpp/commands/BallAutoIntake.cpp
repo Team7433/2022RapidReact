@@ -13,23 +13,35 @@ BallAutoIntake::BallAutoIntake(Magazine * magazine, Intake * intake) {
 }
 
 // Called when the command is initially scheduled.
-void BallAutoIntake::Initialize() {}
+void BallAutoIntake::Initialize() {
+    m_intake->setPercentOutput(0.5);
+    
+    if (m_magazine->isBall() == false) {
+      m_magazine->setPercentageOutput(0.4);
+    }
+    if (m_intake->getPercentOutput() != 0.0 || m_magazine->getPercentageOutput() !=0.0 ) {
+
+      m_done = true;
+    }
+    
+}
 
 // Called repeatedly when this Command is scheduled to run
 void BallAutoIntake::Execute() {
   if (m_magazine->isBall() == true) {
     m_magazine->setPercentageOutput(0.0);
     m_done = true;
+  }
 
-  }
-  else {
-    m_intake->setPercentOutput(0.5);
-    m_magazine->setPercentageOutput(0.4);
-  }
+  
 }
 
 // Called once the command ends or is interrupted.
-void BallAutoIntake::End(bool interrupted) {}
+void BallAutoIntake::End(bool interrupted) {
+  m_intake->setPercentOutput(0);
+  m_magazine->setPercentageOutput(0);
+  m_done = false;
+}
 
 // Returns true when the command should end.
 bool BallAutoIntake::IsFinished() {

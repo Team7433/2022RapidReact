@@ -37,5 +37,7 @@ class Gyro : public frc2::SubsystemBase {
   // declared private and exposed only through public methods.
   
   AHRS* m_gyro;
+  double m_gyroOffset{0.0};
+
   // ctre::phoenix::sensors::PigeonIMU* m_gyro = new ctre::phoenix::sensors::PigeonIMU{50};
 };

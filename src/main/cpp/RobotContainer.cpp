@@ -33,20 +33,6 @@ void RobotContainer::ConfigureButtonBindings() {
   // frc2::JoystickButton(&m_controller, 3).WhenPressed(MotionProfile(&m_swerveDriveTrain, &m_gyro, coordinate{0.0_m, 0.0_m, 0.0_deg}));
 
 
-  // frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::InstantCommand([this] {m_shooter.setVelocity(1000);} ));
-
-  // frc2::JoystickButton(&m_controller, 3).WhenPressed(RunShooter(&m_shooter, 0, 300));
-  // frc2::JoystickButton(&m_controller, 4).WhenPressed(RunShooter(&m_shooter, 20000, 300));
-
-  frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::InstantCommand(
-    [this]{
-      if (m_shooter.getTargetVelocity() == 0) {
-        RunShooter(&m_shooter, 20000, 300).Schedule();
-      } else {
-        RunShooter(&m_shooter, 0, 300).Schedule();
-      }
-    }
-  ));
 
   frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::ConditionalCommand(
     RunShooter(&m_shooter, 20000, 300),
@@ -58,52 +44,34 @@ void RobotContainer::ConfigureButtonBindings() {
 
   frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand( [this] {
     if (m_intake.getPercentOutput() == 0.0){
-      m_intake.setPercentOutput(0.7);
+      m_magazine.setPercentageOutput(0.5);
     }
     else {                                    // run the intake
-      m_intake.setPercentOutput(0.0);
-    }
-  }));
-
-  // frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{m_shooter.setPercentOutput(0.0);})); // stop the shooter
-
-  //   frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
-  //   m_hood.setPercentOutput(0.65);
-  // }));
-
-  // frc2::JoystickButton(&m_controller, 7).WhenReleased(frc2::InstantCommand([this]{
-  //   m_hood.setPercentOutput(0.0);
-  // }));
-
-  // frc2::JoystickButton(&m_controller, 8).WhenPressed(frc2::InstantCommand([this]{
-  //   m_hood.setPercentOutput(-0.65); 
-  // }));
-
-  // frc2::JoystickButton(&m_controller, 8).WhenReleased(frc2::InstantCommand([this]{
-  //   m_hood.setPercentOutput(0.0);
-  // }));
-
-  frc2::JoystickButton(&m_controller, 8).WhenPressed(BallAutoIntake(&m_magazine, &m_intake));
-  frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
-    if (!(m_intake.getPercentOutput() == 0.0)){
-      m_intake.setPercentOutput(0.0);
-    }
-    else {
-    m_intake.setPercentOutput(0.5);
-    }
-  }));
-  
-
-  frc2::JoystickButton(&m_controller, 6).WhenPressed(frc2::InstantCommand([this]{
-
-    if (m_magazine.getPercentageOutput() == 0) {
-      m_magazine.setPercentageOutput(0.9);
-    } 
-    else {
       m_magazine.setPercentageOutput(0.0);
     }
-
   }));
+
+  frc2::JoystickButton(&m_controller, 6).WhenPressed(BallAutoIntake(&m_magazine, &m_intake));
+  // frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
+  //   if (!(m_intake.getPercentOutput() == 0.0)){
+  //     m_intake.setPercentOutput(0.0);
+  //   }
+  //   else {
+  //   m_intake.setPercentOutput(0.5);
+  //   }
+  // }));
+  
+
+  // frc2::JoystickButton(&m_controller, 6).WhenPressed(frc2::InstantCommand([this]{
+
+  //   if (m_magazine.getPercentageOutput() == 0) {
+  //     m_magazine.setPercentageOutput(0.9);
+  //   } 
+  //   else {
+  //     m_magazine.setPercentageOutput(0.0);
+  //   }
+
+  // }));
 
   frc2::JoystickButton(&m_controller, 9).WhenPressed(frc2::InstantCommand([this] {
     m_counter = m_counter + 200;
@@ -118,10 +86,10 @@ void RobotContainer::ConfigureButtonBindings() {
     RunShooter(&m_shooter, m_counter, 200);
   }));
 
-  frc2::JoystickButton(&m_controller, 11).WhenPressed(frc2::InstantCommand([this]{
+  frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
     m_intake.setPercentOutput(-0.5);
   }));
-  frc2::JoystickButton(&m_controller, 11).WhenReleased(frc2::InstantCommand([this]{
+  frc2::JoystickButton(&m_controller, 7).WhenReleased(frc2::InstantCommand([this]{
     m_intake.setPercentOutput(0.0);
   }));
 

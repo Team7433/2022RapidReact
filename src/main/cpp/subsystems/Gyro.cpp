@@ -22,10 +22,7 @@ Gyro::Gyro() {
         std::cout << err_string.c_str() << std::endl;
     }
 
-
-
     Reset();
-
 }
 
 // This method will be called once per scheduler run
@@ -36,12 +33,13 @@ void Gyro::Periodic() {
 }
 
 units::degree_t Gyro::GetYaw() {
-    return units::degree_t( m_gyro->GetFusedHeading() );
+    return units::degree_t( m_gyro->GetFusedHeading()- m_gyroOffset);
 }
 
 void Gyro::Reset() {
     // m_gyro->SetYaw(0.0);
     std::cout << "gyro has been reset!!! \n";
+    m_gyroOffset = GetYaw().to<double>();
     m_gyro->Reset();
 }
 
