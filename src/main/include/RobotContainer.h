@@ -22,7 +22,6 @@
 #include "subsystems/Shooter.h"
 #include "subsystems/Vision.h"
 #include "subsystems/Magazine.h"
-#include "subsystems/HoodedShooter.h"
 #include "subsystems/Intake.h"
 
 
@@ -50,6 +49,7 @@ class RobotContainer {
   RobotContainer();
 
   frc2::Command* GetAutonomousCommand();
+  void stopShooterMagazine() {m_shooter.setPercentOutput(0.0); m_magazine.setPercentageOutput(0.0); m_intake.setPercentOutput(0.0);}
 
  private:
   // The robot's subsystems and commands are defined here...
@@ -59,7 +59,6 @@ class RobotContainer {
   Shooter m_shooter;
   Magazine m_magazine;
   Intake m_intake;
-  HoodedShooter m_hood;
   Vision m_vision;
 
   void ConfigureButtonBindings();

@@ -25,7 +25,7 @@ void SwerveDrive::Drive(double forward, double strafe, double rotate, units::deg
     //converting joystick field centric inputs to field centric values for the bot depending on the chasis angle
     FWD = forward*units::math::cos(currentRobotAngle) + (strafe*units::math::sin(currentRobotAngle));
     STR = strafe*units::math::cos(currentRobotAngle) - (forward*units::math::sin(currentRobotAngle));
-
+    Rotate = rotate;
     //setting variables for vector math later
     A = STR - (rotate * (kwheelBase/kradius));
     B = STR + (rotate * (kwheelBase/kradius));
@@ -91,6 +91,7 @@ void SwerveDrive::DisplayData() {
 
     frc::SmartDashboard::PutNumber("SwerveDrive/Forward", FWD);
     frc::SmartDashboard::PutNumber("SwerveDrive/Strafe", STR);
+    frc::SmartDashboard::PutNumber("SwerveDrive/Rotate", Rotate);
     
 }
 

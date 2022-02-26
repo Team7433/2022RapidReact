@@ -9,6 +9,8 @@
 
 #include "Constants.h"
 #include "subsystems/Shooter.h"
+#include <functional>
+
 
 /**
  * An example command.
@@ -20,7 +22,7 @@
 class RunShooter
     : public frc2::CommandHelper<frc2::CommandBase, RunShooter> {
  public:
-  RunShooter(Shooter* shooter, double targetVelocity, double velocityRamp);
+  RunShooter(Shooter* shooter, double targetVelocity, double velocityRamp, bool moveHood=false, std::function<double()> = [](){return 0.0;});
 
   void Initialize() override;
 
@@ -32,14 +34,14 @@ class RunShooter
 
 private:
   Shooter* m_shooter;
-  double m_targetVel;
-  double m_velocityRamp;
-  double currentVel;
-
-  double velError;
-  double futureVel;
+  double m_targetVel{0.0};
+  double m_velocityRamp{0.0};
+  double currentVel{0.0};
+  double m_direction{0.0};
   bool m_done{false};
-  double m_direction;
 
+
+  bool m_moveHood;
+  std::function<double()> m_hoodPos;
 
 };

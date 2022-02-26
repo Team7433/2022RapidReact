@@ -26,6 +26,7 @@ class Shooter : public frc2::SubsystemBase {
   void ConfigPIDH(double, double, double);
   void setPercentageOutputHood(double output) {m_hoodmotor->Set(ControlMode::PercentOutput, output);}
   void setHoodPosition(double position);
+
   
   double getPercentOutput() {return m_motor->GetMotorOutputPercent();}
   double getVelocity() {return m_motor->GetSelectedSensorVelocity();}
@@ -61,5 +62,7 @@ class Shooter : public frc2::SubsystemBase {
 
   double static constexpr k_hoodMaxEncoder{0.0}; //gotta find this value
   double m_currentHoodPosition{0.0};
+
+
 
 };

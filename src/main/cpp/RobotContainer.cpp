@@ -26,19 +26,19 @@ void RobotContainer::ConfigureButtonBindings() {
 
 
   frc2::JoystickButton(&m_controller, 1).WhenReleased(frc2::InstantCommand([this] {m_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 0);}));
-  frc2::JoystickButton(&m_controller, 2).WhenPressed(
-    frc2::InstantCommand([this] {m_swerveDriveTrain.ResetOdometry();})
-  );
+  // frc2::JoystickButton(&m_controller, 2).WhenPressed(
+  //   frc2::InstantCommand([this] {m_swerveDriveTrain.ResetOdometry();})
+  // );
 
   // frc2::JoystickButton(&m_controller, 3).WhenPressed(MotionProfile(&m_swerveDriveTrain, &m_gyro, coordinate{0.0_m, 0.0_m, 0.0_deg}));
 
 
 
-  frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::ConditionalCommand(
-    RunShooter(&m_shooter, 20000, 300),
-    RunShooter(&m_shooter, 0, 300), 
-    [this]{return m_shooter.getTargetVelocity() == 0;})
-    );
+  // frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::ConditionalCommand(
+  //   RunShooter(&m_shooter, 20000, 300),
+  //   RunShooter(&m_shooter, 0, 300), 
+  //   [this]{return m_shooter.getTargetVelocity() == 0;})
+  //   );
 
   
 
@@ -95,19 +95,19 @@ void RobotContainer::ConfigureButtonBindings() {
 
 
   frc2::TriggerButton(&m_controller, frc::XboxTriggers::L_trig).WhenPressed(frc2::InstantCommand([this]{
-    m_hood.setPercentOutput(-0.5);
+   m_shooter.setPercentageOutputHood(-0.5);
   }));
 
   frc2::TriggerButton(&m_controller, frc::XboxTriggers::L_trig).WhenReleased(frc2::InstantCommand([this]{
-    m_hood.setPercentOutput(0.0);
+    m_shooter.setPercentageOutputHood(0.0);
   }));
 
   frc2::TriggerButton(&m_controller, frc::XboxTriggers::R_trig).WhenPressed(frc2::InstantCommand([this]{
-    m_hood.setPercentOutput(0.5);
+    m_shooter.setPercentageOutputHood(0.5);
   }));
 
   frc2::TriggerButton(&m_controller, frc::XboxTriggers::R_trig).WhenReleased(frc2::InstantCommand([this]{
-    m_hood.setPercentOutput(0.5);
+    m_shooter.setPercentageOutputHood(0.0);
   }));
 
 
@@ -119,7 +119,7 @@ void RobotContainer::ConfigureButtonBindings() {
   // }));
 
 
-  frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick));
+  frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick, &m_shooter));
 
   
 }

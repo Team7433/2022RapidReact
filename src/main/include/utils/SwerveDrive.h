@@ -53,6 +53,7 @@ namespace Iona{
             //field centric forward and strafe
             double FWD{0.0};
             double STR{0.0};
+            double Rotate{0.0};
 
             //gyro angle
             units::degree_t currentRobotAngle{0.0};

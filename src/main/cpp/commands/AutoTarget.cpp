@@ -4,11 +4,12 @@
 
 #include "commands/AutoTarget.h"
 
-AutoTarget::AutoTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Vision* vision, frc::Joystick* joystick) {
+AutoTarget::AutoTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Vision* vision, frc::Joystick* joystick, Shooter* shooter) {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({swerveDriveTrain});
 
   m_swerveDrive= swerveDriveTrain;
+  m_shooter = shooter;
   m_gyro = gyro;
   m_vision = vision;
   m_joystick = joystick;
@@ -63,10 +64,13 @@ void AutoTarget::Execute() {
   // std::cout << "error: " << m_error.to<double>() << " output: " << rotate << std::endl;
   //telling swerveDrive Controller to drive with the above outputs
   m_swerveDrive->Drive(forward*kForwardMultiplier, strafe*kStrafeMultiplier, rotate, true, true, false);
+  RunShooter(m_shooter, m_shooterVelocity, 300).Schedule();
+  
 }
 
 // Called once the command ends or is interrupted.
 void AutoTarget::End(bool interrupted) {
+  RunShooter(m_shooter, 0.0, 300).Schedule();
   m_done=false;
 }
 
