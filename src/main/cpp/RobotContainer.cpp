@@ -125,6 +125,30 @@ void RobotContainer::ConfigureButtonBindings() {
     m_intake.setPercentOutput(0.0);
   }));
 
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::up).WhenPressed(frc2::InstantCommand([this]{
+    m_hood.setPercentOutput(-0.5);
+  }));
+
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::up).WhenReleased(frc2::InstantCommand([this]{
+    m_hood.setPercentOutput(0.0);
+  }));
+
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::down).WhenPressed(frc2::InstantCommand([this]{
+    m_hood.setPercentOutput(0.5);
+  }));
+
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::down).WhenReleased(frc2::InstantCommand([this]{
+    m_hood.setPercentOutput(0.5);
+  }));
+
+
+  
+  
+
+  // frc2::JoystickButton(&m_controller, 12).WhenReleased(frc2::InstantCommand([this]{
+
+  // }));
+
 
   frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick));
 

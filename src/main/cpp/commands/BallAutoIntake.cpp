@@ -19,6 +19,7 @@ void BallAutoIntake::Initialize() {}
 void BallAutoIntake::Execute() {
   if (m_magazine->isBall() == true) {
     m_magazine->setPercentageOutput(0.0);
+    m_done = true;
 
   }
   else {
@@ -32,5 +33,5 @@ void BallAutoIntake::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool BallAutoIntake::IsFinished() {
-  return false;
+  return m_done;
 }

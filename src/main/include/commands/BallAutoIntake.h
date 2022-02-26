@@ -33,4 +33,6 @@ class BallAutoIntake
   Magazine * m_magazine;
   Intake * m_intake;
 
+  bool m_done;
+
 };
