@@ -8,5 +8,5 @@ Magazine::Magazine() = default;
 
 // This method will be called once per scheduler run
 void Magazine::Periodic() {
-    std::cout << isBall() << std::endl;
+    frc::SmartDashboard::PutBoolean("magazine/sensor", isBall());
 }

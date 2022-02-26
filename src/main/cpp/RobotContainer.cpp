@@ -44,7 +44,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
   frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand( [this] {
     if (m_intake.getPercentOutput() == 0.0){
-      m_magazine.setPercentageOutput(0.5);
+      m_magazine.setPercentageOutput(0.6);
     }
     else {                                    // run the intake
       m_magazine.setPercentageOutput(0.0);
@@ -72,6 +72,8 @@ void RobotContainer::ConfigureButtonBindings() {
   //   }
 
   // }));
+
+  
 
   frc2::JoystickButton(&m_controller, 9).WhenPressed(frc2::InstantCommand([this] {
     m_counter = m_counter + 200;

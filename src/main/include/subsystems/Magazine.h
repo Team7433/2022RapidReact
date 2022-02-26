@@ -8,6 +8,8 @@
 #include <ctre/Phoenix.h>
 #include <frc/DigitalInput.h>
 
+#include <frc/smartdashboard/SmartDashboard.h>
+
 #include <iostream>
 
 class Magazine : public frc2::SubsystemBase {

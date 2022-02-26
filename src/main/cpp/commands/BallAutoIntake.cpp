@@ -19,7 +19,7 @@ void BallAutoIntake::Initialize() {
     if (m_magazine->isBall() == false) {
       m_magazine->setPercentageOutput(0.4);
     }
-    if (m_intake->getPercentOutput() != 0.0 || m_magazine->getPercentageOutput() !=0.0 ) {
+    if (m_intake->getPercentOutput() != 0.0 || m_magazine->getPercentageOutput() != 0.0 ) {
 
       m_done = true;
     }
@@ -38,8 +38,8 @@ void BallAutoIntake::Execute() {
 
 // Called once the command ends or is interrupted.
 void BallAutoIntake::End(bool interrupted) {
-  m_intake->setPercentOutput(0);
-  m_magazine->setPercentageOutput(0);
+  m_intake->setPercentOutput(0.0);
+  m_magazine->setPercentageOutput(0.0);
   m_done = false;
 }
 
