@@ -18,6 +18,7 @@ RunShooter::RunShooter(Shooter* shooter, double targetVelocity, double velocityR
 
 // Called when the command is initially scheduled.
 void RunShooter::Initialize() {
+  m_shooter->m_rampTarget = m_targetVel;
   if (m_shooter->getTargetVelocity() == m_targetVel) {
     m_done = true;
   } else {

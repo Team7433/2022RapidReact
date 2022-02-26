@@ -31,6 +31,8 @@
 #include "commands/RunShooter.h"
 #include "commands/AutoTarget.h"
 #include "commands/BallAutoIntake.h"
+#include "commands/RunMagazine.h"
+#include "commands/EjectOneBall.h"
 
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>

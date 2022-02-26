@@ -51,7 +51,11 @@ void RobotContainer::ConfigureButtonBindings() {
     }
   }));
 
+  frc2::JoystickButton(&m_controller, 5).WhileHeld(RunMagazine(&m_magazine, 0.6, [this]{return m_shooter.rampHasReachedSpeed();}));
   frc2::JoystickButton(&m_controller, 6).WhenPressed(BallAutoIntake(&m_magazine, &m_intake));
+
+
+  
   // frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
   //   if (!(m_intake.getPercentOutput() == 0.0)){
   //     m_intake.setPercentOutput(0.0);
@@ -73,7 +77,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
   // }));
 
-  
+
 
   frc2::JoystickButton(&m_controller, 9).WhenPressed(frc2::InstantCommand([this] {
     m_counter = m_counter + 200;

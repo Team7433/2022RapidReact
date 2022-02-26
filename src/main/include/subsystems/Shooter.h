@@ -38,10 +38,11 @@ class Shooter : public frc2::SubsystemBase {
   double getHoodPercentageOutput() {return m_hoodmotor->GetMotorOutputPercent();}
   double getHoodVelocity() {return m_hoodmotor->GetSelectedSensorVelocity();}
 
-
+  bool rampHasReachedSpeed() {return m_rampTarget == getTargetVelocity();}
 
   ControlMode getControlMode() {return m_motor->GetControlMode();}
   
+  double m_rampTarget{0.0};
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
@@ -62,6 +63,7 @@ class Shooter : public frc2::SubsystemBase {
 
   double static constexpr k_hoodMaxEncoder{0.0}; //gotta find this value
   double m_currentHoodPosition{0.0};
+
 
 
 
