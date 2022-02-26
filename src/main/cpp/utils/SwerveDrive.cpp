@@ -3,7 +3,7 @@
 using namespace Iona;
 
 
-void SwerveDrive::Drive(double forward, double strafe, double rotate, units::degree_t gyroAngle, bool invertHeading, bool invertRotation, bool squaredInputs, bool velocityMode, bool squareRotation) {
+void SwerveDrive::Drive(double forward, double strafe, double rotate, units::degree_t gyroAngle, bool invertHeading, bool invertRotation, bool squaredInputs, bool velocityMode, bool squareRotation, bool velocityRamping) {
     //invert heading and rotation logic
     // forward = invertHeading ? -forward : forward;
     // strafe = invertHeading ? -strafe : strafe;
@@ -18,13 +18,29 @@ void SwerveDrive::Drive(double forward, double strafe, double rotate, units::deg
         rotate = std::copysign(pow(rotate, 2.0), rotate);
     }
 
+    if(velocityRamping) {
+        strafeRampDirection = -(strafe-strafeCurrentRamp)/fabs(strafe-strafeCurrentRamp);
+        forwardRampDirection = -(forward-forwardCurrentRamp)/fabs(forward-forwardCurrentRamp);
+        if(forwardCurrentRamp*forwardRampDirection > forward) {
+            forwardCurrentRamp = forward;
+        } else {
+            forwardCurrentRamp += rampSpeed*forwardRampDirection;
+        }
+
+        if(strafeCurrentRamp*strafeRampDirection > strafe) {
+            strafeCurrentRamp = strafe;
+        } else {
+            strafeCurrentRamp += rampSpeed*strafeRampDirection;
+        }
+    }
+
     //getting chasis angle from the gyro
     currentRobotAngle = gyroAngle;
     // std::cout << gyroAngle.to<double>() << std::endl;
 
     //converting joystick field centric inputs to field centric values for the bot depending on the chasis angle
-    FWD = forward*units::math::cos(currentRobotAngle) + (strafe*units::math::sin(currentRobotAngle));
-    STR = strafe*units::math::cos(currentRobotAngle) - (forward*units::math::sin(currentRobotAngle));
+    FWD = (velocityRamping ? forwardCurrentRamp : forward)*units::math::cos(currentRobotAngle) + ((velocityRamping ? strafeCurrentRamp : strafe)*units::math::sin(currentRobotAngle));
+    STR = (velocityRamping ? strafeCurrentRamp : strafe) *units::math::cos(currentRobotAngle) - ((velocityRamping ? forwardCurrentRamp : forward)*units::math::sin(currentRobotAngle));
     Rotate = rotate;
     //setting variables for vector math later
     A = STR - (rotate * (kwheelBase/kradius));

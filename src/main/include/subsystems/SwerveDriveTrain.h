@@ -34,7 +34,7 @@ class SwerveDriveTrain : public frc2::SubsystemBase {
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
-  void Drive(double forward, double strafe, double rotate, bool squared=false, bool velocityMode=false, bool squareRotation=false);
+  void Drive(double forward, double strafe, double rotate, bool squared=false, bool velocityMode=false, bool squareRotation=false, bool velocityRamping=false);
   void ResetGyro() {m_odometry.ResetPosition(m_odometry.GetPose(), -m_gyro->GetYaw()); m_gyro->Reset();}
   void ResetOdometry() {m_odometry.ResetPosition(frc::Pose2d{0_m, 0_m, -m_gyro->GetYaw()}, -m_gyro->GetYaw());}
   coordinate getCoordinate();
@@ -88,4 +88,5 @@ class SwerveDriveTrain : public frc2::SubsystemBase {
 
   frc::SwerveDriveKinematics<4> m_kinematics{m_translations["TopLeft"], m_translations["TopRight"], m_translations["BottomLeft"], m_translations["BottomRight"]};
   frc::SwerveDriveOdometry<4> m_odometry;
+
 };
