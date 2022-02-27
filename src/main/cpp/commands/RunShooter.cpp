@@ -6,23 +6,28 @@
 
 
 using namespace ShooterConstants;
-RunShooter::RunShooter(Shooter* shooter, double targetVelocity, double velocityRamp, bool moveHood, std::function<double()> hoodPos) {
-  // Use addRequirements() here to declare subsystem dependencies.
+RunShooter::RunShooter(Shooter* shooter, double targetVelocity, double velocityRamp, bool moveHood, std::function<double()> hoodPos) : RunShooter(shooter, [targetVelocity]{return targetVelocity;}, velocityRamp, moveHood, hoodPos) {}
+
+
+RunShooter::RunShooter(Shooter* shooter, std::function<double()> targetVelocity, double velocityRamp, bool moveHood, std::function<double()> hoodPos) {
+
   AddRequirements(shooter);
   m_shooter = shooter;
   m_targetVel = targetVelocity;
   m_velocityRamp = velocityRamp;
   m_moveHood = moveHood;
   m_hoodPos = hoodPos;
+
 }
+
 
 // Called when the command is initially scheduled.
 void RunShooter::Initialize() {
-  m_shooter->m_rampTarget = m_targetVel;
-  if (m_shooter->getTargetVelocity() == m_targetVel) {
+  m_shooter->m_rampTarget = m_targetVel();
+  if (m_shooter->getTargetVelocity() == m_targetVel()) {
     m_done = true;
   } else {
-    m_direction = -(m_shooter->getTargetVelocity()-m_targetVel)/fabs(m_shooter->getTargetVelocity()-m_targetVel);
+    m_direction = -(m_shooter->getTargetVelocity()-m_targetVel())/fabs(m_shooter->getTargetVelocity()-m_targetVel());
     m_done = false;
   }
 
@@ -37,8 +42,8 @@ void RunShooter::Execute() {
   if(!m_done) {
     currentVel = m_shooter->getTargetVelocity();
 
-    if (currentVel*m_direction > m_targetVel) {
-      m_shooter->setVelocity(m_targetVel);
+    if (currentVel*m_direction > m_targetVel()) {
+      m_shooter->setVelocity(m_targetVel());
     } else {
       m_shooter->setVelocity((currentVel+(m_velocityRamp*m_direction)));
     }

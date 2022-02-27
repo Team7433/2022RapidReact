@@ -51,7 +51,7 @@ class AutoTarget
 
   units::degree_t getCLosestError(units::degree_t targetGyroAngle); //finds closest path (error) to target
   units::degree_t getRemappedGyroAngle(units::degree_t targetGyroAngle); // maps like 190 degrees to -170 Degrees
-
+  double getTargetShooterVel(){return m_shooterVelocity;}
 
   private:
   Gyro* m_gyro;

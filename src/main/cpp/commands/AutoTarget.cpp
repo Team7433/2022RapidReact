@@ -22,9 +22,11 @@ void AutoTarget::Initialize() {
   if (m_vision->getTargetVisible())
   {
      m_gyroTarget = m_gyro->GetYaw() + m_vision->getTargetOffsetX();
+     RunShooter(m_shooter, [this]{return getTargetShooterVel();}, 300).Schedule();
   } else {
     m_done = true;
   }
+  
   
 
 }
@@ -64,7 +66,7 @@ void AutoTarget::Execute() {
   // std::cout << "error: " << m_error.to<double>() << " output: " << rotate << std::endl;
   //telling swerveDrive Controller to drive with the above outputs
   m_swerveDrive->Drive(forward*kForwardMultiplier, strafe*kStrafeMultiplier, rotate, true, true, false);
-  RunShooter(m_shooter, m_shooterVelocity, 300).Schedule();
+  
   
 }
 
