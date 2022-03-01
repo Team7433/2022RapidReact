@@ -19,8 +19,9 @@ void SwerveDrive::Drive(double forward, double strafe, double rotate, units::deg
     }
 
     if(velocityRamping) {
-        strafeRampDirection = -(strafe-strafeCurrentRamp)/fabs(strafe-strafeCurrentRamp);
-        forwardRampDirection = -(forward-forwardCurrentRamp)/fabs(forward-forwardCurrentRamp);
+        strafeRampDirection = -(strafeCurrentRamp-strafe)/fabs(strafeCurrentRamp-strafe);
+        forwardRampDirection = -(forwardCurrentRamp-forward)/fabs(forwardCurrentRamp-forward);
+
         if(forwardCurrentRamp*forwardRampDirection > forward) {
             forwardCurrentRamp = forward;
         } else {

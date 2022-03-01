@@ -29,8 +29,8 @@ namespace SwerveDriveConstants {
     static constexpr double kJoystickStrafeDeadZone{0.15};
     static constexpr double kJoystickForwardDeadZone{0.15};
 
-    static constexpr double kStrafeMultiplier{1.25};
-    static constexpr double kForwardMultiplier{1.25};
+    static constexpr double kStrafeMultiplier{1.85};
+    static constexpr double kForwardMultiplier{1.85};
     static constexpr double kRotateMultiplier{1.25};
 
 

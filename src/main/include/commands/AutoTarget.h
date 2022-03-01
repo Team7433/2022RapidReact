@@ -6,6 +6,8 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc2/command/ScheduleCommand.h>
+#include <frc2/command/CommandScheduler.h>
 
 #include "commands/RunShooter.h"
 
@@ -26,6 +28,8 @@
 #include <units/angle.h>
 
 #include <iostream>
+
+
 
 using namespace SwerveDriveConstants;
 
@@ -68,10 +72,11 @@ class AutoTarget
   units::degree_t m_error{0_deg};
   units::degree_t m_gyroTarget{0_deg};
 
-  double m_shooterVelocity{0.0};
+  double m_shooterVelocity{10000};
   double m_hoodPosition{0.0};
 
   bool m_done{false};
 
+  frc2::CommandScheduler m_scheduler;
 
 };
