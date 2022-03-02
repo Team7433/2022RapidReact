@@ -4,12 +4,11 @@
 
 #include "commands/AutoTarget.h"
 
-AutoTarget::AutoTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Vision* vision, frc::Joystick* joystick, Shooter* shooter) {
+AutoTarget::AutoTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Vision* vision, frc::Joystick* joystick) {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({swerveDriveTrain});
 
   m_swerveDrive= swerveDriveTrain;
-  m_shooter = shooter;
   m_gyro = gyro;
   m_vision = vision;
   m_joystick = joystick;
@@ -18,10 +17,9 @@ AutoTarget::AutoTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Vision* v
 
 // Called when the command is initially scheduled.
 void AutoTarget::Initialize() {
-
+  std::cout <<"AutoTarget\n";
   if (m_vision->getTargetVisible())
   {
-    //  m_scheduler.GetInstance().Schedule(new RunShooter(m_shooter, 1000, 300));
      m_gyroTarget = m_gyro->GetYaw() + m_vision->getTargetOffsetX();
   } else {
     m_done = true;
@@ -72,10 +70,10 @@ void AutoTarget::Execute() {
 
 // Called once the command ends or is interrupted.
 void AutoTarget::End(bool interrupted) {
-  
-  // m_scheduler.GetInstance().Schedule(new RunShooter(m_shooter, 0, 300));
   m_done=false;
 }
+
+
 
 // Returns true when the command should end.
 bool AutoTarget::IsFinished() {

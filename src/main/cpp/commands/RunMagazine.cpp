@@ -13,7 +13,9 @@ RunMagazine::RunMagazine(Magazine* magazine, double output, std::function<bool()
 }
 
 // Called when the command is initially scheduled.
-void RunMagazine::Initialize() {}
+void RunMagazine::Initialize() {
+  std::cout << "RunMagazine\n";
+}
 
 // Called repeatedly when this Command is scheduled to run
 void RunMagazine::Execute() {

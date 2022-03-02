@@ -30,7 +30,7 @@ class Shooter : public frc2::SubsystemBase {
   
   double getPercentOutput() {return m_motor->GetMotorOutputPercent();}
   double getVelocity() {return m_motor->GetSelectedSensorVelocity();}
-  double getTargetVelocity() {return m_motor->GetClosedLoopTarget();}
+  double getTargetVelocity() {return (m_motor->GetControlMode() == ControlMode::Velocity) ? m_motor->GetClosedLoopTarget() : 0.0;}
 
   double getHoodEncoderPosition() {return m_hoodmotor->GetSelectedSensorPosition();}
   double getHoodTargetPosition() {return m_currentHoodPosition;}

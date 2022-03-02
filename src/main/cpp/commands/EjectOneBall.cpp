@@ -14,13 +14,13 @@ EjectOneBall::EjectOneBall(Magazine* magazine, Shooter* shooter) {
 
 // Called when the command is initially scheduled.
 void EjectOneBall::Initialize() {
-  RunShooter(m_shooter, 4000.0, 300.0).Schedule();
+  std::cout << "EjectOneBall\n";
 }
 
 // Called repeatedly when this Command is scheduled to run
 void EjectOneBall::Execute() {
 
-  if (m_shooter->rampHasReachedSpeed()) {
+  if (m_shooter->rampHasReachedSpeed()&&m_shooter->getPercentOutput()!=0.0) {
     m_timer.Start();
     m_magazine->setPercentageOutput(0.5);
   }

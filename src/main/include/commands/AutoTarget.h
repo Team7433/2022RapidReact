@@ -43,7 +43,7 @@ using namespace SwerveDriveConstants;
 class AutoTarget
     : public frc2::CommandHelper<frc2::CommandBase, AutoTarget> {
  public:
-  AutoTarget(SwerveDriveTrain*, Gyro*, Vision*, frc::Joystick*, Shooter*);
+  AutoTarget(SwerveDriveTrain*, Gyro*, Vision*, frc::Joystick*);
 
   void Initialize() override;
 
@@ -61,7 +61,6 @@ class AutoTarget
   Gyro* m_gyro;
   Vision* m_vision;
   SwerveDriveTrain* m_swerveDrive;
-  Shooter* m_shooter;
   frc::Joystick* m_joystick;
 
   std::map<std::string, double> kPID{{"kP",0.05}, {"kI", 0.0001}, {"kD", 0.0}, {"kS", 0.001}};
@@ -76,7 +75,5 @@ class AutoTarget
   double m_hoodPosition{0.0};
 
   bool m_done{false};
-
-  // frc2::CommandScheduler m_scheduler;
 
 };
