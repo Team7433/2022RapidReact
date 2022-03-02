@@ -14,7 +14,7 @@ Shooter::Shooter() {
     m_motorS->SetInverted(true);
     m_motorS->Follow(*m_motor, ctre::phoenix::motorcontrol::FollowerType::FollowerType_PercentOutput);
 
-    m_motor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, kTimeOutMS);
+    m_hoodmotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, kTimeOutMS);
 
 
 
@@ -33,13 +33,13 @@ Shooter::Shooter() {
 void Shooter::Periodic() {
     if (m_motor->GetControlMode() == ControlMode::Velocity) {
         frc::SmartDashboard::PutString("shooter/controlmode", "velocity");
-        frc::SmartDashboard::PutNumber("shooter/vel", getVelocity());
         frc::SmartDashboard::PutNumber("shooter/targetVel", getTargetVelocity());
         
     } else {
         frc::SmartDashboard::PutString("shooter/controlmode", "not vel");
 
     }
+        frc::SmartDashboard::PutNumber("shooter/vel", getVelocity());
     if (m_hoodmotor->GetControlMode() == ControlMode::Position) {
 
         frc::SmartDashboard::PutString("hood/controlMode", "position");
@@ -49,9 +49,9 @@ void Shooter::Periodic() {
         frc::SmartDashboard::PutString("hood/controlMode", "not position");
     }
     frc::SmartDashboard::PutNumber("hood/percentageOutput", getPercentOutput());
-    if (getHoodVelocity() > frc::SmartDashboard::GetNumber("hood/maxVel", 0.0)) {
-        frc::SmartDashboard::PutNumber("hood/maxVel", getHoodVelocity());
-    }
+    // if (getHoodVelocity() > frc::SmartDashboard::GetNumber("hood/maxVel", 0.0)) {
+    //     frc::SmartDashboard::PutNumber("hood/maxVel", getHoodVelocity());
+    // }
 }
 
 void Shooter::ConfigPID(double P, double I, double D) {

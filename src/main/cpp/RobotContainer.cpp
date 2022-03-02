@@ -24,7 +24,6 @@ void RobotContainer::ConfigureButtonBindings() {
     frc2::InstantCommand([this] {m_swerveDriveTrain.ResetGyro();})
   );
 
-
   frc2::JoystickButton(&m_controller, 1).WhenReleased(frc2::InstantCommand([this] {m_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 0);}));
   // frc2::JoystickButton(&m_controller, 2).WhenPressed(
   //   frc2::InstantCommand([this] {m_swerveDriveTrain.ResetOdometry();})
@@ -41,47 +40,24 @@ void RobotContainer::ConfigureButtonBindings() {
   //   );
 
   
+  frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand([this]{
 
-  frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand( [this] {
-    if (m_intake.getPercentOutput() == 0.0){
-      m_magazine.setPercentageOutput(0.6);
+    if(m_isShooting) {
+      RunShooter(&m_shooter, 0, 300).Schedule();
+      m_isShooting = false;
+    } else {
+      RunShooter(&m_shooter, 15000, 300).Schedule();
+      m_isShooting = true;
     }
-    else {                                    // run the intake
-      m_magazine.setPercentageOutput(0.0);
-    }
+
   }));
-
-  frc2::JoystickButton(&m_controller, 5).WhileHeld(RunMagazine(&m_magazine, 0.6, [this]{return m_shooter.rampHasReachedSpeed();}));
-  frc2::JoystickButton(&m_controller, 6).WhenPressed(BallAutoIntake(&m_magazine, &m_intake));
-
-
-
-  // frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
-  //   if (!(m_intake.getPercentOutput() == 0.0)){
-  //     m_intake.setPercentOutput(0.0);
-  //   }
-  //   else {
-  //   m_intake.setPercentOutput(0.5);
-  //   }
-  // }));
-  
-
-  // frc2::JoystickButton(&m_controller, 6).WhenPressed(frc2::InstantCommand([this]{
-
-  //   if (m_magazine.getPercentageOutput() == 0) {
-  //     m_magazine.setPercentageOutput(0.9);
-  //   } 
-  //   else {
-  //     m_magazine.setPercentageOutput(0.0);
-  //   }
-
-  // }));
+  frc2::JoystickButton(&m_controller, 6).WhileHeld(BallAutoIntake(&m_magazine, &m_intake));
 
 
 
   frc2::JoystickButton(&m_controller, 9).WhenPressed(frc2::InstantCommand([this] {
     m_counter = m_counter + 200;
-    RunShooter(&m_shooter, m_counter, 200);
+    RunShooter(&m_shooter, [this]{return m_counter;}, 200);
   }));
 
   frc2::JoystickButton(&m_controller, 10).WhenPressed(frc2::InstantCommand([this] {
@@ -89,14 +65,7 @@ void RobotContainer::ConfigureButtonBindings() {
     if (m_counter < 200) {
       m_counter = 0;
     }
-    RunShooter(&m_shooter, m_counter, 200);
-  }));
-
-  frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
-    m_intake.setPercentOutput(-0.5);
-  }));
-  frc2::JoystickButton(&m_controller, 7).WhenReleased(frc2::InstantCommand([this]{
-    m_intake.setPercentOutput(0.0);
+    RunShooter(&m_shooter, [this]{return m_counter;}, 200);
   }));
 
 
@@ -117,10 +86,20 @@ void RobotContainer::ConfigureButtonBindings() {
   }));
 
 
-  
+  frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick));
+  frc2::JoystickButton(&m_joystick, 2).WhileHeld(RunMagazine(&m_magazine, 0.6, [this]{return m_shooter.rampHasReachedSpeed()&&m_shooter.getPercentOutput()!=0.0;}));
 
-  frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick, &m_shooter));
-  frc2::JoystickButton(&m_joystick, 2).WhenPressed(EjectOneBall(&m_magazine, &m_shooter));
+  frc2::JoystickButton(&m_joystick, 2).WhenPressed(frc2::InstantCommand([this]{
+    m_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 1);
+    m_controller.SetRumble(frc::GenericHID::RumbleType::kRightRumble, 1);
+  }));
+
+  frc2::JoystickButton(&m_joystick, 2).WhenReleased(frc2::InstantCommand([this]{
+    m_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 0);
+    m_controller.SetRumble(frc::GenericHID::RumbleType::kRightRumble, 0);
+  }));
+
+  frc2::JoystickButton(&m_joystick, 3).WhenPressed(frc2::SequentialCommandGroup(frc2::ParallelRaceGroup(EjectOneBall(&m_magazine, &m_shooter), RunShooter(&m_shooter, 4000, 300)), RunShooter(&m_shooter, 0, 300)));
   
 }
 

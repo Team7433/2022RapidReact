@@ -14,6 +14,11 @@
 #include <frc2/command/SequentialCommandGroup.h>
 #include <frc2/command/ConditionalCommand.h>
 #include <frc2/command/ScheduleCommand.h>
+#include <frc2/command/ParallelRaceGroup.h>
+#include <frc2/command/FunctionalCommand.h>
+#include <frc2/command/ScheduleCommand.h>
+#include <frc2/command/ProxyScheduleCommand.h>
+
 
 #include "utils/TriggerButton.h"
 
@@ -37,6 +42,7 @@
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>
 
+#include <functional>
 
 
 /**
@@ -67,6 +73,8 @@ class RobotContainer {
 
   frc::XboxController m_controller{0};
   frc::Joystick m_joystick{1};
+
+  bool m_isShooting{false};
 
   int m_counter = 0;
 

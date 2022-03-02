@@ -11,6 +11,8 @@
 #include "subsystems/Shooter.h"
 #include <functional>
 
+#include <iostream>
+
 
 /**
  * An example command.

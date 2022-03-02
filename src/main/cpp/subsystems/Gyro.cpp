@@ -33,7 +33,7 @@ void Gyro::Periodic() {
 }
 
 units::degree_t Gyro::GetYaw() {
-    return units::degree_t( m_gyro->GetFusedHeading()- m_gyroOffset);
+    return units::degree_t( m_gyro->GetYaw());
 }
 
 void Gyro::Reset() {
