@@ -42,20 +42,21 @@ void RobotContainer::ConfigureButtonBindings() {
 
   
 
-  frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand( [this] {
-    if (m_intake.getPercentOutput() == 0.0){
-      m_magazine.setPercentageOutput(0.6);
-    }
-    else {                                    // run the intake
-      m_magazine.setPercentageOutput(0.0);
-    }
-  }));
-  frc2::JoystickButton(&m_controller, 5).WhenPressed(RunShooter(&m_shooter, []{return 1000;}, 100));
-  // frc2::JoystickButton(&m_controller, 5).WhileHeld(RunMagazine(&m_magazine, 0.6, [this]{return m_shooter.rampHasReachedSpeed();}));
+  // frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand( [this] {
+  //   if (m_intake.getPercentOutput() == 0.0){
+  //     m_magazine.setPercentageOutput(0.6);
+  //   }
+  //   else {                                    // run the intake
+  //     m_magazine.setPercentageOutput(0.0);
+  //   }
+  // }));
+  // frc2::JoystickButton(&m_controller, 5).WhenPressed(RunShooter(&m_shooter, []{return 1000;}, 100));
+  frc2::JoystickButton(&m_controller, 5).WhileHeld(RunMagazine(&m_magazine, 0.6, [this]{return m_shooter.rampHasReachedSpeed();}));
   frc2::JoystickButton(&m_controller, 6).WhileHeld(BallAutoIntake(&m_magazine, &m_intake));
 
 
 
+  // frc2::JoystickButton(&m_controller, 6).WhileHeld(BallAutoIntake(&m_magazine, &m_intake));
   // frc2::JoystickButton(&m_controller, 7).WhenPressed(frc2::InstantCommand([this]{
   //   if (!(m_intake.getPercentOutput() == 0.0)){
   //     m_intake.setPercentOutput(0.0);
@@ -120,9 +121,12 @@ void RobotContainer::ConfigureButtonBindings() {
   
 
   frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick, &m_shooter));
-  frc2::JoystickButton(&m_joystick, 1).WhenPressed(RunShooter(&m_shooter, 10000, 300));
-  frc2::JoystickButton(&m_joystick, 1).WhenReleased(RunShooter(&m_shooter, 0, 300));
-  frc2::JoystickButton(&m_joystick, 2).WhenPressed(EjectOneBall(&m_magazine, &m_shooter));
+  // frc2::JoystickButton(&m_joystick, 2).WhenPressed(frc2::ConditionalCommand(RunShooter(&m_shooter, 10000, 300), RunShooter(&m_shooter, 0, 300), [this]{std::cout<< m_shooter.getTargetVelocity() << std::endl; return m_shooter.getTargetVelocity()==0.0;}));
+  frc2::JoystickButton(&m_joystick, 3).WhenPressed(RunShooter(&m_shooter, 10000, 300));
+  frc2::JoystickButton(&m_joystick, 4).WhenPressed(RunShooter(&m_shooter, 0, 300));
+  // frc2::JoystickButton(&m_joystick, 1).WhenPressed(RunShooter(&m_shooter, 20000, 300));
+  // frc2::JoystickButton(&m_joystick, 1).WhenReleased(RunShooter(&m_shooter, 0, 300));
+  // frc2::JoystickButton(&m_joystick, 2).WhenPressed(EjectOneBall(&m_magazine, &m_shooter));
   
 }
 

@@ -36,18 +36,19 @@ void RunShooter::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void RunShooter::Execute() {
 
-  if (m_moveHood) {
-    m_shooter->setHoodPosition(m_hoodPos());
-  }
-  if(!m_done) {
+  // if (m_moveHood) {
+  //   m_shooter->setHoodPosition(m_hoodPos());
+  // }
+  // if(!m_done) {
     currentVel = m_shooter->getTargetVelocity();
 
     if (currentVel*m_direction > m_targetVel()) {
       m_shooter->setVelocity(m_targetVel());
+      m_done=true;
     } else {
       m_shooter->setVelocity((currentVel+(m_velocityRamp*m_direction)));
     }
-  }
+  // }
 
 
 
@@ -55,10 +56,11 @@ void RunShooter::Execute() {
 
 // Called once the command ends or is interrupted.
 void RunShooter::End(bool interrupted) {
+  m_shooter->setVelocity(m_targetVel());
   m_done=false;
 }
 
 // Returns true when the command should end.
 bool RunShooter::IsFinished() {
-  return false;
+  return m_done;
 }

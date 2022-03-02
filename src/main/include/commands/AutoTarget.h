@@ -77,6 +77,6 @@ class AutoTarget
 
   bool m_done{false};
 
-  frc2::CommandScheduler m_scheduler;
+  // frc2::CommandScheduler m_scheduler;
 
 };

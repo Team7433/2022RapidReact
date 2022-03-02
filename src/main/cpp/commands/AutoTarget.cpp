@@ -21,7 +21,7 @@ void AutoTarget::Initialize() {
 
   if (m_vision->getTargetVisible())
   {
-     m_scheduler.GetInstance().Schedule(new RunShooter(m_shooter, 1000, 300));
+    //  m_scheduler.GetInstance().Schedule(new RunShooter(m_shooter, 1000, 300));
      m_gyroTarget = m_gyro->GetYaw() + m_vision->getTargetOffsetX();
   } else {
     m_done = true;
@@ -73,7 +73,7 @@ void AutoTarget::Execute() {
 // Called once the command ends or is interrupted.
 void AutoTarget::End(bool interrupted) {
   
-  m_scheduler.GetInstance().Schedule(new RunShooter(m_shooter, 0, 300));
+  // m_scheduler.GetInstance().Schedule(new RunShooter(m_shooter, 0, 300));
   m_done=false;
 }
 
