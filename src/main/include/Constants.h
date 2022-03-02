@@ -25,7 +25,7 @@ namespace ShooterConstants {
 
 namespace SwerveDriveConstants {
 
-    static constexpr double kJoystickRotateDeadZone{0.35};
+    static constexpr double kJoystickRotateDeadZone{0.0};
     static constexpr double kJoystickStrafeDeadZone{0.15};
     static constexpr double kJoystickForwardDeadZone{0.15};
 

@@ -63,7 +63,7 @@ class AutoTarget
   SwerveDriveTrain* m_swerveDrive;
   frc::Joystick* m_joystick;
 
-  std::map<std::string, double> kPID{{"kP",0.05}, {"kI", 0.0001}, {"kD", 0.0}, {"kS", 0.001}};
+  std::map<std::string, double> kPID{{"kP",0.05}, {"kI", 0.0001}, {"kD", 0.0}, {"kS", 0.01}};
   double static constexpr m_maxAccumulator{100.0};
   double static constexpr m_izone{4.0};
   double m_accumulator;

@@ -24,7 +24,7 @@ void EjectOneBall::Execute() {
     m_timer.Start();
     m_magazine->setPercentageOutput(0.5);
   }
-  if (m_timer.HasElapsed(3_s)) {
+  if (m_timer.HasElapsed(1_s)) {
     m_done = true;
   }
 

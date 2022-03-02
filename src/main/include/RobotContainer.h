@@ -78,4 +78,6 @@ class RobotContainer {
 
   int m_counter = 0;
 
+  // frc2::ParallelCommandGroup* m_RampShooterDown = new frc2::ParallelCommandGroup(RunShooter(&m_shooter, 0, 400), frc2::InstantCommand([this]{m_isShooting =false;}));
+  // frc2::ParallelCommandGroup* m_RampShooterUp = new frc2::ParallelCommandGroup(frc2::InstantCommand([this] {m_RampShooterDown.Cancel();}), RunShooter(&m_shooter, 10000, 400), frc2::InstantCommand([this]{m_isShooting =true;}));
 };
