@@ -8,6 +8,7 @@
 #include <frc2/command/CommandHelper.h>
 #include <subsystems/Magazine.h>
 #include <subsystems/Intake.h>
+#include "units/time.h"
 
 /**
  * An example command.
@@ -34,5 +35,8 @@ class BallAutoIntake
   Intake * m_intake;
 
   bool m_done;
+
+  frc::Timer m_timer;
+  units::time::second_t m_time;
 
 };

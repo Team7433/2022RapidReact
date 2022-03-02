@@ -23,14 +23,27 @@ void BallAutoIntake::Initialize() {
 
       m_done = true;
     }
+    m_time = 2_s;
+
     
 }
 
 // Called repeatedly when this Command is scheduled to run
 void BallAutoIntake::Execute() {
-  if (m_magazine->isBall() == true) {
+  if (m_magazine->isBall() == true && m_time == 2_s) {
     m_magazine->setPercentageOutput(0.0);
-    m_done = true;
+    m_time = 0_s;
+    m_timer.Stop();
+    m_timer.Reset();
+    m_timer.Start();
+    
+  }
+
+  if (m_timer.HasElapsed(2_s)){
+    m_time = 2_s;
+    if (!(m_magazine->isBall())){
+      m_magazine->setPercentageOutput(0.6);
+    }
   }
 
   
