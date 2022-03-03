@@ -7,6 +7,7 @@
 #include <frc2/command/SubsystemBase.h>
 #include <ctre/Phoenix.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/DigitalInput.h>
 
 #include <map>
 #include <string.h>
@@ -22,21 +23,22 @@ class Shooter : public frc2::SubsystemBase {
   void Periodic() override;
   void setPercentOutput(double output) {m_motor->Set(ControlMode::PercentOutput, output);}
   void setVelocity(double velocity) {(velocity ==0)? m_motor->Set(ControlMode::PercentOutput, 0) : m_motor->Set(ControlMode::Velocity, velocity);}
-  void ConfigPID(double P, double I, double D);
+  void ConfigPID(double P, double I, double D); // PID, and one-time initialisation stuffs
   void ConfigPIDH(double, double, double);
   void setPercentageOutputHood(double output) {m_hoodmotor->Set(ControlMode::PercentOutput, output);}
   void setHoodPosition(double position);
 
   
   double getPercentOutput() {return m_motor->GetMotorOutputPercent();}
-  double getVelocity() {return m_motor->GetSelectedSensorVelocity();}
+  double getVelocity() {return m_motor->GetSelectedSensorVelocity();} // shooter functions
   double getTargetVelocity() {return (m_motor->GetControlMode() == ControlMode::Velocity) ? m_motor->GetClosedLoopTarget() : 0.0;}
 
   double getHoodEncoderPosition() {return m_hoodmotor->GetSelectedSensorPosition();}
   double getHoodTargetPosition() {return m_currentHoodPosition;}
   double getHoodPositionError() {return m_hoodmotor->GetClosedLoopError();}
-  double getHoodPercentageOutput() {return m_hoodmotor->GetMotorOutputPercent();}
+  double getHoodPercentageOutput() {return m_hoodmotor->GetMotorOutputPercent();}  // hood functions
   double getHoodVelocity() {return m_hoodmotor->GetSelectedSensorVelocity();}
+  bool hasHoodHitLimit() {return m_hoodlimit.Get();}
 
   bool rampHasReachedSpeed() {return m_rampTarget == getTargetVelocity();}
 
@@ -50,6 +52,7 @@ class Shooter : public frc2::SubsystemBase {
   WPI_TalonFX* m_motor = new WPI_TalonFX{6};
   WPI_TalonFX* m_motorS = new WPI_TalonFX{5};
   WPI_TalonSRX* m_hoodmotor = new WPI_TalonSRX{7};
+  frc::DigitalInput m_hoodlimit{8};
 
 
   //KI settings for shooter
