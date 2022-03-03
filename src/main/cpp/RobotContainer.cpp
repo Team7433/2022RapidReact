@@ -7,6 +7,7 @@
 RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   // Initialize all of your commands and subsystems here
   m_swerveDriveTrain.SetDefaultCommand(DriveWithJoystick(&m_swerveDriveTrain, &m_gyro, &m_controller, &m_joystick));
+  
   // m_shooter.SetDefaultCommand(RunShooter(&m_shooter, 10))
 
 
@@ -35,7 +36,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
   frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::ConditionalCommand(
     frc2::ParallelCommandGroup(RunShooter(&m_shooter, 0, 400), frc2::InstantCommand([this]{m_isShooting =false;})),
-    frc2::ParallelCommandGroup(RunShooter(&m_shooter, 15000, 400), frc2::InstantCommand([this]{m_isShooting =true;})),
+    frc2::ParallelCommandGroup(RunShooter(&m_shooter, 19000, 400), frc2::InstantCommand([this]{m_isShooting =true;})),
     [this] {return m_isShooting;}
 
   ));

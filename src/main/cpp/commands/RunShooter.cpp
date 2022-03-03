@@ -11,7 +11,7 @@ RunShooter::RunShooter(Shooter* shooter, double targetVelocity, double velocityR
 
 RunShooter::RunShooter(Shooter* shooter, std::function<double()> targetVelocity, double velocityRamp, bool moveHood, std::function<double()> hoodPos) {
 
-  AddRequirements(shooter);
+  AddRequirements({shooter});
   m_shooter = shooter;
   m_targetVel = targetVelocity;
   m_velocityRamp = velocityRamp;

@@ -75,7 +75,7 @@ class RobotContainer {
   frc::Joystick m_joystick{1};
 
   bool m_isShooting{false};
-
+  double m_shooterVelocity;
   int m_counter = 0;
 
   // frc2::ParallelCommandGroup* m_RampShooterDown = new frc2::ParallelCommandGroup(RunShooter(&m_shooter, 0, 400), frc2::InstantCommand([this]{m_isShooting =false;}));
