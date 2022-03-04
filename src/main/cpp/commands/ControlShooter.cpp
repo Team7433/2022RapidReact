@@ -46,7 +46,7 @@ bool ControlShooter::IsFinished() {
 }
 
 double ControlShooter::calculateDirection() {
-
+  //returns -1, 0 or 1, showing which way the ramp is going 0 means its on target
   return  ((*m_rampTarget)()-m_shooter->getTargetVelocity() !=0.0) ? ((*m_rampTarget)() - m_shooter->getTargetVelocity())/fabs((*m_rampTarget)()-m_shooter->getTargetVelocity()) : 0.0;
 
 }

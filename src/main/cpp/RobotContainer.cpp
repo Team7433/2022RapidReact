@@ -88,6 +88,11 @@ void RobotContainer::ConfigureButtonBindings() {
   //   m_controller.SetRumble(frc::GenericHID::RumbleType::kRightRumble, 0);
   // }));
 
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::L_trig).WhenPressed(frc2::InstantCommand([this]{m_hoodedShooter.setPercentageOutputHood(0.5);}));
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::L_trig).WhenReleased(frc2::InstantCommand([this]{m_hoodedShooter.setPercentageOutputHood(0.0);}));
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::R_trig).WhenPressed(frc2::InstantCommand([this]{m_hoodedShooter.setPercentageOutputHood(-0.5);}));
+  frc2::TriggerButton(&m_controller, frc::XboxTriggers::R_trig).WhenReleased(frc2::InstantCommand([this]{m_hoodedShooter.setPercentageOutputHood(0);}));
+
   frc2::JoystickButton(&m_joystick, 3).WhenPressed(frc2::SequentialCommandGroup(frc2::SequentialCommandGroup(RunShooter(&m_shooter, 4000, 300), EjectOneBall(&m_magazine, &m_shooter)), RunShooter(&m_shooter, 0, 300)));
   
 }
