@@ -29,6 +29,7 @@
 #include "subsystems/Magazine.h"
 #include "subsystems/Intake.h"
 #include "subsystems/HoodedShooter.h"
+#include "subsystems/Climb.h"
 
 #include "commands/DriveWithJoystick.h"
 #include "commands/MoveTo.h"
@@ -70,6 +71,7 @@ class RobotContainer {
   Intake m_intake;
   Vision m_vision;
   HoodedShooter m_hoodedShooter;
+  Climb m_climb;
   
   void ConfigureButtonBindings();
 
