@@ -40,6 +40,7 @@
 #include "commands/RunMagazine.h"
 #include "commands/EjectOneBall.h"
 #include "commands/ControlShooter.h"
+#include "commands/ClimbMode.h"
 
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>
