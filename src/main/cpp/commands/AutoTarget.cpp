@@ -4,7 +4,7 @@
 
 #include "commands/AutoTarget.h"
 
-AutoTarget::AutoTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Vision* vision, frc::Joystick* joystick) {
+AutoTarget::AutoTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Vision* vision, frc::Joystick* joystick, frc::XboxController* controller) {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({swerveDriveTrain});
 
@@ -12,6 +12,7 @@ AutoTarget::AutoTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Vision* v
   m_gyro = gyro;
   m_vision = vision;
   m_joystick = joystick;
+  m_controller = controller;
 
 }
 
@@ -24,7 +25,8 @@ void AutoTarget::Initialize() {
   } else {
     m_done = true;
   }
-  
+  m_controller->SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 1);
+  m_controller->SetRumble(frc::GenericHID::RumbleType::kRightRumble, 1);
   
 
 }
@@ -71,6 +73,8 @@ void AutoTarget::Execute() {
 // Called once the command ends or is interrupted.
 void AutoTarget::End(bool interrupted) {
   m_done=false;
+    m_controller->SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 0);
+    m_controller->SetRumble(frc::GenericHID::RumbleType::kRightRumble, 0);
 }
 
 

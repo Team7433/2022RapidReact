@@ -19,6 +19,7 @@
 #include "subsystems/Shooter.h"
 
 #include <frc/Joystick.h>
+#include <frc/XboxController.h>
 
 #include "Constants.h"
 
@@ -43,7 +44,7 @@ using namespace SwerveDriveConstants;
 class AutoTarget
     : public frc2::CommandHelper<frc2::CommandBase, AutoTarget> {
  public:
-  AutoTarget(SwerveDriveTrain*, Gyro*, Vision*, frc::Joystick*);
+  AutoTarget(SwerveDriveTrain*, Gyro*, Vision*, frc::Joystick*, frc::XboxController*);
 
   void Initialize() override;
 
@@ -62,6 +63,7 @@ class AutoTarget
   Vision* m_vision;
   SwerveDriveTrain* m_swerveDrive;
   frc::Joystick* m_joystick;
+  frc::XboxController* m_controller;
 
   std::map<std::string, double> kPID{{"kP",0.05}, {"kI", 0.0001}, {"kD", 0.0}, {"kS", 0.01}};
   double static constexpr m_maxAccumulator{100.0};

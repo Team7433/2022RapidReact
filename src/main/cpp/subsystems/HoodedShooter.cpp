@@ -8,9 +8,9 @@ using namespace ShooterConstants;
 HoodedShooter::HoodedShooter(){
     m_hoodmotor->ConfigFactoryDefault();
 
-    // ConfigPIDH(k_PID_H["kP"], k_PID_H["kI"], k_PID_H["kD"]);
+    ConfigPIDH(k_PID_H["kP"], k_PID_H["kI"], k_PID_H["kD"]);
 
-    // m_hoodmotor->Config_kF(0 ,k_PID_H["kF"], kTimeOutMS);
+    m_hoodmotor->Config_kF(0 ,k_PID_H["kF"], kTimeOutMS);
     m_hoodmotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, kTimeOutMS);
 }
 

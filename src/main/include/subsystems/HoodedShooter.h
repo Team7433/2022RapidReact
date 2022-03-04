@@ -12,6 +12,8 @@
 #include <iostream>
 #include "Constants.h"
 
+#include <map>
+
 
 class HoodedShooter : public frc2::SubsystemBase {
  public:
@@ -47,5 +49,5 @@ class HoodedShooter : public frc2::SubsystemBase {
   double m_currentHoodPosition{0.0};
 
   //PID values for hood
-  // std::map<std::string, double> k_PID_H{{"kP", 0.18}, {"kI", 00000000000001}, {"kD", 0.0}, {"kF", 0.0}};
+  std::map<std::string, double> k_PID_H{{"kP", 0.18}, {"kI", 00000000000001}, {"kD", 0.0}, {"kF", 0.0}};
 };

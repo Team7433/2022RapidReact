@@ -28,7 +28,7 @@
 #include "subsystems/Vision.h"
 #include "subsystems/Magazine.h"
 #include "subsystems/Intake.h"
-
+#include "subsystems/HoodedShooter.h"
 
 #include "commands/DriveWithJoystick.h"
 #include "commands/MoveTo.h"
@@ -38,6 +38,7 @@
 #include "commands/BallAutoIntake.h"
 #include "commands/RunMagazine.h"
 #include "commands/EjectOneBall.h"
+#include "commands/ControlShooter.h"
 
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>
@@ -57,7 +58,7 @@ class RobotContainer {
   RobotContainer();
 
   frc2::Command* GetAutonomousCommand();
-  void stopShooterMagazine() {m_shooter.setPercentOutput(0.0); m_magazine.setPercentageOutput(0.0); m_intake.setPercentOutput(0.0);}
+  void stopShooterMagazine() {m_shooter.setPercentOutput(0.0); m_rampTarget = []{return 0.0;} ; m_magazine.setPercentageOutput(0.0); m_intake.setPercentOutput(0.0);}
 
  private:
   // The robot's subsystems and commands are defined here...
@@ -68,6 +69,7 @@ class RobotContainer {
   Magazine m_magazine;
   Intake m_intake;
   Vision m_vision;
+  HoodedShooter m_hoodedShooter;
   
   void ConfigureButtonBindings();
 
@@ -75,7 +77,10 @@ class RobotContainer {
   frc::Joystick m_joystick{1};
 
   bool m_isShooting{false};
-  double m_shooterVelocity;
+
+  std::function<double()> m_rampTarget{[]{return 0.0;}};
+  std::function<double()> m_rampSpeed{[]{return 400.0;}};
+  std::function<double()> m_hoodTarget{[]{return 0.0;}};
   int m_counter = 0;
 
   // frc2::ParallelCommandGroup* m_RampShooterDown = new frc2::ParallelCommandGroup(RunShooter(&m_shooter, 0, 400), frc2::InstantCommand([this]{m_isShooting =false;}));

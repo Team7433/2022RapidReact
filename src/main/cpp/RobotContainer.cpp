@@ -7,6 +7,7 @@
 RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   // Initialize all of your commands and subsystems here
   m_swerveDriveTrain.SetDefaultCommand(DriveWithJoystick(&m_swerveDriveTrain, &m_gyro, &m_controller, &m_joystick));
+  m_shooter.SetDefaultCommand(ControlShooter(&m_shooter, &m_hoodedShooter, &m_rampTarget, &m_rampSpeed, &m_hoodTarget));
   
   // m_shooter.SetDefaultCommand(RunShooter(&m_shooter, 10))
 
@@ -34,12 +35,23 @@ void RobotContainer::ConfigureButtonBindings() {
 
 
 
-  frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::ConditionalCommand(
-    frc2::ParallelCommandGroup(RunShooter(&m_shooter, 0, 400), frc2::InstantCommand([this]{m_isShooting =false;})),
-    frc2::ParallelCommandGroup(RunShooter(&m_shooter, 19000, 400), frc2::InstantCommand([this]{m_isShooting =true;})),
-    [this] {return m_isShooting;}
+  // frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::ConditionalCommand(
+  //   frc2::ParallelCommandGroup(RunShooter(&m_shooter, 0, 400), frc2::InstantCommand([this]{m_isShooting =false;})),
+  //   frc2::ParallelCommandGroup(RunShooter(&m_shooter, 19000, 400), frc2::InstantCommand([this]{m_isShooting =true;})),
+  //   [this] {return m_isShooting;}
 
-  ));
+  // ));
+
+
+  frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand([this]{
+
+    if (m_rampTarget() == 0.0) {
+      m_rampTarget = []{return 19000.0;};
+    } else {
+      m_rampTarget = []{return 0.0;};
+    }
+
+  }));
   
 
   frc2::JoystickButton(&m_controller, 6).WhileHeld(BallAutoIntake(&m_magazine, &m_intake));
@@ -60,24 +72,10 @@ void RobotContainer::ConfigureButtonBindings() {
   }));
 
 
-  frc2::TriggerButton(&m_controller, frc::XboxTriggers::L_trig).WhenPressed(frc2::InstantCommand([this]{
-   m_shooter.setPercentageOutputHood(-0.5);
-  }));
-
-  frc2::TriggerButton(&m_controller, frc::XboxTriggers::L_trig).WhenReleased(frc2::InstantCommand([this]{
-    m_shooter.setPercentageOutputHood(0.0);
-  }));
-
-  frc2::TriggerButton(&m_controller, frc::XboxTriggers::R_trig).WhenPressed(frc2::InstantCommand([this]{
-    m_shooter.setPercentageOutputHood(0.5);
-  }));
-
-  frc2::TriggerButton(&m_controller, frc::XboxTriggers::R_trig).WhenReleased(frc2::InstantCommand([this]{
-    m_shooter.setPercentageOutputHood(0.0);
-  }));
 
 
-  frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick));
+
+  frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick, &m_controller));
   frc2::JoystickButton(&m_joystick, 2).WhileHeld(RunMagazine(&m_magazine, 0.6, [this]{return m_shooter.rampHasReachedSpeed()&&m_shooter.getPercentOutput()!=0.0;}));
 
   // frc2::JoystickButton(&m_joystick, 2).WhenPressed(frc2::InstantCommand([this]{
