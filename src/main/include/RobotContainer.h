@@ -81,7 +81,7 @@ class RobotContainer {
   std::function<double()> m_rampTarget{[]{return 0.0;}};
   std::function<double()> m_rampSpeed{[]{return 400.0;}};
   std::function<double()> m_hoodTarget{[]{return 0.0;}};
-  int m_counter = 0;
+  double m_counter = 0.0;
 
   // frc2::ParallelCommandGroup* m_RampShooterDown = new frc2::ParallelCommandGroup(RunShooter(&m_shooter, 0, 400), frc2::InstantCommand([this]{m_isShooting =false;}));
   // frc2::ParallelCommandGroup* m_RampShooterUp = new frc2::ParallelCommandGroup(frc2::InstantCommand([this] {m_RampShooterDown.Cancel();}), RunShooter(&m_shooter, 10000, 400), frc2::InstantCommand([this]{m_isShooting =true;}));

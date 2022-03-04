@@ -60,7 +60,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
   frc2::JoystickButton(&m_controller, 9).WhenPressed(frc2::InstantCommand([this] {
     m_counter = m_counter + 200;
-    RunShooter(&m_shooter, [this]{return m_counter;}, 200);
+    m_rampTarget = [this]{return m_counter;};
   }));
 
   frc2::JoystickButton(&m_controller, 10).WhenPressed(frc2::InstantCommand([this] {
@@ -68,7 +68,7 @@ void RobotContainer::ConfigureButtonBindings() {
     if (m_counter < 200) {
       m_counter = 0;
     }
-    RunShooter(&m_shooter, [this]{return m_counter;}, 200);
+    m_rampTarget = [this]{return m_counter;};
   }));
 
 
