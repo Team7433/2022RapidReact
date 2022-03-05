@@ -30,6 +30,7 @@
 #include "subsystems/Intake.h"
 #include "subsystems/HoodedShooter.h"
 
+#include "commands/InitHood.h"
 #include "commands/DriveWithJoystick.h"
 #include "commands/MoveTo.h"
 #include "commands/MotionProfile.h"
@@ -59,7 +60,7 @@ class RobotContainer {
 
   frc2::Command* GetAutonomousCommand();
   void stopShooterMagazine() {m_shooter.setPercentOutput(0.0); m_rampTarget = []{return 0.0;} ; m_magazine.setPercentageOutput(0.0); m_intake.setPercentOutput(0.0);}
-
+  void initHood() {InitHood(&m_hoodedShooter).Schedule();}
  private:
   // The robot's subsystems and commands are defined here...
   SwerveDriveTrain m_swerveDriveTrain;

@@ -27,13 +27,14 @@ class HoodedShooter : public frc2::SubsystemBase {
   void ConfigPIDH(double, double, double);
   void setPercentageOutputHood(double output) {m_hoodmotor->Set(ControlMode::PercentOutput, output);}
   void setHoodPosition(double position);
+  void resetEncoder() {m_hoodmotor->SetSelectedSensorPosition(0.0, 0, 10);}
 
   double getHoodEncoderPosition() {return m_hoodmotor->GetSelectedSensorPosition();}
   double getHoodTargetPosition() {return m_currentHoodPosition;}
   double getHoodPositionError() {return m_hoodmotor->GetClosedLoopError();}
   double getHoodPercentageOutput() {return m_hoodmotor->GetMotorOutputPercent();}  // hood functions
   double getHoodVelocity() {return m_hoodmotor->GetSelectedSensorVelocity();}
-  bool hasHoodHitLimit() {return m_hoodlimit.Get();}
+  bool hasHoodHitLimit() {return m_hoodmotor->IsRevLimitSwitchClosed();}
 
   
 
@@ -43,7 +44,7 @@ class HoodedShooter : public frc2::SubsystemBase {
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
   WPI_TalonSRX* m_hoodmotor = new WPI_TalonSRX{7};
-  frc::DigitalInput m_hoodlimit{8};
+
 
   double static constexpr k_hoodMaxEncoder{0.0}; //gotta find this value
   double m_currentHoodPosition{0.0};
