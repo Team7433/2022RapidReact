@@ -71,6 +71,8 @@ void RobotContainer::ConfigureButtonBindings() {
     m_rampTarget = [this]{return m_counter;};
   }));
 
+  frc2::JoystickButton(&m_controller, 7).ToggleWhenPressed(ClimbMode(&m_climb, [this] {return m_controller.GetLeftY(); }, [this] {return m_controller.GetRightY(); } ) );
+
 
 
 
@@ -95,6 +97,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
   frc2::JoystickButton(&m_joystick, 3).WhenPressed(frc2::SequentialCommandGroup(frc2::SequentialCommandGroup(RunShooter(&m_shooter, 4000, 300), EjectOneBall(&m_magazine, &m_shooter)), RunShooter(&m_shooter, 0, 300)));
   
+
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

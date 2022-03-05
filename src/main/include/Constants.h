@@ -39,3 +39,11 @@ namespace SwerveDriveConstants {
 namespace HoodedShooterConstants {
     static constexpr double kTimeOutMS = 10;
 }
+
+namespace ClimbConstants {
+
+    static constexpr int kLeftClimbMotorId = 1;
+    static constexpr int kRightClimbMotorId = 2;
+    static constexpr int kClimbReleaseSoloniodId = 0;
+
+}
