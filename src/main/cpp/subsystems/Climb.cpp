@@ -4,7 +4,18 @@
 
 #include "subsystems/Climb.h"
 
-Climb::Climb() = default;
+Climb::Climb() {
+
+    m_leftClimb->ConfigFactoryDefault();
+    m_rightClimb->ConfigFactoryDefault();
+
+    m_leftClimb->SetNeutralMode(NeutralMode::Brake);
+    m_rightClimb->SetNeutralMode(NeutralMode::Brake);
+
+}
+
+
+
 
 // This method will be called once per scheduler run
 void Climb::Periodic() {}
