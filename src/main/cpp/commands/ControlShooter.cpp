@@ -27,7 +27,7 @@ void ControlShooter::Execute() {
   m_hoodedSooter->setHoodPosition((*m_hoodTarget)()); // sets hoodedshooter to position
 
   //checks if adding the next rampspeed will go over or equal to the target, if so then just set it to the target
-  if (m_shooter->getTargetVelocity()+(calculateDirection()*(*m_rampSpeed)()) >= (*m_rampTarget)()*calculateDirection()) {
+  if ((m_shooter->getTargetVelocity()+(calculateDirection()*(*m_rampSpeed)())*calculateDirection()) >= (*m_rampTarget)()*calculateDirection()) {
     m_shooter->setVelocity((*m_rampTarget)());
   }
   //sets the shooter velocity to current plus ramp speed
