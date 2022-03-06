@@ -8,11 +8,11 @@
 #include <ctre/Phoenix.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/DigitalInput.h>
-
+#include "Constants.h"
 #include <map>
 #include <string.h>
 
-
+using namespace ShooterConstants;
 class Shooter : public frc2::SubsystemBase {
  public:
   Shooter();
@@ -41,8 +41,8 @@ class Shooter : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  WPI_TalonFX* m_motor = new WPI_TalonFX{6};
-  WPI_TalonFX* m_motorS = new WPI_TalonFX{5};
+  WPI_TalonFX* m_motor = new WPI_TalonFX{kShooterMotorID};
+  WPI_TalonFX* m_motorS = new WPI_TalonFX{kShooterSMotorID};
   
 
 

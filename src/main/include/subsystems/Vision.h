@@ -11,11 +11,11 @@
 #include "networktables/NetworkTableEntry.h"
 #include "networktables/NetworkTableValue.h"
 #include "wpi/span.h"
-
-#include "units/length.h"
+#include "Constants.h"
 #include "units/angle.h"
 #include "units/math.h"
 
+using namespace VisionConstants;
 class Vision : public frc2::SubsystemBase {
  public:
   Vision();
@@ -28,7 +28,7 @@ class Vision : public frc2::SubsystemBase {
   units::degree_t getTargetOffsetY() {return units::degree_t(table->GetNumber("ty",0.0));}
   units::degree_t getTargetArea() {return units::degree_t(table->GetNumber("ta",0.0));}
   units::degree_t getTargetSkew() {return units::degree_t(table->GetNumber("ts", 0.0));}
-  units::meter_t getTargetDistance() {return (m_towerHeight-m_limelightHeight)/units::math::tan(m_limelightOffset+getTargetOffsetY());} // 1 goal off ground dist, 2 limelight off ground dist, 3 limelight angle from vertical
+  units::meter_t getTargetDistance() {return (kTowerHeight-kLimelightHeight)/units::math::tan(kLimelightOffsetAngle+getTargetOffsetY());} // 1 goal off ground dist, 2 limelight off ground dist, 3 limelight angle from vertical
   bool getTargetVisible() {return table->GetNumber("tv", 0.0);}
   bool getTXUpToDate() {return m_txUpToDate;}
 
@@ -41,8 +41,5 @@ class Vision : public frc2::SubsystemBase {
   double m_currentTx{0.0};
   bool m_txUpToDate{true};
 
-  units::meter_t m_limelightHeight{51_cm};
-  units::meter_t m_towerHeight {264_cm};
-  units::degree_t m_limelightOffset{35_deg};
   
 };

@@ -3,7 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-
+#include "units/length.h"
+#include "units/angle.h"
 /**
  * The Constants header provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants.  This should not be used for any other
@@ -18,6 +19,10 @@ namespace ShooterConstants {
     static constexpr double kTimeOutMS = 10;
     static constexpr double maxVelocity = 23000; // max velocity of the motor (velocity at 100% output)
     static constexpr double kFCalc = 1023 / maxVelocity; //kF calculations for the shooter motor
+    double constexpr static k_maxAccumulator{1.5};
+    double constexpr static k_iZone{300};
+    static constexpr int kShooterMotorID = 6;
+    static constexpr int kShooterSMotorID = 5;
     
 
 }
@@ -38,6 +43,17 @@ namespace SwerveDriveConstants {
 
 namespace HoodedShooterConstants {
     static constexpr double kTimeOutMS = 10;
+    static constexpr int kHoodMotorID = 54;
+    static constexpr double kHoodEncoderMax = 1036.0;
+    static constexpr double kP = 1.0;
+    static constexpr double kI = 0.00000000000001;
+    static constexpr double kD = 0.0;
+    static constexpr double kF = 0.0;
+}
+
+namespace MagazineConstants {
+    static constexpr int kMagazineMotorID = 52;
+    static constexpr int kBallSensorID = 9;
 }
 
 namespace ClimbConstants {
@@ -52,5 +68,13 @@ namespace IntakeConstants {
 
     static constexpr int kIntakeMotorID{51};
     static constexpr int kSolenoidLockID{5};
+
+}
+
+namespace VisionConstants {
+    static constexpr units::meter_t kLimelightHeight = 51_cm;
+    static constexpr units::meter_t kTowerHeight = 264_cm;
+    static constexpr units::degree_t kLimelightOffsetAngle = 35_deg;
+
 
 }

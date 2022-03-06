@@ -7,11 +7,12 @@
 #include <frc2/command/SubsystemBase.h>
 #include <ctre/Phoenix.h>
 #include <frc/DigitalInput.h>
-
+#include "Constants.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 
 #include <iostream>
 
+using namespace MagazineConstants;
 class Magazine : public frc2::SubsystemBase {
  public:
   Magazine();
@@ -27,7 +28,7 @@ class Magazine : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  WPI_TalonFX* m_motor = new WPI_TalonFX{52};
-  frc::DigitalInput m_ballsensor{9};
+  WPI_TalonFX* m_motor = new WPI_TalonFX{kMagazineMotorID};
+  frc::DigitalInput m_ballsensor{kBallSensorID};
 
 };
