@@ -12,6 +12,7 @@ HoodedShooter::HoodedShooter(){
 
     m_hoodmotor->Config_kF(0 ,k_PID_H["kF"], kTimeOutMS);
     m_hoodmotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, kTimeOutMS);
+    m_hoodmotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyClosed, kTimeOutMS);
 }
 
 // This method will be called once per scheduler run
@@ -25,6 +26,11 @@ void HoodedShooter::Periodic() {
         frc::SmartDashboard::PutString("hood/controlMode", "not position");
     }
     frc::SmartDashboard::PutNumber("hood/percentageOutput", getHoodPercentageOutput());
+
+    if (hasHoodHitLimit()) {
+        resetEncoder();
+    }
+
 }
 
 void HoodedShooter::setHoodPosition(double position) {

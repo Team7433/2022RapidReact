@@ -36,9 +36,11 @@ class ControlShooter
 
  private:
   Shooter* m_shooter;
-  HoodedShooter* m_hoodedSooter;
+  HoodedShooter* m_hoodedShooter;
   std::function<double()>* m_rampTarget;
   std::function<double()>* m_rampSpeed;
   std::function<double()>* m_hoodTarget;
+
+  bool m_hasInit{false};
 
 };

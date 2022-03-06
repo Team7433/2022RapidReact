@@ -18,7 +18,7 @@ void BallAutoIntake::Initialize() {
     m_intake->setPercentOutput(0.5);
     
     if (m_magazine->isBall() == false) {
-      m_magazine->setPercentageOutput(0.4);
+      m_magazine->setPercentageOutput(0.3);
     }
     if (m_intake->getPercentOutput() != 0.0 || m_magazine->getPercentageOutput() != 0.0 ) {
 
@@ -43,7 +43,7 @@ void BallAutoIntake::Execute() {
   if (m_timer.HasElapsed(2_s)){
     m_time = 2_s;
     if (!(m_magazine->isBall())){
-      m_magazine->setPercentageOutput(0.6);
+      m_magazine->setPercentageOutput(0.3);
     }
   }
 

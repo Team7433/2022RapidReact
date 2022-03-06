@@ -18,11 +18,12 @@ void InitHood::Initialize() {
   if(!m_hood->hasHoodHitLimit()){
     m_hood->setPercentageOutputHood(-0.5);
   }
+  std::cout << m_hood->hasHoodHitLimit() << std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run
-void InitHood::Execute() {}
-
+void InitHood::Execute() {
+}
 // Called once the command ends or is interrupted.
 void InitHood::End(bool interrupted) {
   m_hood->setPercentageOutputHood(0.0);

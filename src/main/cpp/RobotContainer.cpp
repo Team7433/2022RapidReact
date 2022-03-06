@@ -58,12 +58,12 @@ void RobotContainer::ConfigureButtonBindings() {
 
 
 
-  frc2::JoystickButton(&m_controller, 9).WhenPressed(frc2::InstantCommand([this] {
+  frc2::JoystickButton(&m_joystick, 4).WhenPressed(frc2::InstantCommand([this] {
     m_counter = m_counter + 200;
     m_rampTarget = [this]{return m_counter;};
   }));
 
-  frc2::JoystickButton(&m_controller, 10).WhenPressed(frc2::InstantCommand([this] {
+  frc2::JoystickButton(&m_joystick, 6).WhenPressed(frc2::InstantCommand([this] {
     m_counter = m_counter - 200;
     if (m_counter < 200) {
       m_counter = 0;
