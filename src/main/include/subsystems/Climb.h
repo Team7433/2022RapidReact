@@ -25,5 +25,6 @@ class Climb : public frc2::SubsystemBase {
   TalonSRX * m_leftClimb = new TalonSRX{ClimbConstants::kLeftClimbMotorId};
   TalonSRX * m_rightClimb = new TalonSRX{ClimbConstants::kRightClimbMotorId};
 
-  frc::DigitalOutput m_releaseSolenoid{ClimbConstants::kClimbReleaseSoloniodId};
+  frc::DigitalOutput m_releaseSolenoidRight{ClimbConstants::kClimbReleaseRightSoloniodId};
+  frc::DigitalOutput m_releaseSolenoidLeft{ClimbConstants::kClimbReleaseLeftSoloniodId};
 };

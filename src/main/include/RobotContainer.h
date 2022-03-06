@@ -63,6 +63,9 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
   void stopShooterMagazine() {m_shooter.setPercentOutput(0.0); m_rampTarget = []{return 0.0;} ; m_magazine.setPercentageOutput(0.0); m_intake.setPercentOutput(0.0);}
   // void initHood() {InitHood(&m_hoodedShooter).Schedule(false);}
+  void setIntakeLock(bool state) {m_intake.setSolenoid(state);}
+
+
  private:
   // The robot's subsystems and commands are defined here...
   SwerveDriveTrain m_swerveDriveTrain;

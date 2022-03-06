@@ -44,6 +44,13 @@ namespace ClimbConstants {
 
     static constexpr int kLeftClimbMotorId = 1;
     static constexpr int kRightClimbMotorId = 2;
-    static constexpr int kClimbReleaseSoloniodId = 0;
+    static constexpr int kClimbReleaseLeftSoloniodId = 3;
+    static constexpr int kClimbReleaseRightSoloniodId = 4;
+
+}
+namespace IntakeConstants {
+
+    static constexpr int kIntakeMotorID{51};
+    static constexpr int kSolenoidLockID{5};
 
 }

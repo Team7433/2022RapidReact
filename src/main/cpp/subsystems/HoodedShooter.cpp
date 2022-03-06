@@ -26,6 +26,11 @@ void HoodedShooter::Periodic() {
         frc::SmartDashboard::PutString("hood/controlMode", "not position");
     }
     frc::SmartDashboard::PutNumber("hood/percentageOutput", getHoodPercentageOutput());
+    if (getHoodVelocity() > frc::SmartDashboard::GetNumber("hood/maxVel", 0.0)) {
+        frc::SmartDashboard::PutNumber("hood/maxVel", getHoodVelocity());
+    }
+
+    frc::SmartDashboard::PutBoolean("hood/limitSwitch", hasHoodHitLimit());
 
     if (hasHoodHitLimit()) {
         resetEncoder();

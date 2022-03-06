@@ -28,5 +28,6 @@ void Climb::SetMotors(double left, double right) {
 }
 
 void Climb::SetClimbReleased(bool release) {
-    m_releaseSolenoid.Set(release);
+    m_releaseSolenoidRight.Set(release);
+    m_releaseSolenoidLeft.Set(release);
 }

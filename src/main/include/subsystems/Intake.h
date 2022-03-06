@@ -7,6 +7,12 @@
 #include <frc2/command/SubsystemBase.h>
 #include <ctre/Phoenix.h>
 
+#include <frc/DigitalOutput.h>
+
+#include "Constants.h"
+
+using namespace IntakeConstants;
+
 class Intake : public frc2::SubsystemBase {
  public:
   Intake();
@@ -17,9 +23,11 @@ class Intake : public frc2::SubsystemBase {
   void Periodic() override;
   void setPercentOutput(double percentoutput) {m_motor->Set(ControlMode::PercentOutput, percentoutput);}
   double getPercentOutput() {return m_motor->GetMotorOutputPercent();}
-
+  void setSolenoid(bool state) { m_solenoidLock.Set(!state);}
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-  WPI_TalonSRX * m_motor = new WPI_TalonSRX{51};
+  WPI_TalonSRX * m_motor = new WPI_TalonSRX{kIntakeMotorID};
+  frc::DigitalOutput m_solenoidLock{kSolenoidLockID};
 };
+  

@@ -46,9 +46,11 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand([this]{
 
     if (m_rampTarget() == 0.0) {
-      m_rampTarget = []{return 19000.0;};
+      m_rampTarget = [this]{return 1304.347826* m_vision.getTargetDistance() + 12469.56522;};
+      m_hoodTarget = [this]{return 17.95652* m_vision.getTargetDistance() - 43.09565;};
     } else {
       m_rampTarget = []{return 0.0;};
+      m_hoodTarget = []{return 0.0;};
     }
 
   }));

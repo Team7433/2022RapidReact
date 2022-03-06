@@ -19,26 +19,26 @@ ControlShooter::ControlShooter(Shooter* shooter, HoodedShooter* hoodedShooter, s
 // Called when the command is initially scheduled.
 void ControlShooter::Initialize() {
 
-  // if(m_hasInit==false) {
-  //   m_hoodedShooter->setPercentageOutputHood(-0.5);
-  // }
+  if(m_hasInit==false) {
+    m_hoodedShooter->setPercentageOutputHood(-0.5);
+  }
 
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ControlShooter::Execute() {
   
-  // if(!m_hasInit) {
-  //   if (m_hoodedShooter->hasHoodHitLimit()) {
-  //     m_hoodedShooter->resetEncoder();
-  //     m_hasInit = true;
-  //   }
-  // } else {
-  //   m_hoodedShooter->setHoodPosition((*m_hoodTarget)()); // sets hoodedshooter to position
-  // }
+  if(m_hasInit==false) {
+    if (m_hoodedShooter->hasHoodHitLimit()) {
+      m_hoodedShooter->setPercentageOutputHood(0.0);
+      m_hasInit = true;
+    }
+  } else {
+    // m_hoodedShooter->setHoodPosition((*m_hoodTarget)()); // sets hoodedshooter to position
+  }
 
 
-  m_shooter->m_rampTarget = (*m_rampTarget)();
+  m_shooter->m_rampTarget = (*m_rampTarget)(); // tells shooter subsystem what the target ramp target is
 
   //checks if adding the next rampspeed will go over or equal to the target, if so then just set it to the target
   if ((m_shooter->getTargetVelocity()+(calculateDirection()*(*m_rampSpeed)())*calculateDirection()) >= (*m_rampTarget)()*calculateDirection()) {

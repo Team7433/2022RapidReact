@@ -32,7 +32,7 @@ class Shooter : public frc2::SubsystemBase {
 
   
 
-  bool rampHasReachedSpeed() {return m_rampTarget == getTargetVelocity();}
+  bool rampHasReachedSpeed() {return fabs(m_rampTarget - getTargetVelocity()) >= 800.0;}
 
   ControlMode getControlMode() {return m_motor->GetControlMode();}
   

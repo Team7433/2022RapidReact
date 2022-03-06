@@ -31,6 +31,7 @@ void Robot::RobotPeriodic() {
  */
 void Robot::DisabledInit() {
   m_container.stopShooterMagazine();
+  m_container.setIntakeLock(true);
 }
 
 void Robot::DisabledPeriodic() {}
@@ -58,7 +59,7 @@ void Robot::TeleopInit() {
     m_autonomousCommand->Cancel();
     m_autonomousCommand = nullptr;
   }
-  // m_container.initHood();
+  m_container.setIntakeLock(false);
 }
 
 /**

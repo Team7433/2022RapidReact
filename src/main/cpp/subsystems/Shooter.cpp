@@ -38,9 +38,7 @@ void Shooter::Periodic() {
     }
         frc::SmartDashboard::PutNumber("shooter/vel", getVelocity());
     
-    // if (getHoodVelocity() > frc::SmartDashboard::GetNumber("hood/maxVel", 0.0)) {
-    //     frc::SmartDashboard::PutNumber("hood/maxVel", getHoodVelocity());
-    // }
+
 }
 
 void Shooter::ConfigPID(double P, double I, double D) {
