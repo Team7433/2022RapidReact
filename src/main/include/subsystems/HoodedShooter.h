@@ -48,7 +48,8 @@ class HoodedShooter : public frc2::SubsystemBase {
 
   double static constexpr k_hoodMaxEncoder{kHoodEncoderMax}; //gotta find this value
   double m_currentHoodPosition{0.0};
-
+  double static constexpr k_maxAccumulator{10};
+  double static constexpr k_iZone{50};
   //PID values for hood
   std::map<std::string, double> k_PID_H{{"kP", kP}, {"kI", kI}, {"kD", kD}, {"kF", kF}};
 };

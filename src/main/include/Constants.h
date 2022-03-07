@@ -46,7 +46,7 @@ namespace HoodedShooterConstants {
     static constexpr int kHoodMotorID = 54;
     static constexpr double kHoodEncoderMax = 1036.0;
     static constexpr double kP = 20.0;
-    static constexpr double kI = 0.0000000000000;
+    static constexpr double kI = 0.0001;
     static constexpr double kD = 0.0;
     static constexpr double kF = (1023*0.5)/123;
 }

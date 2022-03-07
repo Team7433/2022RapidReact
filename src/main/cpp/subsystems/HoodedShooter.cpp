@@ -13,6 +13,9 @@ HoodedShooter::HoodedShooter(){
     m_hoodmotor->Config_kF(0 ,k_PID_H["kF"], HoodedShooterConstants::kTimeOutMS);
     m_hoodmotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, HoodedShooterConstants::kTimeOutMS);
     m_hoodmotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyClosed, HoodedShooterConstants::kTimeOutMS);
+
+    m_hoodmotor->ConfigMaxIntegralAccumulator(0, k_maxAccumulator, HoodedShooterConstants::kTimeOutMS);
+    m_hoodmotor->Config_IntegralZone(0, k_iZone, HoodedShooterConstants::kTimeOutMS);
     // m_hoodmotor->SetInverted(true);
 }
 

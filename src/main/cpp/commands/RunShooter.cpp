@@ -46,7 +46,7 @@ void RunShooter::Execute() {
   if(m_shooter->getTargetVelocity() != m_targetVel()) {
     currentVel = m_shooter->getTargetVelocity();
 
-    if (currentVel*m_direction > m_targetVel() && m_done == false) {
+    if (currentVel*m_direction > m_targetVel()*m_direction && m_done == false) {
       m_shooter->setVelocity(m_targetVel());
       m_done=true;
     } else {

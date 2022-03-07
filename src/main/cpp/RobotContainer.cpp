@@ -9,8 +9,7 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   m_swerveDriveTrain.SetDefaultCommand(DriveWithJoystick(&m_swerveDriveTrain, &m_gyro, &m_controller, &m_joystick));
   m_shooter.SetDefaultCommand(ControlShooter(&m_shooter, &m_hoodedShooter, &m_rampTarget, &m_rampSpeed, &m_hoodTarget));
   
-  // m_shooter.SetDefaultCommand(RunShooter(&m_shooter, 10))
-
+  frc::SmartDashboard::PutData(&m_autoChooser);
 
   // Configure the button bindings
   ConfigureButtonBindings();
@@ -108,5 +107,10 @@ void RobotContainer::ConfigureButtonBindings() {
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
+
+  switch (m_autoChooser.GetSelected()) {
+    case 0: 
+      
+  }
   return nullptr;
 }

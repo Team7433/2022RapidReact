@@ -18,6 +18,7 @@
 #include <frc2/command/FunctionalCommand.h>
 #include <frc2/command/ScheduleCommand.h>
 #include <frc2/command/ProxyScheduleCommand.h>
+#include <frc/smartdashboard/SendableChooser.h>
 
 
 #include "utils/TriggerButton.h"
@@ -31,7 +32,6 @@
 #include "subsystems/HoodedShooter.h"
 #include "subsystems/Climb.h"
 
-#include "commands/InitHood.h"
 #include "commands/DriveWithJoystick.h"
 #include "commands/MoveTo.h"
 #include "commands/MotionProfile.h"
@@ -67,6 +67,9 @@ class RobotContainer {
   // void initHood() {InitHood(&m_hoodedShooter).Schedule(false);}
   void setIntakeLock(bool state) {m_intake.setSolenoid(state);}
 
+  std::function<double()> m_rampTarget{[]{return 0.0;}};
+  std::function<double()> m_rampSpeed{[]{return 400.0;}};
+  std::function<double()> m_hoodTarget{[]{return 0.0;}};
 
  private:
   // The robot's subsystems and commands are defined here...
@@ -92,6 +95,6 @@ class RobotContainer {
   std::function<double()> m_hoodTarget{[]{return 0.0;}};
   double m_counter = 0.0;
 
-  // frc2::ParallelCommandGroup* m_RampShooterDown = new frc2::ParallelCommandGroup(RunShooter(&m_shooter, 0, 400), frc2::InstantCommand([this]{m_isShooting =false;}));
-  // frc2::ParallelCommandGroup* m_RampShooterUp = new frc2::ParallelCommandGroup(frc2::InstantCommand([this] {m_RampShooterDown.Cancel();}), RunShooter(&m_shooter, 10000, 400), frc2::InstantCommand([this]{m_isShooting =true;}));
+  frc::SendableChooser<int> m_autoChooser;
+
 };
