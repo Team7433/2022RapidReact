@@ -42,7 +42,9 @@
 #include "commands/EjectOneBall.h"
 #include "commands/ControlShooter.h"
 #include "commands/ClimbMode.h"
+#include "commands/ReverseIntake.h"
 
+#include <frc2/command/button/POVButton.h>
 #include <frc/XboxController.h>
 #include <frc/Joystick.h>
 

@@ -56,6 +56,7 @@ void RobotContainer::ConfigureButtonBindings() {
   }));
   
 
+
   frc2::JoystickButton(&m_controller, 6).WhileHeld(BallAutoIntake(&m_magazine, &m_intake));
 
 
@@ -97,8 +98,11 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::TriggerButton(&m_controller, frc::XboxTriggers::R_trig).WhenPressed(frc2::InstantCommand([this]{m_hoodedShooter.setPercentageOutputHood(-0.5);}));
   frc2::TriggerButton(&m_controller, frc::XboxTriggers::R_trig).WhenReleased(frc2::InstantCommand([this]{m_hoodedShooter.setPercentageOutputHood(0);}));
 
+
+
   frc2::JoystickButton(&m_joystick, 3).WhenPressed(frc2::SequentialCommandGroup(frc2::SequentialCommandGroup(RunShooter(&m_shooter, 4000, 300), EjectOneBall(&m_magazine, &m_shooter)), RunShooter(&m_shooter, 0, 300)));
   
+  frc2::POVButton(&m_controller, 180).WhileHeld(ReverseIntake(&m_intake));
 
 }
 
