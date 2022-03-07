@@ -46,8 +46,8 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand([this]{
 
     if (m_rampTarget() == 0.0) {
-      m_rampTarget = [this]{return 1304.347826* m_vision.getTargetDistance() + 12469.56522;};
-      m_hoodTarget = [this]{return 17.95652* m_vision.getTargetDistance() - 43.09565;};
+      m_rampTarget = [this]{return (1304.347826* m_vision.getTargetDistance().to<double>()) + 12469.56522;};
+      m_hoodTarget = [this]{return (17.95652* m_vision.getTargetDistance().to<double>()) - 43.09565;};
     } else {
       m_rampTarget = []{return 0.0;};
       m_hoodTarget = []{return 0.0;};
@@ -81,7 +81,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
 
   frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick, &m_controller));
-  frc2::JoystickButton(&m_joystick, 2).WhileHeld(RunMagazine(&m_magazine, 0.6, [this]{return m_shooter.rampHasReachedSpeed()&&m_shooter.getPercentOutput()!=0.0;}));
+  frc2::JoystickButton(&m_joystick, 2).WhileHeld(RunMagazine(&m_magazine, 0.6, [this]{return m_shooter.getPercentOutput()!=0.0;}));
 
   // frc2::JoystickButton(&m_joystick, 2).WhenPressed(frc2::InstantCommand([this]{
   //   m_controller.SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 1);

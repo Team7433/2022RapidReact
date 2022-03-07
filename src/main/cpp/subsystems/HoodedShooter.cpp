@@ -10,10 +10,12 @@ HoodedShooter::HoodedShooter(){
 
     ConfigPIDH(k_PID_H["kP"], k_PID_H["kI"], k_PID_H["kD"]);
 
-    m_hoodmotor->Config_kF(0 ,k_PID_H["kF"], kTimeOutMS);
-    m_hoodmotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, kTimeOutMS);
-    m_hoodmotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyClosed, kTimeOutMS);
+    m_hoodmotor->Config_kF(0 ,k_PID_H["kF"], HoodedShooterConstants::kTimeOutMS);
+    m_hoodmotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, HoodedShooterConstants::kTimeOutMS);
+    m_hoodmotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyClosed, HoodedShooterConstants::kTimeOutMS);
+    // m_hoodmotor->SetInverted(true);
 }
+
 
 // This method will be called once per scheduler run
 void HoodedShooter::Periodic() {
@@ -21,7 +23,8 @@ void HoodedShooter::Periodic() {
 
         frc::SmartDashboard::PutString("hood/controlMode", "position");
         frc::SmartDashboard::PutNumber("hood/targetPosition", getHoodTargetPosition());
-        frc::SmartDashboard::PutNumber("hood/targetEncoderPos", getHoodEncoderPosition());
+        frc::SmartDashboard::PutNumber("hood/targetEncoderPos", m_hoodmotor->GetClosedLoopTarget());
+        frc::SmartDashboard::PutNumber("hood/error", m_hoodmotor->GetClosedLoopError());
     } else {
         frc::SmartDashboard::PutString("hood/controlMode", "not position");
     }
@@ -29,7 +32,7 @@ void HoodedShooter::Periodic() {
     if (getHoodVelocity() > frc::SmartDashboard::GetNumber("hood/maxVel", 0.0)) {
         frc::SmartDashboard::PutNumber("hood/maxVel", getHoodVelocity());
     }
-
+    frc::SmartDashboard::PutNumber("hood/currentEncoderPos", m_hoodmotor->GetSelectedSensorPosition());
     frc::SmartDashboard::PutBoolean("hood/limitSwitch", hasHoodHitLimit());
 
     if (hasHoodHitLimit()) {
@@ -45,15 +48,16 @@ void HoodedShooter::setHoodPosition(double position) {
     m_currentHoodPosition = position;
     //sets target encoder position
     double encoderPosition{(k_hoodMaxEncoder/100)*position};
+    std::cout << encoderPosition << std::endl;
     //saftey so position is never set to over max encoder;
-    if (encoderPosition < 100 && encoderPosition > 0) {
+    if (encoderPosition < k_hoodMaxEncoder && encoderPosition > 0) {
         m_hoodmotor->Set(ControlMode::Position, encoderPosition);
     }
 }
 
 
 void HoodedShooter::ConfigPIDH(double P, double I, double D) {
-    m_hoodmotor->Config_kP(0, P, kTimeOutMS);
-    m_hoodmotor->Config_kI(0, I, kTimeOutMS);
-    m_hoodmotor->Config_kD(0, D, kTimeOutMS);
+    m_hoodmotor->Config_kP(0, P, HoodedShooterConstants::kTimeOutMS);
+    m_hoodmotor->Config_kI(0, I, HoodedShooterConstants::kTimeOutMS);
+    m_hoodmotor->Config_kD(0, D, HoodedShooterConstants::kTimeOutMS);
 }

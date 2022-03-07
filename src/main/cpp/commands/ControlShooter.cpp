@@ -21,6 +21,7 @@ void ControlShooter::Initialize() {
 
   if(m_hasInit==false) {
     m_hoodedShooter->setPercentageOutputHood(-0.5);
+    // std::cout << "runs this\n";
   }
 
 }
@@ -34,7 +35,7 @@ void ControlShooter::Execute() {
       m_hasInit = true;
     }
   } else {
-    // m_hoodedShooter->setHoodPosition((*m_hoodTarget)()); // sets hoodedshooter to position
+    m_hoodedShooter->setHoodPosition((*m_hoodTarget)()); // sets hoodedshooter to position
   }
 
 

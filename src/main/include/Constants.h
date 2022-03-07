@@ -45,10 +45,10 @@ namespace HoodedShooterConstants {
     static constexpr double kTimeOutMS = 10;
     static constexpr int kHoodMotorID = 54;
     static constexpr double kHoodEncoderMax = 1036.0;
-    static constexpr double kP = 1.0;
-    static constexpr double kI = 0.00000000000001;
+    static constexpr double kP = 20.0;
+    static constexpr double kI = 0.0000000000000;
     static constexpr double kD = 0.0;
-    static constexpr double kF = 0.0;
+    static constexpr double kF = (1023*0.5)/123;
 }
 
 namespace MagazineConstants {
@@ -72,9 +72,9 @@ namespace IntakeConstants {
 }
 
 namespace VisionConstants {
-    static constexpr units::meter_t kLimelightHeight = 51_cm;
-    static constexpr units::meter_t kTowerHeight = 264_cm;
-    static constexpr units::degree_t kLimelightOffsetAngle = 35_deg;
+    constexpr units::meter_t kLimelightHeight = 51_cm;
+    constexpr units::meter_t kTowerHeight = 264_cm;
+    constexpr units::degree_t kLimelightOffsetAngle = 35_deg;
 
 
 }

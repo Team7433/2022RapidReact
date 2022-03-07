@@ -41,5 +41,11 @@ class Vision : public frc2::SubsystemBase {
   double m_currentTx{0.0};
   bool m_txUpToDate{true};
 
+
+    units::meter_t kLimelightHeight = 51_cm;
+    units::meter_t kTowerHeight = 264_cm;
+    units::degree_t kLimelightOffsetAngle = 35_deg;
+
+
   
 };
