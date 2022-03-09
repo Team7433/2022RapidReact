@@ -34,6 +34,7 @@
 
 
 #include "commands/AutoCommands/TwoBallAutoA.h"
+#include "commands/AutoCommands/TwoBallAutoB.h"
 
 #include "commands/DriveWithJoystick.h"
 #include "commands/MoveTo.h"
