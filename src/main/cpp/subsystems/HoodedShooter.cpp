@@ -38,9 +38,9 @@ void HoodedShooter::Periodic() {
     frc::SmartDashboard::PutNumber("hood/currentEncoderPos", m_hoodmotor->GetSelectedSensorPosition());
     frc::SmartDashboard::PutBoolean("hood/limitSwitch", hasHoodHitLimit());
 
-    if (hasHoodHitLimit()) {
-        resetEncoder();
-    }
+    // if (hasHoodHitLimit()) {
+    //     resetEncoder();
+    // }
 
 }
 
@@ -51,7 +51,7 @@ void HoodedShooter::setHoodPosition(double position) {
     m_currentHoodPosition = position;
     //sets target encoder position
     double encoderPosition{(k_hoodMaxEncoder/100)*position};
-    std::cout << encoderPosition << std::endl;
+    // std::cout << encoderPosition << std::endl;
     //saftey so position is never set to over max encoder;
     if (encoderPosition < k_hoodMaxEncoder && encoderPosition > 0) {
         m_hoodmotor->Set(ControlMode::Position, encoderPosition);

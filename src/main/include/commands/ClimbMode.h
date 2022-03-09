@@ -8,6 +8,7 @@
 #include <frc2/command/CommandHelper.h>
 
 #include "subsystems/Climb.h"
+#include <frc/Timer.h>
 
 /**
  * An example command.
@@ -33,4 +34,5 @@ class ClimbMode
     Climb * m_climb;
     std::function<double()> m_leftSpeed;
     std::function<double()> m_rightSpeed;
+    frc::Timer m_timer;
 };

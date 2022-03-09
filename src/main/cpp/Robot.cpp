@@ -32,6 +32,8 @@ void Robot::RobotPeriodic() {
 void Robot::DisabledInit() {
   m_container.stopShooterMagazine();
   m_container.setIntakeLock(true);
+  m_timer.Stop();
+  m_timer.Reset();
 }
 
 void Robot::DisabledPeriodic() {}
@@ -60,12 +62,15 @@ void Robot::TeleopInit() {
     m_autonomousCommand = nullptr;
   }
   m_container.setIntakeLock(false);
+  m_timer.Start();
 }
 
 /**
  * This function is called periodically during operator control.
  */
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  if(m_timer.HasElapsed(0.1_s)) {m_container.setIntakeLock(true);}
+}
 
 /**
  * This function is called periodically during test mode.

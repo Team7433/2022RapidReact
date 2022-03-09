@@ -20,7 +20,7 @@ void EjectOneBall::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void EjectOneBall::Execute() {
 
-  if (m_shooter->rampHasReachedSpeed()&&m_shooter->getPercentOutput()!=0.0) {
+  if (m_shooter->getPercentOutput()!=0.0) {
     m_timer.Start();
     m_magazine->setPercentageOutput(0.5);
   }

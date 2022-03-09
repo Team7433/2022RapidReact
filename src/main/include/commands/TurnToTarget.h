@@ -7,6 +7,8 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
+#include <iostream>
+
 #include "subsystems/Vision.h"
 #include "subsystems/Gyro.h"
 #include "subsystems/SwerveDriveTrain.h"

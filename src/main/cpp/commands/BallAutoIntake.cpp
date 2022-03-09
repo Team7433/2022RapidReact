@@ -55,6 +55,7 @@ void BallAutoIntake::End(bool interrupted) {
   m_intake->setPercentOutput(0.0);
   m_magazine->setPercentageOutput(0.0);
   m_done = false;
+  std::cout << "BallAutoIntakeEnd\n";
 }
 
 // Returns true when the command should end.

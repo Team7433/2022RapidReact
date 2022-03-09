@@ -10,6 +10,8 @@ RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   m_shooter.SetDefaultCommand(ControlShooter(&m_shooter, &m_hoodedShooter, &m_rampTarget, &m_rampSpeed, &m_hoodTarget));
   
   frc::SmartDashboard::PutData(&m_autoChooser);
+  m_autoChooser.AddOption("NoAuto", 0);
+  m_autoChooser.AddOption("AutoA2", 1);
 
   // Configure the button bindings
   ConfigureButtonBindings();
@@ -45,8 +47,8 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand([this]{
 
     if (m_rampTarget() == 0.0) {
-      m_rampTarget = [this]{return (1304.347826* m_vision.getTargetDistance().to<double>()) + 12469.56522;};
-      m_hoodTarget = [this]{return (17.95652* m_vision.getTargetDistance().to<double>()) - 43.09565;};
+      m_rampTarget = [this]{return (1669.45* m_vision.getTargetDistance().to<double>()) + 11175.4;};
+      m_hoodTarget = [this]{return (30* m_vision.getTargetDistance().to<double>()) - 81;};
     } else {
       m_rampTarget = []{return 0.0;};
       m_hoodTarget = []{return 0.0;};
@@ -108,9 +110,13 @@ void RobotContainer::ConfigureButtonBindings() {
 frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
 
+
   switch (m_autoChooser.GetSelected()) {
-    case 0: 
+    case 0: return nullptr;
+    break;
+    case 1: return new TwoBallAutoA(&m_intake, &m_magazine, &m_shooter, &m_hoodedShooter, &m_gyro, &m_vision, &m_swerveDriveTrain);
+    break;
       
-  }
+  };
   return nullptr;
 }

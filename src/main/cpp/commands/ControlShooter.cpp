@@ -32,6 +32,7 @@ void ControlShooter::Execute() {
   if(m_hasInit==false) {
     if (m_hoodedShooter->hasHoodHitLimit()) {
       m_hoodedShooter->setPercentageOutputHood(0.0);
+      m_hoodedShooter->resetEncoder();
       m_hasInit = true;
     }
   } else {

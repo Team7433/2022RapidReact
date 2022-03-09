@@ -51,9 +51,9 @@ namespace Iona {
 
 
             //PID values
-            std::map<std::string, double> m_PID_A{{"P", 0.2}, {"I", 0.0}, {"D", 0.1}};
+            std::map<std::string, double> m_PID_A{{"P", 0.215}, {"I", 0.0}, {"D", 0.1}};
             //calculating kf = (percent output * 1023) / max velocity
-            std::map<std::string, double> m_PID_D{{"P", 0.135}, {"I", 0.0007}, {"D", 0.19}, {"F", (1023.0)/21797}};
+            std::map<std::string, double> m_PID_D{{"P", 0.13}, {"I", 0.0007}, {"D", 0.19}, {"F", (1023.0)/21797}};
             const double kTimeoutMs{10.0};
             const int kslotIndex{0};
             const bool kInvertSensors{true};

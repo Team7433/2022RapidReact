@@ -32,6 +32,9 @@
 #include "subsystems/HoodedShooter.h"
 #include "subsystems/Climb.h"
 
+
+#include "commands/AutoCommands/TwoBallAutoA.h"
+
 #include "commands/DriveWithJoystick.h"
 #include "commands/MoveTo.h"
 #include "commands/MotionProfile.h"
@@ -67,9 +70,6 @@ class RobotContainer {
   // void initHood() {InitHood(&m_hoodedShooter).Schedule(false);}
   void setIntakeLock(bool state) {m_intake.setSolenoid(state);}
 
-  std::function<double()> m_rampTarget{[]{return 0.0;}};
-  std::function<double()> m_rampSpeed{[]{return 400.0;}};
-  std::function<double()> m_hoodTarget{[]{return 0.0;}};
 
  private:
   // The robot's subsystems and commands are defined here...

@@ -14,11 +14,16 @@ ClimbMode::ClimbMode(Climb * climb, std::function<double()> leftSpeed, std::func
 // Called when the command is initially scheduled.
 void ClimbMode::Initialize() {
   m_climb->SetClimbReleased(true);
+  m_timer.Start();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void ClimbMode::Execute() {
   m_climb->SetMotors(m_leftSpeed(), m_rightSpeed());
+  if (m_timer.HasElapsed(1_s)) {
+    m_climb->SetClimbReleased(false);
+    m_timer.Reset();
+  }
 }
 
 // Called once the command ends or is interrupted.

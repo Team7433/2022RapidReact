@@ -16,7 +16,7 @@ TurnToTarget::TurnToTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Visio
 
 // Called when the command is initially scheduled.
 void TurnToTarget::Initialize() {
-
+  std::cout << "TurnToTarget"<< std::endl;
   m_gyroTarget = m_gyro->GetYaw() + m_vision->getTargetOffsetX();
 
 }

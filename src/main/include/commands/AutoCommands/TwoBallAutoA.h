@@ -14,8 +14,9 @@
 #include <frc2/command/ParallelRaceGroup.h>
 #include <frc2/command/FunctionalCommand.h>
 #include <frc2/command/ScheduleCommand.h>
+#include <frc2/command/ParallelDeadlineGroup.h>
 
-#include "RobotContainer.h"
+#include <frc/Timer.h>
 
 
 #include "subsystems/Intake.h"
@@ -30,6 +31,8 @@
 #include "commands/BallAutoIntake.h"
 #include "commands/MotionProfile.h"
 #include "commands/RunMagazine.h"
+#include "commands/ControlShooter.h"
+
 
 
 
