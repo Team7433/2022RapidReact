@@ -46,7 +46,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
 
   frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand([this]{
-
+    if (m_vision.getTargetVisible()){
     if (m_rampTarget() == 0.0) {
       m_rampTarget = [this]{return (1669.45* m_vision.getTargetDistance().to<double>()) + 11175.4;};
       m_hoodTarget = [this]{return (30* m_vision.getTargetDistance().to<double>()) - 81;};
@@ -54,12 +54,17 @@ void RobotContainer::ConfigureButtonBindings() {
       m_rampTarget = []{return 0.0;};
       m_hoodTarget = []{return 0.0;};
     }
-
+    }
   }));
   
 
 
   frc2::JoystickButton(&m_controller, 6).WhileHeld(BallAutoIntake(&m_magazine, &m_intake));
+
+  frc2::POVButton(&m_controller, 0).WhenPressed(frc2::InstantCommand([this]{ // bottom hoop code instant command
+    m_rampTarget = [this]{return 10000;};
+    m_hoodTarget = [this]{return 0;};
+  }));
 
 
 
