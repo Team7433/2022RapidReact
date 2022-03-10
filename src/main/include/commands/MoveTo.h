@@ -9,6 +9,7 @@
 #include <frc2/command/CommandHelper.h>
 #include <subsystems/SwerveDriveTrain.h>
 #include <utils/MotionProfile.h>
+#include <iostream>
 
 
 #include <units/velocity.h>
@@ -46,7 +47,7 @@ class MoveTo
   SwerveDriveTrain* m_driveTrain;
   units::meter_t m_distanceToTarget{0.0_m};
 
-  units::meters_per_second_t m_maxVel{1_mps};
+  units::meters_per_second_t m_maxVel{1.25_mps};
   units::meters_per_second_t m_endVel{0_mps};
   units::meters_per_second_squared_t m_acceleration{0.5_mps_sq};
 

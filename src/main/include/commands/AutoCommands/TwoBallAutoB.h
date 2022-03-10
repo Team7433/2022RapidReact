@@ -38,11 +38,11 @@
 
 
 
-class TwoBallAutoA
+class TwoBallAutoB
     : public frc2::CommandHelper<frc2::SequentialCommandGroup,
-                                 TwoBallAutoA> {
+                                 TwoBallAutoB> {
  public:
-  TwoBallAutoA(Intake*, Magazine*, Shooter*, HoodedShooter*, Gyro*, Vision*, SwerveDriveTrain*);
+  TwoBallAutoB(Intake*, Magazine*, Shooter*, HoodedShooter*, Gyro*, Vision*, SwerveDriveTrain*);
   std::function<double()> m_rampTarget{[]{return 16500;}};
   std::function<double()> m_rampSpeed{[]{return 400.0;}};
   std::function<double()> m_hoodTarget{[]{return 0.0;}};
