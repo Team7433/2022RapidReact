@@ -6,6 +6,8 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include "Constants.h"
+#include "subsystems/DualShooter.h"
 
 /**
  * An example command.
@@ -17,7 +19,7 @@
 class RunDualShooter
     : public frc2::CommandHelper<frc2::CommandBase, RunDualShooter> {
  public:
-  RunDualShooter();
+  RunDualShooter(DualShooter * dualshooter, double rollerTargetVel, double shooterTargetVel);
 
   void Initialize() override;
 
@@ -26,4 +28,17 @@ class RunDualShooter
   void End(bool interrupted) override;
 
   bool IsFinished() override;
+ private:
+  DualShooter * m_dualshooter;
+  double m_rollerTargetVel;
+  double m_shooterTargetVel; // stuf
+
+  int m_rollerDir;
+  int m_shooterDir;
+
+  double rampResolution = 10; // wtf is this variable name
+
+  bool m_done; // track if cmd is done
+  double lastShooterVel;
+  double currentVel;
 };
