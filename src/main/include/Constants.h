@@ -22,7 +22,7 @@ namespace ShooterConstants {
     double constexpr static k_maxAccumulator{1.5};
     double constexpr static k_iZone{300};
     static constexpr int kShooterMotorID = 6;
-    static constexpr int kShooterSMotorID = 5;
+    static constexpr int kRollerMotorID = 5;
     
 
 }

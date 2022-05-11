@@ -17,8 +17,8 @@ Gyro::Gyro() {
 
     } catch (std::exception ex ) {
 
-        std::string err_string = "Error Instantiating navX-MXP: ";
-        err_string += ex.what();
+        std::string err_string = "Error Instantiating navX-MXP: "; // damn bro 
+        err_string += ex.what(); // indeed ex.what
         std::cout << err_string.c_str() << std::endl;
     }
 
@@ -38,7 +38,7 @@ units::degree_t Gyro::GetYaw() {
 
 void Gyro::Reset() {
     // m_gyro->SetYaw(0.0);
-    std::cout << "gyro has been reset!!! \n";
+    std::cout << "gyro has been reset!!! \n"; // debug print go brrrr
     m_gyroOffset = GetYaw().to<double>();
     m_gyro->Reset();
 }
@@ -65,7 +65,7 @@ units::degree_t Gyro::GetClosestError(units::degree_t target) {
 
         }
     }
-    return error;
+    return error; // bruh braincells
 
 
 }
