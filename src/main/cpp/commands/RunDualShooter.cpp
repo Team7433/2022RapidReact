@@ -4,12 +4,13 @@
 
 #include "commands/RunDualShooter.h"
 
-RunDualShooter::RunDualShooter(DualShooter * dualshooter, double rollerTargetVel, double shooterTargetVel) {
+RunDualShooter::RunDualShooter(DualShooter * dualshooter, double rollerTargetVel, double shooterTargetVel, double rampRes) {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({dualshooter});
   m_dualshooter = dualshooter;
   m_shooterTargetVel = shooterTargetVel;
   m_shooterTargetVel = rollerTargetVel;
+  m_rampResolution = rampRes;
 
 
 }
@@ -34,23 +35,25 @@ void RunDualShooter::Execute() {
   m_curRollerVel = m_dualshooter->GetRollerVel();
   m_curShooterVel = m_dualshooter->GetShooterVel(); // made vars so dont keep calling vel, and so velocity doesn't change through 1 loop iter
 
-  if (fabs(m_curShooterVel - m_shooterTargetVel) <= rampResolution){
+  if (fabs(m_curShooterVel - m_shooterTargetVel) <= m_rampResolution){
     m_dualshooter->SetShooter(m_shooterTargetVel);
     m_done = true;
   }
   else {
-    if (m_curShooterVel >= m_lastShooterVel += rampResolution){ // check if 
-      m_dualshooter->SetShooter(m_curShooterVel += m_shooterDir * rampResolution);
+    m_tempShooterTarget = m_lastShooterVel += m_rampResolution;
+    if (m_curShooterVel >= m_tempShooterTarget){ // check if 
+      m_dualshooter->SetShooter(m_curShooterVel += m_shooterDir * m_rampResolution);
     }
   }
 
-  if (fabs(m_curRollerVel - m_rollerTargetVel) <= rampResolution){
+  if (fabs(m_curRollerVel - m_rollerTargetVel) <= m_rampResolution){
     m_dualshooter->SetRoller(m_rollerTargetVel);
     m_done = true;
   }
   else {
-    if (m_curRollerVel >= m_lastRollerVel += rampResolution){ // check if 
-      m_dualshooter->SetRoller(m_curRollerVel += m_rollerDir * rampResolution);
+    m_tempRollerTarget = m_lastRollerVel += m_rampResolution;
+    if (m_curRollerVel >= m_tempRollerTarget){ // check if 
+      m_dualshooter->SetRoller(m_curRollerVel += m_rollerDir * m_rampResolution);
     }
   }
 

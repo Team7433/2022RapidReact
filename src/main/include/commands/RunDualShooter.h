@@ -19,7 +19,7 @@
 class RunDualShooter
     : public frc2::CommandHelper<frc2::CommandBase, RunDualShooter> {
  public:
-  RunDualShooter(DualShooter * dualshooter, double rollerTargetVel, double shooterTargetVel);
+  RunDualShooter(DualShooter * dualshooter, double rollerTargetVel, double shooterTargetVel, double rampRes);
 
   void Initialize() override;
 
@@ -42,8 +42,11 @@ class RunDualShooter
   int m_rollerDir;
   int m_shooterDir;
 
-  double rampResolution = 10; // wtf is this variable name
+  double m_rampResolution; // what is this variable name
 
   bool m_done; // track if cmd is done
+
+  double m_tempRollerTarget;
+  double m_tempShooterTarget;
 
 };

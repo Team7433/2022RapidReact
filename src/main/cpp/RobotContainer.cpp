@@ -87,7 +87,7 @@ void RobotContainer::ConfigureButtonBindings() {
   //   m_rampTarget = [this]{return m_counter;};
   // }));
 
-  frc2::JoystickButton(&m_joystick, 6).WhenPressed(RunDualShooter(&m_dualshooter, 10000, 10000)); // we can add ratios in the command or make instant command
+  frc2::JoystickButton(&m_joystick, 6).WhenPressed(RunDualShooter(&m_dualshooter, 10000, 10000, 10)); // we can add ratios in the command or make instant command
   // to do the stuff for ratios and speed
 
   frc2::JoystickButton(&m_controller, 7).ToggleWhenPressed(ClimbMode(&m_climb, [this] {return m_controller.GetLeftY(); }, [this] {return m_controller.GetRightY(); } ) );
