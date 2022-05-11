@@ -21,16 +21,42 @@ void RunDualShooter::Initialize() {
   // DAVID IF YOU ARE READING THIS, I LEGIT DIDNT LOOK AT YOUR CODE i know it looks sus but its mine lol
   // fabssssss
 
+  m_curRollerVel = m_dualshooter->GetRollerVel();
+  m_curShooterVel = m_dualshooter->GetShooterVel();
+
+  m_lastRollerVel = m_curRollerVel;
+  m_lastShooterVel = m_curShooterVel;
+
 }
 
 // Called repeatedly when this Command is scheduled to run
 void RunDualShooter::Execute() {
-  if (m_dualshooter->GetShooterVel() - m_shooterTargetVel <= rampResolution) {
-    m_dualshooter->SetRoller(m_shooterTargetVel);
+  m_curRollerVel = m_dualshooter->GetRollerVel();
+  m_curShooterVel = m_dualshooter->GetShooterVel(); // made vars so dont keep calling vel, and so velocity doesn't change through 1 loop iter
+
+  if (fabs(m_curShooterVel - m_shooterTargetVel) <= rampResolution){
+    m_dualshooter->SetShooter(m_shooterTargetVel);
+    m_done = true;
   }
   else {
-    
+    if (m_curShooterVel >= m_lastShooterVel += rampResolution){ // check if 
+      m_dualshooter->SetShooter(m_curShooterVel += m_shooterDir * rampResolution);
+    }
   }
+
+  if (fabs(m_curRollerVel - m_rollerTargetVel) <= rampResolution){
+    m_dualshooter->SetRoller(m_rollerTargetVel);
+    m_done = true;
+  }
+  else {
+    if (m_curRollerVel >= m_lastRollerVel += rampResolution){ // check if 
+      m_dualshooter->SetRoller(m_curRollerVel += m_rollerDir * rampResolution);
+    }
+  }
+
+
+  m_lastRollerVel = m_curRollerVel;
+  m_lastShooterVel = m_curShooterVel; // put this at the end so when the loop runs next this is the last value
 
 }
 

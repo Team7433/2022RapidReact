@@ -33,12 +33,17 @@ class RunDualShooter
   double m_rollerTargetVel;
   double m_shooterTargetVel; // stuf
 
+  double m_lastShooterVel;
+  double m_lastRollerVel;
+
+  double m_curShooterVel;
+  double m_curRollerVel;
+
   int m_rollerDir;
   int m_shooterDir;
 
   double rampResolution = 10; // wtf is this variable name
 
   bool m_done; // track if cmd is done
-  double lastShooterVel;
-  double currentVel;
+
 };
