@@ -31,6 +31,7 @@
 #include "subsystems/Intake.h"
 #include "subsystems/HoodedShooter.h"
 #include "subsystems/Climb.h"
+#include "subsystems/DualShooter.h"
 
 
 #include "commands/AutoCommands/TwoBallAutoA.h"
@@ -47,6 +48,7 @@
 #include "commands/ControlShooter.h"
 #include "commands/ClimbMode.h"
 #include "commands/ReverseIntake.h"
+#include "commands/RunDualShooter.h"
 
 #include <frc2/command/button/POVButton.h>
 #include <frc/XboxController.h>
@@ -83,6 +85,7 @@ class RobotContainer {
   Vision m_vision;
   HoodedShooter m_hoodedShooter;
   Climb m_climb;
+  DualShooter m_dualshooter;
   
   void ConfigureButtonBindings();
 
