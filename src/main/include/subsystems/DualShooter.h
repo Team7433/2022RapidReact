@@ -11,6 +11,8 @@
 #include <string.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
+#include <iostream>
+
 using namespace ShooterConstants;
 
 class DualShooter : public frc2::SubsystemBase {
@@ -24,9 +26,10 @@ class DualShooter : public frc2::SubsystemBase {
   void SetRoller(double vel){m_rollerMotor->Set(ControlMode::Velocity, vel);}
   void SetShooter(double vel){m_shooterMotor->Set(ControlMode::Velocity, vel);}
 
-  void SetRollerPCGO(double pcgo){m_rollerMotor->Set(ControlMode::PercentOutput, pcgo);}
-  void SetShooterPCGO(double pcgo){m_shooterMotor->Set(ControlMode::PercentOutput, pcgo);} // remove before flight
+  // void SetRollerPCGO(double pcgo){std::cout << "WorkingOne\n"; m_rollerMotor->Set(ControlMode::PercentOutput, pcgo);}
+  // void SetShooterPCGO(double pcgo){std::cout << "workingTwo\n"; m_shooterMotor->Set(ControlMode::PercentOutput, pcgo);} // remove before flight
 
+  void setDualRoller(double percentageOutput) { m_shooterMotor->Set(ControlMode::PercentOutput, percentageOutput); m_rollerMotor->Set(ControlMode::PercentOutput, percentageOutput);}
   double GetRollerVel(){return m_rollerMotor->GetSelectedSensorVelocity();}
   double GetShooterVel(){return m_shooterMotor->GetSelectedSensorVelocity();}
 

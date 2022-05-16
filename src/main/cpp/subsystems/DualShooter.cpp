@@ -18,6 +18,10 @@ void DualShooter::Periodic() {
     frc::SmartDashboard::PutNumber("Shooter/Roller/MaxVel", m_maxRollerVel);
     }
 DualShooter::DualShooter() {
+
+    m_shooterMotor->ConfigFactoryDefault();
+    m_rollerMotor->ConfigFactoryDefault();
+
     PIDInit();
     m_maxShooterVel = m_shooterMotor->GetSelectedSensorVelocity();
     m_maxRollerVel = m_rollerMotor->GetSelectedSensorVelocity();

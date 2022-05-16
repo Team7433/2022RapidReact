@@ -7,10 +7,11 @@
 
 #include "RobotContainer.h"
 
+
 RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   // Initialize all of your commands and subsystems here
   m_swerveDriveTrain.SetDefaultCommand(DriveWithJoystick(&m_swerveDriveTrain, &m_gyro, &m_controller, &m_joystick));
-  m_shooter.SetDefaultCommand(ControlShooter(&m_shooter, &m_hoodedShooter, &m_rampTarget, &m_rampSpeed, &m_hoodTarget));
+  // m_shooter.SetDefaultCommand(ControlShooter(&m_shooter, &m_hoodedShooter, &m_rampTarget, &m_rampSpeed, &m_hoodTarget));
   
   frc::SmartDashboard::PutData(&m_autoChooser);
   m_autoChooser.AddOption("NoAuto", 0);
@@ -51,21 +52,21 @@ void RobotContainer::ConfigureButtonBindings() {
   // ));
 
 
-  frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand([this]{
-    if (m_vision.getTargetVisible()){
-    if (m_rampTarget() == 0.0) {
-      m_rampTarget = [this]{return (1669.45* m_vision.getTargetDistance().to<double>()) + 11175.4;};
-      m_hoodTarget = [this]{return (30* m_vision.getTargetDistance().to<double>()) - 81;};
-    } else {
-      m_rampTarget = []{return 0.0;};
-      m_hoodTarget = []{return 0.0;};
-    }
-    }
-  }));
+  // frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand([this]{
+  //   if (m_vision.getTargetVisible()){
+  //   if (m_rampTarget() == 0.0) {
+  //     m_rampTarget = [this]{return (1669.45* m_vision.getTargetDistance().to<double>()) + 11175.4;};
+  //     m_hoodTarget = [this]{return (30* m_vision.getTargetDistance().to<double>()) - 81;};
+  //   } else {
+  //     m_rampTarget = []{return 0.0;};
+  //     m_hoodTarget = []{return 0.0;};
+  //   }
+  //   }
+  // }));
   
 
 
-  frc2::JoystickButton(&m_controller, 6).WhileHeld(BallAutoIntake(&m_magazine, &m_intake));
+ //frc2::JoystickButton(&m_controller, 6).WhileHeld(BallAutoIntake(&m_magazine, &m_intake));
 
   frc2::POVButton(&m_controller, 0).WhenPressed(frc2::InstantCommand([this]{ // bottom hoop code instant command
     m_rampTarget = [this]{return 10000;};
@@ -87,10 +88,18 @@ void RobotContainer::ConfigureButtonBindings() {
   //   m_rampTarget = [this]{return m_counter;};
   // }));
 
-  frc2::JoystickButton(&m_joystick, 6).WhenPressed(RunDualShooter(&m_dualshooter, 10000, 10000, 10)); // we can add ratios in the command or make instant command
+ //  frc2::JoystickButton(&m_controller, 6).WhenPressed(RunDualShooter(&m_dualshooter, 1000, 1000, 10)); // we can add ratios in the command or make instant command
   // to do the stuff for ratios and speed
 
-  frc2::JoystickButton(&m_controller, 7).ToggleWhenPressed(ClimbMode(&m_climb, [this] {return m_controller.GetLeftY(); }, [this] {return m_controller.GetRightY(); } ) );
+  frc2::JoystickButton(&m_controller, 6).WhenPressed(frc2::InstantCommand([this]{
+    m_dualshooter.setDualRoller(0.0);
+  }));
+
+  frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand([this]{
+    m_dualshooter.setDualRoller(0.2);
+  }));
+
+  // frc2::JoystickButton(&m_controller, 7).ToggleWhenPressed(ClimbMode(&m_climb, [this] {return m_controller.GetLeftY(); }, [this] {return m_controller.GetRightY(); } ) );
 
 
 

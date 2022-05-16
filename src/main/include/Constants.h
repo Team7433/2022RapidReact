@@ -21,8 +21,8 @@ namespace ShooterConstants {
     static constexpr double kFCalc = 1023 / maxVelocity; //kF calculations for the shooter motor
     double constexpr static k_maxAccumulator{1.5};
     double constexpr static k_iZone{300};
-    static constexpr int kShooterMotorID = 6;
-    static constexpr int kRollerMotorID = 5;
+    static constexpr int kShooterMotorID = 5;
+    static constexpr int kRollerMotorID = 6;
     
 
 }
