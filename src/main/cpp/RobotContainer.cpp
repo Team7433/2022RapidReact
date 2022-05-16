@@ -54,11 +54,13 @@ void RobotContainer::ConfigureButtonBindings() {
   // to do the stuff for ratios and speed
 
   frc2::JoystickButton(&m_controller, 6).WhenPressed(frc2::InstantCommand([this]{
-    m_dualshooter.setDualRoller(0.0);
+    m_dualshooter.SetRoller(11000);
+    m_dualshooter.SetShooter(7000);
+    std::cout << "working running dual shooter\n";
   }));
 
   frc2::JoystickButton(&m_controller, 5).WhenPressed(frc2::InstantCommand([this]{
-    m_dualshooter.setDualRoller(0.2);
+    m_dualshooter.setDualRoller(0.0);
   }));
 
   // frc2::JoystickButton(&m_controller, 7).ToggleWhenPressed(ClimbMode(&m_climb, [this] {return m_controller.GetLeftY(); }, [this] {return m_controller.GetRightY(); } ) );

@@ -17,10 +17,13 @@ RunDualShooter::RunDualShooter(DualShooter * dualshooter, double rollerTargetVel
 
 // Called when the command is initially scheduled.
 void RunDualShooter::Initialize() {
-  m_shooterDir = (fabs(m_dualshooter->GetShooterVel() - m_shooterTargetVel)) / (m_dualshooter->GetShooterVel() - m_shooterTargetVel);
+  m_shooterDir = (fabs(m_rollerTargetVel - m_dualshooter->GetRollerVel())) / (m_shooterTargetVel - m_dualshooter->GetRollerVel());
   m_rollerDir = (fabs(m_dualshooter->GetRollerVel() - m_rollerTargetVel)) / (m_dualshooter->GetRollerVel() - m_rollerTargetVel);
   // DAVID IF YOU ARE READING THIS, I LEGIT DIDNT LOOK AT YOUR CODE i know it looks sus but its mine lol
   // fabssssss
+
+  frc::SmartDashboard::PutNumber("DualShooter/rollerDir", m_rollerDir);
+  frc::SmartDashboard::PutNumber("DualShooter/shooterDir", m_shooterDir);
 
   m_curRollerVel = m_dualshooter->GetRollerVel();
   m_curShooterVel = m_dualshooter->GetShooterVel();
@@ -35,14 +38,18 @@ void RunDualShooter::Execute() {
   m_curRollerVel = m_dualshooter->GetRollerVel();
   m_curShooterVel = m_dualshooter->GetShooterVel(); // made vars so dont keep calling vel, and so velocity doesn't change through 1 loop iter
 
+  frc::SmartDashboard::PutNumber("DualShooter/shooterTargetVel", m_shooterTargetVel);
+  frc::SmartDashboard::PutNumber("DualShooter/rollerTargetVel", m_rollerTargetVel);
+
+  frc::SmartDashboard::PutNumber("DualShooter/shooterVel", m_curShooterVel);
+  frc::SmartDashboard::PutNumber("DualShooter/rollerVel", m_curRollerVel);
   if (fabs(m_curShooterVel - m_shooterTargetVel) <= m_rampResolution){
     m_dualshooter->SetShooter(m_shooterTargetVel);
     m_done = true;
-  }
-  else {
-    m_tempShooterTarget = m_lastShooterVel += m_rampResolution;
-    if (m_curShooterVel >= m_tempShooterTarget){ // check if 
-      m_dualshooter->SetShooter(m_curShooterVel += m_shooterDir * m_rampResolution);
+  } else {
+    m_tempShooterTarget = m_lastShooterVel + m_rampResolution * m_shooterDir;
+    if (fabs(m_curShooterVel - m_tempShooterTarget) >= m_rampResolution){ // check if the motor has made it to its target
+      m_dualshooter->SetShooter(m_curShooterVel + m_shooterDir * m_rampResolution);
     }
   }
 
@@ -51,9 +58,9 @@ void RunDualShooter::Execute() {
     m_done = true;
   }
   else {
-    m_tempRollerTarget = m_lastRollerVel += m_rampResolution;
-    if (m_curRollerVel >= m_tempRollerTarget){ // check if 
-      m_dualshooter->SetRoller(m_curRollerVel += m_rollerDir * m_rampResolution);
+    m_tempRollerTarget = m_lastRollerVel + m_rampResolution;
+    if (fabs(m_curRollerVel - m_tempRollerTarget) >= m_rampResolution){ // check if 
+      m_dualshooter->SetRoller(m_curRollerVel + m_rollerDir * m_rampResolution);
     }
   }
 

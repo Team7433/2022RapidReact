@@ -30,7 +30,6 @@ void Robot::RobotPeriodic() {
  * robot is disabled.
  */
 void Robot::DisabledInit() {
-  m_container.stopShooterMagazine();
   m_container.setIntakeLock(true);
   m_timer.Stop();
   m_timer.Reset();

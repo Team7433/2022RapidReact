@@ -12,7 +12,6 @@
 #include "subsystems/Vision.h"
 #include "subsystems/Gyro.h"
 #include "subsystems/SwerveDriveTrain.h"
-#include "subsystems/Shooter.h"
 
 /**
  * An example command.

@@ -8,6 +8,7 @@
 #include <frc2/command/CommandHelper.h>
 #include "Constants.h"
 #include "subsystems/DualShooter.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 /**
  * An example command.

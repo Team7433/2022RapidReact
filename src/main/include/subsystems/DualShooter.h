@@ -41,8 +41,8 @@ class DualShooter : public frc2::SubsystemBase {
   // declared private and exposed only through public methods.
   WPI_TalonFX * m_shooterMotor = new WPI_TalonFX{kShooterMotorID};
   WPI_TalonFX * m_rollerMotor = new WPI_TalonFX{kRollerMotorID}; // rename this const
-  std::map<std::string, double> m_pidRoller{{"kP", 0.001}, {"kI", 0}, {"kD", 0}};
-  std::map<std::string, double> m_pidShooter{{"kP", 0.001}, {"kI", 0}, {"kD", 0}}; // bruh piss
+  std::map<std::string, double> m_pidRoller{{"kP", 0.1}, {"kI", 0}, {"kD", 0}};
+  std::map<std::string, double> m_pidShooter{{"kP", 0.1}, {"kI", 0}, {"kD", 0}}; // bruh piss
 
   double m_maxShooterVel;
   double m_maxRollerVel;
