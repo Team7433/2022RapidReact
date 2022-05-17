@@ -41,6 +41,7 @@
 #include "commands/ClimbMode.h"
 #include "commands/ReverseIntake.h"
 #include "commands/RunDualShooter.h"
+#include "commands/ShooterBottomHoop.h"
 
 #include <frc2/command/button/POVButton.h>
 #include <frc/XboxController.h>
