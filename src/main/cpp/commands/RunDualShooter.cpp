@@ -9,7 +9,7 @@ RunDualShooter::RunDualShooter(DualShooter * dualshooter, double rollerTargetVel
   AddRequirements({dualshooter});
   m_dualshooter = dualshooter;
   m_shooterTargetVel = shooterTargetVel;
-  m_shooterTargetVel = rollerTargetVel;
+  m_rollerTargetVel = rollerTargetVel;
   m_rampResolution = rampRes;
 
 
