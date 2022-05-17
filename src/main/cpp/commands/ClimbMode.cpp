@@ -20,7 +20,7 @@ void ClimbMode::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ClimbMode::Execute() {
   m_climb->SetMotors(m_leftSpeed(), m_rightSpeed());
-  if (m_timer.HasElapsed(1_s)) {
+  if (m_timer.HasElapsed(1_s)) { // fortnite reference?
     m_climb->SetClimbReleased(false);
     m_timer.Reset();
   }
@@ -28,7 +28,7 @@ void ClimbMode::Execute() {
 
 // Called once the command ends or is interrupted.
 void ClimbMode::End(bool interrupted) {
-  m_climb->SetClimbReleased(false);
+  m_climb->SetClimbReleased(false); // morbius
 }
 
 // Returns true when the command should end.

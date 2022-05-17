@@ -19,7 +19,7 @@ void DualShooter::Periodic() {
     }
 
 void DualShooter::PIDInit() {
-    m_shooterMotor->Config_kP(0, m_pidShooter["kP"], kTimeOutMS);
+    m_shooterMotor->Config_kP(0, m_pidShooter["kP"], kTimeOutMS); // me when the me when :aughhh:
     m_shooterMotor->Config_kI(0, m_pidShooter["kI"], kTimeOutMS);
     m_shooterMotor->Config_kD(0, m_pidShooter["kD"], kTimeOutMS);
 

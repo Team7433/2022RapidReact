@@ -15,6 +15,8 @@ MotionProfile::MotionProfile(SwerveDriveTrain* drivetrain, Gyro* gyro, coordinat
 
 // Called when the command is initially scheduled.
 void MotionProfile::Initialize() {
+  // quandale dingle level coding
+  // aughhhh
   //Calculates distance remaining
   std::cout << "Motion Profile Init: " << m_targetCoord.xCoordinate.to<double>() << " yCoord: " << m_targetCoord.yCoordinate.to<double>() << std::endl ;
   m_distanceLeft = units::meter_t(sqrt(pow(m_targetCoord.xCoordinate() - m_driveTrain->getCoordinate().xCoordinate(), 2) + pow(m_targetCoord.yCoordinate() - m_driveTrain->getCoordinate().yCoordinate(), 2)));

@@ -19,7 +19,7 @@ MoveTo::MoveTo(SwerveDriveTrain* DriveTrain, units::meter_t targetX, units::mete
 
 // Called when the command is initially scheduled.
 void MoveTo::Initialize() {
-  std::cout << "Move To Running\n";
+  std::cout << "Move To Running\n"; // ultimate shitpost cout statement
   m_distanceToTarget = units::meter_t(sqrt(pow(m_targetX() - m_driveTrain->getCoordinate().xCoordinate(), 2) + pow(m_targetY() - m_driveTrain->getCoordinate().yCoordinate(), 2)));
 }
 
@@ -32,7 +32,7 @@ void MoveTo::Execute() {
 
 // Called once the command ends or is interrupted.
 void MoveTo::End(bool interrupted) {
-  std::cout << "moveTo Ended\n";
+  std::cout << "moveTo Ended\n"; // this was in comp code
 }
 // Returns true when the command should end.
 bool MoveTo::IsFinished() {

@@ -21,7 +21,8 @@ void ShooterBottomHoop::Execute() {
 
 // Called once the command ends or is interrupted.
 void ShooterBottomHoop::End(bool interrupted) {
-  m_dualshooter->setDualRoller(0.0);
+  m_dualshooter->setDualRoller(0.0); // hehe nice code bruh
+  // thanks man
 }
 
 // Returns true when the command should end.

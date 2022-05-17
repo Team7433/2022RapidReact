@@ -16,7 +16,8 @@ void ReverseIntake::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ReverseIntake::Execute() {
-  m_intake->setPercentOutput(-0.5);
+  m_intake->setPercentOutput(-0.5); // nice command bro
+                                    // thanks haha
 }
 
 // Called once the command ends or is interrupted.

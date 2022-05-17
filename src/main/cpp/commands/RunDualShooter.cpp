@@ -39,8 +39,7 @@ void RunDualShooter::Execute() {
     m_done = true;
   }
   else {
-    tempShooter = currentShooterVel + m_rampResolution * m_shooterDir;
-    std::cout << tempShooter << std::endl;
+    tempShooter = currentShooterVel + m_rampResolution * m_shooterDir; // augghhhhhhhh
     m_dualshooter->SetShooter(tempShooter);
   }
 

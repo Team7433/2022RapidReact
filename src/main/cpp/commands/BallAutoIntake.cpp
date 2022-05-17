@@ -15,7 +15,7 @@ BallAutoIntake::BallAutoIntake(Magazine * magazine, Intake * intake) {
 // Called when the command is initially scheduled.
 void BallAutoIntake::Initialize() {
     std::cout << "BallAutoIntake\n";
-    m_intake->setPercentOutput(0.6);
+    m_intake->setPercentOutput(0.6); // hard coded values be like: kumalalalala
     
     if (m_magazine->isBall() == false) {
       m_magazine->setPercentageOutput(0.3);
