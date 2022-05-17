@@ -52,6 +52,7 @@ class RunDualShooter
   double nextShooterVel;
 
   double tempShooter;
+  double tempRoller;
 
   bool m_nextCount = false;
 
