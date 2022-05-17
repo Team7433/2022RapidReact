@@ -27,6 +27,9 @@ void RobotContainer::ConfigureButtonBindings() {
     frc2::InstantCommand([this] {m_swerveDriveTrain.ResetOdometry();}) // reset odometry
   );
 
+  frc2::JoystickButton(&m_controller, 4).WhenPressed(RunDualShooter(&m_dualshooter, 1000, 1000, 10)); // run the shooter
+  frc2::JoystickButton(&m_controller, 4).WhenReleased(RunDualShooter(&m_dualshooter, 0, 0, 10)); // stop shooter when button released
+
   frc2::JoystickButton(&m_joystick, 5).WhenPressed(
     frc2::InstantCommand([this] {m_swerveDriveTrain.ResetGyro();}) // reset gyro for swerve
   );
@@ -38,8 +41,7 @@ void RobotContainer::ConfigureButtonBindings() {
 
 
 
-  frc2::JoystickButton(&m_controller, 4).WhenPressed(RunDualShooter(&m_dualshooter, 1000, 1000, 10)); // run the shooter
-  frc2::JoystickButton(&m_controller, 4).WhenReleased(RunDualShooter(&m_dualshooter, 0, 0, 10)); // stop shooter when button released
+  
 
 
 
