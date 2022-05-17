@@ -20,7 +20,7 @@ void RunMagazine::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void RunMagazine::Execute() {
 
-  if (m_shooterUpToSpeed()) {
+  if (true) {
     m_magazine->setPercentageOutput(m_output);
   } else {
     m_magazine->setPercentageOutput(0.0);

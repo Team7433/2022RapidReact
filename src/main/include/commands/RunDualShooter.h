@@ -32,22 +32,27 @@ class RunDualShooter
  private:
   DualShooter * m_dualshooter;
   double m_rollerTargetVel;
-  double m_shooterTargetVel; // stuf
+  double m_shooterTargetVel; // stuff
 
-  double m_lastShooterVel;
-  double m_lastRollerVel;
 
-  double m_curShooterVel;
-  double m_curRollerVel;
+  double m_rampResolution;
 
-  int m_rollerDir;
-  int m_shooterDir;
+  double currentRollerVel;
+  double currentShooterVel;
 
-  double m_rampResolution; // what is this variable name
-
-  bool m_done; // track if cmd is done
+  bool m_done = false; // track if cmd is done
 
   double m_tempRollerTarget;
   double m_tempShooterTarget;
+
+  double m_rollerDir;
+  double m_shooterDir;
+
+  double nextRollerVel;
+  double nextShooterVel;
+
+  double tempShooter;
+
+  bool m_nextCount = false;
 
 };

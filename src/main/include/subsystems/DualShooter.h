@@ -33,6 +33,9 @@ class DualShooter : public frc2::SubsystemBase {
   double GetRollerVel(){return m_rollerMotor->GetSelectedSensorVelocity();}
   double GetShooterVel(){return m_shooterMotor->GetSelectedSensorVelocity();}
 
+  double GetShooterClosedLoopTarget(){return m_shooterMotor->GetClosedLoopTarget();}
+  double GetRollerClosedLoopTarget(){return m_rollerMotor->GetClosedLoopTarget();}
+
   void UpdateSD();
   void PIDInit();
 

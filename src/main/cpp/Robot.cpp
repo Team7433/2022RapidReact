@@ -62,6 +62,8 @@ void Robot::TeleopInit() {
   }
   m_container.setIntakeLock(false);
   m_timer.Start();
+  frc::SmartDashboard::PutNumber("shooter/roller/speed", 1000);
+  frc::SmartDashboard::PutNumber("shooter/shooter/speed", 1000);
 }
 
 /**
