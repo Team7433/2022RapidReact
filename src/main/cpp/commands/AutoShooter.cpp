@@ -17,10 +17,10 @@ void AutoShooter::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void AutoShooter::Execute() {
   std::function<double()> m_shooterSpeed = [this]{
-    return (4 / m_vision->getTargetDistance()) * kShooterDefaultSpeed;
+    return (4 / m_vision->getTargetDistance()).to<double>() * kShooterDefaultSpeed;
   };
 
-  std::function<double()> m_rollerSpeed = [this]{
+  std::function<double()> m_rollerSpeed = [this, m_shooterSpeed]{
     return kShooterToRoller * m_shooterSpeed(); // convert this to units
   };
 }
