@@ -15,12 +15,10 @@
  * they are needed.
  */
 
-namespace ShooterConstants {
+namespace DualShooterConstants {
     static constexpr double kTimeOutMS = 10;
-    static constexpr double maxVelocity = 23000; // max velocity of the motor (velocity at 100% output)
-    static constexpr double kFCalc = 1023 / maxVelocity; //kF calculations for the shooter motor
-    double constexpr static k_maxAccumulator{1.5};
-    double constexpr static k_iZone{300};
+    static constexpr double kShooterDefaultSpeed = 4000; // at x meters
+    static constexpr double kShooterToRoller = 1 + 1/17; // multiply this by what the shooter should be to get your roller speed
     static constexpr int kShooterMotorID = 5;
     static constexpr int kRollerMotorID = 6;
     
