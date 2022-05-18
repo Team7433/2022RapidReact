@@ -20,7 +20,7 @@
 class RunDualShooter
     : public frc2::CommandHelper<frc2::CommandBase, RunDualShooter> {
  public:
-  RunDualShooter(DualShooter * dualshooter, double rollerTargetVel, double shooterTargetVel, double rampRes);
+  RunDualShooter(DualShooter * dualshooter, std::function<double()> rollerTargetVel, std::function<double()> shooterTargetVel, double rampRes);
 
   void Initialize() override;
 
@@ -31,29 +31,25 @@ class RunDualShooter
   bool IsFinished() override;
  private:
   DualShooter * m_dualshooter;
+  std::function<double()> m_rollerTargetVelFunc;
+  std::function<double()> m_shooterTargetVelFunc; // lambda function for the final speed
+  
   double m_rollerTargetVel;
-  double m_shooterTargetVel; // stuff
+  double m_shooterTargetVel;
 
+  double m_rampResolution; // the step of ramping for each iteration
 
-  double m_rampResolution;
-
-  double currentRollerVel;
+  double currentRollerVel; // vars to track the current velocities
   double currentShooterVel;
 
   bool m_done = false; // track if cmd is done
 
-  double m_tempRollerTarget;
-  double m_tempShooterTarget;
-
-  double m_rollerDir;
+  double m_rollerDir; // gets the direction to speed up or down
   double m_shooterDir;
 
-  double nextRollerVel;
-  double nextShooterVel;
-
-  double tempShooter;
+  double tempShooter; // temporary variables to store the speed that the shooters are being set to
   double tempRoller;
 
-  bool m_nextCount = false;
+
 
 };
