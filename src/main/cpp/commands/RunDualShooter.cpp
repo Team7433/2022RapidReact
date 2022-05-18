@@ -33,6 +33,9 @@ void RunDualShooter::Initialize() {
 void RunDualShooter::Execute() {
   currentShooterVel = m_dualshooter->GetShooterClosedLoopTarget();
   currentRollerVel = m_dualshooter->GetRollerClosedLoopTarget();
+  m_shooterDir = fabs(m_shooterTargetVel - m_dualshooter->GetShooterVel()) / (m_shooterTargetVel - m_dualshooter->GetShooterVel());
+  m_rollerDir = fabs(m_rollerTargetVel - m_dualshooter->GetRollerVel())/ (m_dualshooter->GetRollerVel() - m_rollerTargetVel);
+
   frc::SmartDashboard::PutNumber("DualShooter/rollerVel", currentRollerVel);
   frc::SmartDashboard::PutNumber("DualShooter/shooterVel", currentShooterVel);
 
@@ -58,7 +61,9 @@ void RunDualShooter::Execute() {
 }
 
 // Called once the command ends or is interrupted.
-void RunDualShooter::End(bool interrupted) {}
+void RunDualShooter::End(bool interrupted) {
+  m_done = false;
+}
 
 // Returns true when the command should end.
 bool RunDualShooter::IsFinished() {
