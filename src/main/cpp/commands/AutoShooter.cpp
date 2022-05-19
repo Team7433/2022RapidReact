@@ -23,6 +23,8 @@ void AutoShooter::Execute() {
   std::function<double()> m_rollerSpeed = [this, m_shooterSpeed]{
     return kShooterToRoller * m_shooterSpeed(); // convert this to units
   };
+
+  
 }
 
 // Called once the command ends or is interrupted.

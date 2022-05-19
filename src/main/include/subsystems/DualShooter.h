@@ -13,7 +13,7 @@
 
 #include <iostream>
 
-using namespace ShooterConstants;
+using namespace DualShooterConstants;
 
 class DualShooter : public frc2::SubsystemBase {
  public:
