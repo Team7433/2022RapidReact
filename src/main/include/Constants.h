@@ -5,6 +5,8 @@
 #pragma once
 #include "units/length.h"
 #include "units/angle.h"
+
+#include <functional>
 /**
  * The Constants header provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants.  This should not be used for any other
@@ -21,7 +23,10 @@ namespace DualShooterConstants {
     static constexpr double kShooterToRoller = 9000/8500; // multiply this by what the shooter should be to get your roller speed
     static constexpr int kShooterMotorID = 5;
     static constexpr int kRollerMotorID = 6;
-    
+
+    double findVelocity(double x){
+        return 2*x; 
+    }
 
 }
 

@@ -11,11 +11,11 @@ TwoBallAutoA::TwoBallAutoA(Intake * m_intake, Magazine * m_magazine, SwerveDrive
   // Add your commands here, e.g.
   // AddCommands(FooCommand(), BarCommand());
 
-  AddCommands(
-    frc2::ParallelDeadlineGroup(
-      MotionProfile(m_swerve, m_gyro, coordinate{0.0_m, 0.0_m, 0.0_deg}),
-      RunMagazine(m_intake, m_magazine)
-    )
-  );
+  // AddCommands(
+  //   frc2::ParallelDeadlineGroup(
+  //     MotionProfile(m_swerve, m_gyro, coordinate{0.0_m, 0.0_m, 0.0_deg}),
+  //     RunMagazine(m_intake, m_magazine)
+  //   )
+  // );
 
 }
