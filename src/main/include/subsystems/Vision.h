@@ -30,6 +30,7 @@ class Vision : public frc2::SubsystemBase {
   units::degree_t getTargetSkew() {return units::degree_t(table->GetNumber("ts", 0.0));}
   units::meter_t getTargetDistance() {return (kTowerHeight-kLimelightHeight)/units::math::tan(kLimelightOffsetAngle+getTargetOffsetY());} // 1 goal off ground dist, 2 limelight off ground dist, 3 limelight angle from vertical
   double getTargetDistanceNum() {return getTargetDistance().to<double>();}
+  double findVelocity(){return 180.952 * pow(getTargetDistanceNum(), 2) + -49.1429 * getTargetDistanceNum() + 7252.55; }
   bool getTargetVisible() {return table->GetNumber("tv", 0.0);}
   bool getTXUpToDate() {return m_txUpToDate;}
 

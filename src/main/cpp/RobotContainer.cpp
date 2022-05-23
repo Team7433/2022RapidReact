@@ -28,14 +28,20 @@ void RobotContainer::ConfigureButtonBindings() {
     frc2::InstantCommand([this] {m_swerveDriveTrain.ResetOdometry();}) // reset odometry
   );
 
-  frc2::JoystickButton(&m_controller, 4).WhenPressed(RunDualShooter(&m_dualshooter, []{return 11850;}, []{return 11850 * kShooterToRoller;}, 300)); // run the shooter
+  frc2::JoystickButton(&m_controller, 4).WhenPressed(RunDualShooter(&m_dualshooter, [this]{
+    double setVel = m_vision.findVelocity() * kShooterToRoller;
+    frc::SmartDashboard::PutNumber("Vision/AutoRollVel", setVel);
+    frc::SmartDashboard::PutNumber("Vision/ActualRollVel", m_dualshooter.GetRollerVel());
+    return setVel;
+    
+    }, [this]{
+      double setVel = m_vision.findVelocity();
+      frc::SmartDashboard::PutNumber("Vision/AutoShootVel", setVel);
+      frc::SmartDashboard::PutNumber("Vision/ActualShootVel", m_dualshooter.GetShooterVel());
+      return setVel;
+      }, 300)); // run the shooter
 
-
-
-  // frc2::JoystickButton(&m_controller, 4).WhenPressed(frc2::InstantCommand([this]{
-  //   m_dualshooter.SetRoller(12000 * kShooterToRoller); // at 4.7 m
-  //   m_dualshooter.SetShooter(12000);
-  // }));
+  // frc2::JoystickButton(&m_controller, 4).WhenPressed(RunDualShooter(&m_dualshooter, []{return 12500;}, []{return 12500 * kShooterToRoller;}, 300));
 
   frc2::JoystickButton(&m_controller, 4).WhenReleased(frc2::InstantCommand([this]{
     m_dualshooter.setDualRoller(0.0);

@@ -7,6 +7,8 @@
 #include "units/angle.h"
 
 #include <functional>
+#include <cmath>
+
 /**
  * The Constants header provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants.  This should not be used for any other
@@ -24,9 +26,7 @@ namespace DualShooterConstants {
     static constexpr int kShooterMotorID = 5;
     static constexpr int kRollerMotorID = 6;
 
-    double findVelocity(double x){
-        return 2*x; 
-    }
+    
 
 }
 
