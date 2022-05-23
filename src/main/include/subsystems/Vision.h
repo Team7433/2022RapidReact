@@ -25,10 +25,11 @@ class Vision : public frc2::SubsystemBase {
    */
   void Periodic() override;
   units::degree_t getTargetOffsetX(){ return units::degree_t(m_currentTx);}
-  units::degree_t getTargetOffsetY() {return units::degree_t(table->GetNumber("ty",0.0));}
+  units::degree_t getTargetOffsetY() {return units::degree_t(table->GetNumber("ty", 1.0));}
   units::degree_t getTargetArea() {return units::degree_t(table->GetNumber("ta",0.0));}
   units::degree_t getTargetSkew() {return units::degree_t(table->GetNumber("ts", 0.0));}
   units::meter_t getTargetDistance() {return (kTowerHeight-kLimelightHeight)/units::math::tan(kLimelightOffsetAngle+getTargetOffsetY());} // 1 goal off ground dist, 2 limelight off ground dist, 3 limelight angle from vertical
+  double getTargetDistanceNum() {return getTargetDistance().to<double>();}
   bool getTargetVisible() {return table->GetNumber("tv", 0.0);}
   bool getTXUpToDate() {return m_txUpToDate;}
 
@@ -42,9 +43,6 @@ class Vision : public frc2::SubsystemBase {
   bool m_txUpToDate{true};
 
 
-    units::meter_t kLimelightHeight = 51_cm;
-    units::meter_t kTowerHeight = 264_cm;
-    units::degree_t kLimelightOffsetAngle = 35_deg;
 
 
   

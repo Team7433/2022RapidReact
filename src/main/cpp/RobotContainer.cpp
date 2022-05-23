@@ -10,6 +10,7 @@
 
 RobotContainer::RobotContainer() : m_swerveDriveTrain{&m_gyro} {
   m_swerveDriveTrain.SetDefaultCommand(DriveWithJoystick(&m_swerveDriveTrain, &m_gyro, &m_controller, &m_joystick));
+
   
   frc::SmartDashboard::PutData(&m_autoChooser);
   m_autoChooser.AddOption("NoAuto", 0);
@@ -27,7 +28,7 @@ void RobotContainer::ConfigureButtonBindings() {
     frc2::InstantCommand([this] {m_swerveDriveTrain.ResetOdometry();}) // reset odometry
   );
 
-  frc2::JoystickButton(&m_controller, 4).WhenPressed(RunDualShooter(&m_dualshooter, []{return 9000;}, []{return 9000 * kShooterToRoller;}, 200)); // run the shooter
+  frc2::JoystickButton(&m_controller, 4).WhenPressed(RunDualShooter(&m_dualshooter, []{return 11850;}, []{return 11850 * kShooterToRoller;}, 300)); // run the shooter
 
 
 
@@ -46,19 +47,22 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::JoystickButton(&m_controller, 5).WhileHeld(RunMagazine(&m_magazine, 0.6, []{return true;})); // run magazine
 
 
- frc2::JoystickButton(&m_controller, 6).WhileHeld(BallAutoIntake(&m_magazine, &m_intake)); // intake balls
+//  frc2::JoystickButton(&m_controller, 6).WhileHeld(BallAutoIntake(&m_magazine, &m_intake)); // intake balls
 
+frc2::JoystickButton(&m_controller, 6).WhenPressed(frc2::InstantCommand([this]{
+  m_intake.setPercentOutput(0.6);
+}));
 
+frc2::JoystickButton(&m_controller, 6).WhenReleased(frc2::InstantCommand([this]{
+  m_intake.setPercentOutput(0.0);
+}));
 
-  
+frc2::JoystickButton(&m_joystick, 1).WhenPressed(TurnToTarget(&m_swerveDriveTrain, &m_gyro, &m_vision));
 
 
 
   // frc2::JoystickButton(&m_controller, 7).ToggleWhenPressed(ClimbMode(&m_climb, [this] {return m_controller.GetLeftY(); }, [this] {return m_controller.GetRightY(); } ) );
   // TODO climb
-
-
-
   
   frc2::POVButton(&m_controller, 180).WhileHeld(ReverseIntake(&m_intake)); // reverse the intake if stuck balls
 

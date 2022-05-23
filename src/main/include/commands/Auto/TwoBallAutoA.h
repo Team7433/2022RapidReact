@@ -9,7 +9,6 @@
 
 #include "commands/AutoShooter.h"
 #include "commands/BallAutoIntake.h"
-#include "commands/MoveTo.h"
 #include "commands/MotionProfile.h"
 #include "commands/RunMagazine.h"
 #include "commands/TurnToTarget.h"
