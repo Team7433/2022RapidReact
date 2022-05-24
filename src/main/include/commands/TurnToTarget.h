@@ -51,5 +51,7 @@ class TurnToTarget
   units::degree_t m_error{0_deg};
   units::degree_t m_gyroTarget{0_deg};
 
+  bool m_done = false;
+
 
 };

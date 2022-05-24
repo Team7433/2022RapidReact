@@ -40,6 +40,8 @@ void TurnToTarget::Execute() {
   if (m_accumulator >= m_maxAccumulator) {
     m_accumulator = m_maxAccumulator;
   }
+
+  
   //rotate output variable
   double rotate{m_error.to<double>()*kPID["kP"] + m_accumulator*kPID["kI"] + kPID["kS"] };
 
@@ -47,7 +49,10 @@ void TurnToTarget::Execute() {
   //telling swerveDrive Controller to drive with the above outputs
   m_swerveDrive->Drive(0.0, 0.0, rotate, true, true, false);
   
-
+  if (m_vision->getTargetOffsetX() < 0.5_deg){
+    printf("stuff");
+    m_done = true;
+  }
 
 
 }
@@ -57,7 +62,7 @@ void TurnToTarget::End(bool interrupted) {}
 
 // Returns true when the command should end.
 bool TurnToTarget::IsFinished() {
-  return false;
+  return m_done;
 }
 
 units::degree_t TurnToTarget::getCLosestError(units::degree_t targetGyroAngle) {
