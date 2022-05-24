@@ -28,8 +28,8 @@
 #include "subsystems/Vision.h"
 #include "subsystems/Magazine.h"
 #include "subsystems/Intake.h"
-#include "subsystems/Climb.h"
 #include "subsystems/DualShooter.h"
+#include "subsystems/Climb.h"
 
 
 
@@ -38,7 +38,6 @@
 #include "commands/MotionProfile.h"
 #include "commands/BallAutoIntake.h"
 #include "commands/RunMagazine.h"
-#include "commands/ClimbMode.h"
 #include "commands/ReverseIntake.h"
 #include "commands/RunDualShooter.h"
 #include "commands/ShooterBottomHoop.h"
@@ -74,8 +73,8 @@ class RobotContainer {
   Magazine m_magazine;
   Intake m_intake;
   Vision m_vision;
-  Climb m_climb;
   DualShooter m_dualshooter;
+  Climb m_climb;
   
   void ConfigureButtonBindings();
 

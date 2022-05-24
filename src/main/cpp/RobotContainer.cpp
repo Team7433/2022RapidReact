@@ -70,6 +70,30 @@ frc2::JoystickButton(&m_joystick, 1).WhenPressed(TurnToTarget(&m_swerveDriveTrai
   // frc2::JoystickButton(&m_controller, 7).ToggleWhenPressed(ClimbMode(&m_climb, [this] {return m_controller.GetLeftY(); }, [this] {return m_controller.GetRightY(); } ) );
   // TODO climb
   
+  frc2::POVButton(&m_controller, 270).WhenPressed(frc2::InstantCommand([this]{
+    m_climb.setPercentageOutput(0.2);
+  }));
+
+  frc2::POVButton(&m_controller, 270).WhenReleased(frc2::InstantCommand([this]{
+    m_climb.setPercentageOutput(0.0);
+  }));
+
+  frc2::POVButton(&m_controller, 0).WhenPressed(frc2::InstantCommand([this]{
+    m_climb.setPercentageOutput(-0.2);
+  }));
+
+  frc2::POVButton(&m_controller, 0).WhenReleased(frc2::InstantCommand([this]{
+    m_climb.setPercentageOutput(0.0);
+  }));
+
+  // frc2::POVButton(&m_controller, 180).WhenPressed(frc2::InstantCommand([this]{
+  //   m_climb.setPercentageOutput(0.1);
+  // }));
+
+  // frc2::POVButton(&m_controller, 180).WhenReleased(frc2::InstantCommand([this]{
+  //   m_climb.setPercentageOutput(0.0);
+  // }));
+  
   frc2::POVButton(&m_controller, 180).WhileHeld(ReverseIntake(&m_intake)); // reverse the intake if stuck balls
 
 }

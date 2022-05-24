@@ -49,7 +49,7 @@ void TurnToTarget::Execute() {
   //telling swerveDrive Controller to drive with the above outputs
   m_swerveDrive->Drive(0.0, 0.0, rotate, true, true, false);
   
-  if (m_vision->getTargetOffsetX() < 0.5_deg){
+  if ( m_vision->getTargetOffsetX() < 0.5_deg){
     printf("stuff");
     m_done = true;
   }

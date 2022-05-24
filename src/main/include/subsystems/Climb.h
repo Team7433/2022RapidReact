@@ -5,8 +5,8 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-#include <frc/DigitalOutput.h>
-#include <ctre/Phoenix.h>
+
+#include "ctre/Phoenix.h"
 
 #include "Constants.h"
 
@@ -18,13 +18,13 @@ class Climb : public frc2::SubsystemBase {
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
-  void SetMotors(double leftSpeed, double rightSpeed);
-  void SetClimbReleased(bool released);
+  void setPercentageOutput(double pcgo){climbMotorOne->Set(ControlMode::PercentOutput, pcgo);}
 
  private:
-  TalonSRX * m_leftClimb = new TalonSRX{ClimbConstants::kLeftClimbMotorId};
-  TalonSRX * m_rightClimb = new TalonSRX{ClimbConstants::kRightClimbMotorId};
+  // Components (e.g. motor controllers and sensors) should generally be
+  // declared private and exposed only through public methods.
+  WPI_TalonFX * climbMotorOne = new WPI_TalonFX{2};
+  WPI_TalonFX * climbMotorTwo = new WPI_TalonFX{4};
 
-  frc::DigitalOutput m_releaseSolenoidRight{ClimbConstants::kClimbReleaseRightSoloniodId};
-  frc::DigitalOutput m_releaseSolenoidLeft{ClimbConstants::kClimbReleaseLeftSoloniodId};
+
 };
