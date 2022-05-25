@@ -22,13 +22,18 @@
 
 #include <frc2/command/CommandHelper.h>
 #include <frc2/command/SequentialCommandGroup.h>
-#include <frc/smartdashboard/SmartDashboard.h>
-
-#include <frc2/command/ParallelCommandGroup.h>
-#include <frc2/command/ParallelDeadlineGroup.h>
-#include <frc2/command/ParallelRaceGroup.h>
-#include <frc2/command/ConditionalCommand.h>
 #include <frc2/command/InstantCommand.h>
+#include <frc2/command/ParallelCommandGroup.h>
+#include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/ConditionalCommand.h>
+#include <frc2/command/ScheduleCommand.h>
+#include <frc2/command/ParallelRaceGroup.h>
+#include <frc2/command/FunctionalCommand.h>
+#include <frc2/command/ScheduleCommand.h>
+#include <frc2/command/ParallelDeadlineGroup.h>
+
+#include <units/math.h>
+#include "Constants.h"
 
 class TwoBallAutoA
     : public frc2::CommandHelper<frc2::SequentialCommandGroup,

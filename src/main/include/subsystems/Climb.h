@@ -10,6 +10,8 @@
 
 #include "Constants.h"
 
+#include <frc/Servo.h>
+
 class Climb : public frc2::SubsystemBase {
  public:
   Climb();
@@ -19,12 +21,14 @@ class Climb : public frc2::SubsystemBase {
    */
   void Periodic() override;
   void setPercentageOutput(double pcgo){climbMotorOne->Set(ControlMode::PercentOutput, pcgo);}
+  void setRelease(double angle){releaseServo.Set(angle);}
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
   WPI_TalonFX * climbMotorOne = new WPI_TalonFX{2};
   WPI_TalonFX * climbMotorTwo = new WPI_TalonFX{4};
+  frc::Servo releaseServo{1};
 
 
 };

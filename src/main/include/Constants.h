@@ -22,7 +22,7 @@
 namespace DualShooterConstants {
     static constexpr double kTimeOutMS = 10;
     static constexpr double kShooterDefaultSpeed = 8500; // at 3.3 meters
-    static constexpr double kShooterToRoller = 9250/8500; // multiply this by what the shooter should be to get your roller speed
+    static constexpr double kShooterToRoller = 9250.0/8500.0; // multiply this by what the shooter should be to get your roller speed
     static constexpr int kShooterMotorID = 5;
     static constexpr int kRollerMotorID = 6;
 

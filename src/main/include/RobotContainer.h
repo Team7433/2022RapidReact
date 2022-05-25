@@ -42,6 +42,8 @@
 #include "commands/RunDualShooter.h"
 #include "commands/ShooterBottomHoop.h"
 #include "commands/TurnToTarget.h"
+#include "commands/AutoTarget.h"
+#include "commands/Auto/TwoBallAutoA.h"
 
 #include <frc2/command/button/POVButton.h>
 #include <frc/XboxController.h>
@@ -64,6 +66,7 @@ class RobotContainer {
   frc2::Command* GetAutonomousCommand();
   
   void setIntakeLock(bool state) {m_intake.setSolenoid(state);}
+  void setClimbLock(double angle) {m_climb.setRelease(angle);}
 
 
  private:

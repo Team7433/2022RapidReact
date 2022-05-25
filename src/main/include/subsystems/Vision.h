@@ -28,7 +28,7 @@ class Vision : public frc2::SubsystemBase {
   units::degree_t getTargetOffsetY() {return units::degree_t(table->GetNumber("ty", 1.0));}
   units::degree_t getTargetArea() {return units::degree_t(table->GetNumber("ta",0.0));}
   units::degree_t getTargetSkew() {return units::degree_t(table->GetNumber("ts", 0.0));}
-  units::meter_t getTargetDistance() {return (kTowerHeight-kLimelightHeight)/units::math::tan(kLimelightOffsetAngle+getTargetOffsetY()) + 0.3_m;} // 1 goal off ground dist, 2 limelight off ground dist, 3 limelight angle from vertical
+  units::meter_t getTargetDistance() {return (kTowerHeight-kLimelightHeight)/units::math::tan(kLimelightOffsetAngle+getTargetOffsetY());} // 1 goal off ground dist, 2 limelight off ground dist, 3 limelight angle from vertical
   double getTargetDistanceNum() {return getTargetDistance().to<double>();}
   double findVelocity(){return 161.905 * pow(getTargetDistanceNum(), 2) + 172.571 * getTargetDistanceNum() + 6637.13; }
   bool getTargetVisible() {return table->GetNumber("tv", 0.0);}

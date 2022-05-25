@@ -2,27 +2,37 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "commands/TurnToTarget.h"
+#include "commands/AutoTarget.h"
 
-TurnToTarget::TurnToTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Vision* vision) {
+AutoTarget::AutoTarget(SwerveDriveTrain* swerveDriveTrain, Gyro* gyro, Vision* vision, frc::Joystick* joystick, frc::XboxController* controller) {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({swerveDriveTrain});
 
   m_swerveDrive= swerveDriveTrain;
   m_gyro = gyro;
   m_vision = vision;
+  m_joystick = joystick;
+  m_controller = controller;
 
 }
 
 // Called when the command is initially scheduled.
-void TurnToTarget::Initialize() {
-  std::cout << "TurnToTarget"<< std::endl;
-  m_gyroTarget = m_gyro->GetYaw() + m_vision->getTargetOffsetX();
+void AutoTarget::Initialize() {
+  std::cout <<"AutoTarget\n";
+  if (m_vision->getTargetVisible())
+  {
+     m_gyroTarget = m_gyro->GetYaw() + m_vision->getTargetOffsetX();
+  } else {
+    m_done = true;
+  }
+  m_controller->SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 1);
+  m_controller->SetRumble(frc::GenericHID::RumbleType::kRightRumble, 1);
+  
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void TurnToTarget::Execute() {
+void AutoTarget::Execute() {
 
   //sets new gyro target if the vision has been updated
   if(m_vision->getTargetVisible() && m_vision->getTXUpToDate()){
@@ -43,25 +53,38 @@ void TurnToTarget::Execute() {
   }
   //rotate output variable
   double rotate{m_error.to<double>()*kPID["kP"] + m_accumulator*kPID["kI"] + kPID["kS"] };
-
+  //driving forward variable
+  double forward = m_joystick->GetRawAxis(1);
+  if (fabs(forward) < kJoystickForwardDeadZone) {
+    forward = 0;
+  }
+  //strafe variable
+  double strafe = -m_joystick->GetRawAxis(0);
+  if (fabs(strafe) < kJoystickStrafeDeadZone) {
+    strafe = 0;
+  }
   // std::cout << "error: " << m_error.to<double>() << " output: " << rotate << std::endl;
   //telling swerveDrive Controller to drive with the above outputs
-  m_swerveDrive->Drive(0.0, 0.0, rotate, true, true, false);
+  m_swerveDrive->Drive(forward*kForwardMultiplier, strafe*kStrafeMultiplier, rotate, true, true, false);
   
-
-
-
+  
 }
 
 // Called once the command ends or is interrupted.
-void TurnToTarget::End(bool interrupted) {}
-
-// Returns true when the command should end.
-bool TurnToTarget::IsFinished() {
-  return false;
+void AutoTarget::End(bool interrupted) {
+  m_done=false;
+    m_controller->SetRumble(frc::GenericHID::RumbleType::kLeftRumble, 0);
+    m_controller->SetRumble(frc::GenericHID::RumbleType::kRightRumble, 0);
 }
 
-units::degree_t TurnToTarget::getCLosestError(units::degree_t targetGyroAngle) {
+
+
+// Returns true when the command should end.
+bool AutoTarget::IsFinished() {
+  return m_done;
+}
+
+units::degree_t AutoTarget::getCLosestError(units::degree_t targetGyroAngle) {
 
   targetGyroAngle = getRemappedGyroAngle(targetGyroAngle);
 
@@ -78,7 +101,7 @@ units::degree_t TurnToTarget::getCLosestError(units::degree_t targetGyroAngle) {
 
 }
 
-units::degree_t TurnToTarget::getRemappedGyroAngle(units::degree_t targetGyroAngle) {
+units::degree_t AutoTarget::getRemappedGyroAngle(units::degree_t targetGyroAngle) {
 
   if (targetGyroAngle <= -180_deg) {
     targetGyroAngle = 180_deg-units::degree_t(remainderf(-(targetGyroAngle.to<double>()), 180));

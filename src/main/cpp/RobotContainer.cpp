@@ -63,7 +63,9 @@ frc2::JoystickButton(&m_controller, 6).WhenReleased(frc2::InstantCommand([this]{
   m_intake.setPercentOutput(0.0);
 }));
 
-frc2::JoystickButton(&m_joystick, 1).WhenPressed(TurnToTarget(&m_swerveDriveTrain, &m_gyro, &m_vision));
+// frc2::JoystickButton(&m_joystick, 1).WhenPressed(TurnToTarget(&m_swerveDriveTrain, &m_gyro, &m_vision));
+
+frc2::JoystickButton(&m_joystick, 1).ToggleWhenPressed(AutoTarget(&m_swerveDriveTrain, &m_gyro, &m_vision, &m_joystick, &m_controller));
 
 
 
@@ -71,7 +73,7 @@ frc2::JoystickButton(&m_joystick, 1).WhenPressed(TurnToTarget(&m_swerveDriveTrai
   // TODO climb
   
   frc2::POVButton(&m_controller, 270).WhenPressed(frc2::InstantCommand([this]{
-    m_climb.setPercentageOutput(0.2);
+    m_climb.setPercentageOutput(0.6);
   }));
 
   frc2::POVButton(&m_controller, 270).WhenReleased(frc2::InstantCommand([this]{
@@ -79,7 +81,7 @@ frc2::JoystickButton(&m_joystick, 1).WhenPressed(TurnToTarget(&m_swerveDriveTrai
   }));
 
   frc2::POVButton(&m_controller, 0).WhenPressed(frc2::InstantCommand([this]{
-    m_climb.setPercentageOutput(-0.2);
+    m_climb.setPercentageOutput(-0.4);
   }));
 
   frc2::POVButton(&m_controller, 0).WhenReleased(frc2::InstantCommand([this]{
@@ -94,7 +96,13 @@ frc2::JoystickButton(&m_joystick, 1).WhenPressed(TurnToTarget(&m_swerveDriveTrai
   //   m_climb.setPercentageOutput(0.0);
   // }));
   
-  frc2::POVButton(&m_controller, 180).WhileHeld(ReverseIntake(&m_intake)); // reverse the intake if stuck balls
+  // frc2::POVButton(&m_controller, 180).WhileHeld(ReverseIntake(&m_intake)); // reverse the intake if stuck balls
+
+  frc2::POVButton(&m_controller, 180).WhenPressed(frc2::InstantCommand([this]{
+    m_climb.setRelease(1);
+  }));
+
+
 
 }
 
@@ -102,13 +110,12 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
   // An example command will be run in autonomous
 
 
-  // switch (m_autoChooser.GetSelected()) {
-  //   case 0: return nullptr;
-  //   break;
-  //   case 1: return new TwoBallAutoA(&m_intake, &m_magazine, &m_shooter, &m_hoodedShooter, &m_gyro, &m_vision, &m_swerveDriveTrain);
-  //   break;
-  //   case 2: return  new TwoBallAutoB(&m_intake, &m_magazine, &m_shooter, &m_hoodedShooter, &m_gyro, &m_vision, &m_swerveDriveTrain);
+  switch (m_autoChooser.GetSelected()) {
+    case 0: return nullptr;
+    break;
+    case 1: return new TwoBallAutoA(&m_intake, &m_magazine, &m_swerveDriveTrain, &m_gyro, &m_vision, &m_dualshooter);
+    break;
       
-  // };
+  };
   return nullptr;
 }

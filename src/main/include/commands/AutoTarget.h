@@ -6,13 +6,31 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
+#include <frc2/command/ScheduleCommand.h>
+#include <frc2/command/CommandScheduler.h>
 
-#include <iostream>
 
+
+//Subsystems required
 #include "subsystems/Vision.h"
 #include "subsystems/Gyro.h"
 #include "subsystems/SwerveDriveTrain.h"
 
+#include <frc/Joystick.h>
+#include <frc/XboxController.h>
+
+#include "Constants.h"
+
+#include <cmath>
+
+#include <units/math.h>
+#include <units/angle.h>
+
+#include <iostream>
+
+
+
+using namespace SwerveDriveConstants;
 
 /**
  * An example command.
@@ -21,10 +39,10 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class TurnToTarget
-    : public frc2::CommandHelper<frc2::CommandBase, TurnToTarget> {
+class AutoTarget
+    : public frc2::CommandHelper<frc2::CommandBase, AutoTarget> {
  public:
-  TurnToTarget(SwerveDriveTrain*, Gyro*, Vision*);
+  AutoTarget(SwerveDriveTrain*, Gyro*, Vision*, frc::Joystick*, frc::XboxController*);
 
   void Initialize() override;
 
@@ -42,7 +60,8 @@ class TurnToTarget
   Gyro* m_gyro;
   Vision* m_vision;
   SwerveDriveTrain* m_swerveDrive;
-
+  frc::Joystick* m_joystick;
+  frc::XboxController* m_controller;
 
   std::map<std::string, double> kPID{{"kP",0.05}, {"kI", 0.0001}, {"kD", 0.0}, {"kS", 0.01}};
   double static constexpr m_maxAccumulator{100.0};
@@ -52,5 +71,7 @@ class TurnToTarget
   units::degree_t m_error{0_deg};
   units::degree_t m_gyroTarget{0_deg};
 
+
+  bool m_done{false};
 
 };
