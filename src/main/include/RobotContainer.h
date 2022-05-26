@@ -46,6 +46,8 @@
 
 #include "commands/Auto/TwoBallAutoA.h"
 #include "commands/Auto/OneBallAutoA.h"
+#include "commands/Auto/OneBallAutoB.h"
+#include "commands/Auto/TwoBallAutoB.h"
 
 #include <frc2/command/button/POVButton.h>
 #include <frc/XboxController.h>

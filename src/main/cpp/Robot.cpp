@@ -61,7 +61,6 @@ void Robot::TeleopInit() {
     m_autonomousCommand = nullptr;
   }
   m_container.setIntakeLock(false);
-  m_container.setClimbLock(0);
   m_timer.Start();
   frc::SmartDashboard::PutNumber("shooter/roller/speed", 1000);
   frc::SmartDashboard::PutNumber("shooter/shooter/speed", 1000);
