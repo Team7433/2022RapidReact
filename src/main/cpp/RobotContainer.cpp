@@ -115,6 +115,7 @@ frc2::Command* RobotContainer::GetAutonomousCommand() {
     break;
     case 1: return new TwoBallAutoA(&m_intake, &m_magazine, &m_swerveDriveTrain, &m_gyro, &m_vision, &m_dualshooter);
     break;
+    case 2: return new OneBallAutoA(&m_magazine, &m_swerveDriveTrain, &m_gyro, &m_vision, &m_dualshooter);
       
   };
   return nullptr;

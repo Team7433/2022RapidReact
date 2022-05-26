@@ -1,0 +1,41 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+#pragma once
+#include <frc2/command/CommandHelper.h>
+#include <frc2/command/SequentialCommandGroup.h>
+
+#include "commands/AutoShooter.h"
+#include "commands/BallAutoIntake.h"
+#include "commands/MotionProfile.h"
+#include "commands/RunMagazine.h"
+#include "commands/TurnToTarget.h"
+
+#include "subsystems/Magazine.h"
+#include "subsystems/SwerveDriveTrain.h"
+#include "subsystems/Gyro.h"
+#include "subsystems/Vision.h"
+#include "subsystems/DualShooter.h"
+
+#include <frc2/command/CommandHelper.h>
+#include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/InstantCommand.h>
+#include <frc2/command/ParallelCommandGroup.h>
+#include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/ConditionalCommand.h>
+#include <frc2/command/ScheduleCommand.h>
+#include <frc2/command/ParallelRaceGroup.h>
+#include <frc2/command/FunctionalCommand.h>
+#include <frc2/command/ScheduleCommand.h>
+#include <frc2/command/ParallelDeadlineGroup.h>
+
+#include <units/math.h>
+#include "Constants.h"
+
+class OneBallAutoA
+    : public frc2::CommandHelper<frc2::SequentialCommandGroup,
+                                 OneBallAutoA> {
+ public:
+  OneBallAutoA(Magazine *, SwerveDriveTrain *, Gyro *, Vision *, DualShooter *);
+};

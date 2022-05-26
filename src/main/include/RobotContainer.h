@@ -43,7 +43,9 @@
 #include "commands/ShooterBottomHoop.h"
 #include "commands/TurnToTarget.h"
 #include "commands/AutoTarget.h"
+
 #include "commands/Auto/TwoBallAutoA.h"
+#include "commands/Auto/OneBallAutoA.h"
 
 #include <frc2/command/button/POVButton.h>
 #include <frc/XboxController.h>
